@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c38ec75a2c7707149b462e84483327ca, type: 3}
+  m_Name: SawedOff
+  m_EditorClassIdentifier: 
+  weaponName: SawedOff
+  icon: {fileID: 21300000, guid: 3fa963ca811b6b247a8de1ae66ef6b35, type: 3}
+  bulletPrefab: {fileID: 4435246658327050908, guid: 33343256bd2bff548bc874b3b98fa6fd, type: 3}
+  shootSounds:
+  - {fileID: 8300000, guid: f8b3de7420805e24e8f640959d781b9d, type: 3}
+  clipEmptySound:
+  - {fileID: 8300000, guid: ea2e5c1e152ec534aae02a7358b400e2, type: 3}
+  reloadProcedure:
+  - {fileID: 8300000, guid: 48dbe963dec05fb4697ad57212a8d588, type: 3}
+  - {fileID: 8300000, guid: eaf0574610385ad46af5e4561438ea3b, type: 3}
+  - {fileID: 8300000, guid: 650a882aaf3bccd4fb20d815d7e9c567, type: 3}
+  - {fileID: 8300000, guid: a1d78e3cfc18f41498fbdcc2d2ff0644, type: 3}
+  - {fileID: 8300000, guid: 9ff6356e193b42f48b70c24b15be7517, type: 3}
+  fireRate: 3
+  damage: 30
+  bulletSpeed: 10
+  isAutomatic: 0
+  weaponPrefab: {fileID: 0}
+  magSize: 5

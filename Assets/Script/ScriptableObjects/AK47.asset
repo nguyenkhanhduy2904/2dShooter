@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c38ec75a2c7707149b462e84483327ca, type: 3}
+  m_Name: AK47
+  m_EditorClassIdentifier: 
+  weaponName: AK-47
+  icon: {fileID: 21300000, guid: c9ef79ba59db38f40bd698e29162563d, type: 3}
+  bulletPrefab: {fileID: 4435246658327050908, guid: 33343256bd2bff548bc874b3b98fa6fd, type: 3}
+  shootSounds:
+  - {fileID: 8300000, guid: ecfefbeac3489504ebb50a4a824be1e6, type: 3}
+  - {fileID: 8300000, guid: cecd896edcbf3e04b8f3b9b2c96b9d27, type: 3}
+  - {fileID: 8300000, guid: ec2a140177704fc4bb82fa6637cbe9b6, type: 3}
+  - {fileID: 8300000, guid: cdd4dcfbbaba8ac47aca13196850e1af, type: 3}
+  clipEmptySound:
+  - {fileID: 8300000, guid: ea2e5c1e152ec534aae02a7358b400e2, type: 3}
+  reloadProcedure:
+  - {fileID: 8300000, guid: 745cde3ec9d328c4585758092d1d70a3, type: 3}
+  - {fileID: 8300000, guid: e84ae0e4e24280445ae7184ce520a0a7, type: 3}
+  - {fileID: 8300000, guid: 99293e589d67ad141b1793845ea657d3, type: 3}
+  - {fileID: 8300000, guid: 14b64f6614ea8f24b8af739084bdb08d, type: 3}
+  fireRate: 7
+  damage: 35
+  bulletSpeed: 20
+  isAutomatic: 1
+  weaponPrefab: {fileID: 2571993390151222993, guid: aebe7bdf160211746b5bf0f57efae170, type: 3}
+  magSize: 30

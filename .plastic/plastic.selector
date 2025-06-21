@@ -1,0 +1,4 @@
+repository "project2dshooter/project2dshooter@18967866469659@cloud"
+  path "/"
+    br "/main"
+    co "/main"

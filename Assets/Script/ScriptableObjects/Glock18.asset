@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c38ec75a2c7707149b462e84483327ca, type: 3}
+  m_Name: Glock18
+  m_EditorClassIdentifier: 
+  weaponName: Glock18
+  icon: {fileID: 21300000, guid: 76e1f7391bdef7243820880a793ddd5f, type: 3}
+  bulletPrefab: {fileID: 4435246658327050908, guid: 33343256bd2bff548bc874b3b98fa6fd, type: 3}
+  shootSounds:
+  - {fileID: 8300000, guid: 6ad0e9e12dd9391449bb19fdf722bc34, type: 3}
+  - {fileID: 8300000, guid: f77184195d6036d47aec0d517c95838e, type: 3}
+  clipEmptySound:
+  - {fileID: 8300000, guid: ea2e5c1e152ec534aae02a7358b400e2, type: 3}
+  reloadProcedure:
+  - {fileID: 8300000, guid: 1b43e405bdd0e9d4a97f5b758bc4f548, type: 3}
+  - {fileID: 8300000, guid: d38b69c26125e9a44a39cb80e383a2d4, type: 3}
+  - {fileID: 8300000, guid: 4e67d5b9154841c4696ff8056cee6161, type: 3}
+  - {fileID: 8300000, guid: c851d8171c86a2b41829d3486c528bd9, type: 3}
+  - {fileID: 8300000, guid: 2998afe4cf2ba584082ed2895f44af50, type: 3}
+  fireRate: 5
+  damage: 10
+  bulletSpeed: 20
+  isAutomatic: 0
+  weaponPrefab: {fileID: 3893843552096977287, guid: abbc4e21bc3a1764b843b8ffd841b454, type: 3}
+  magSize: 15

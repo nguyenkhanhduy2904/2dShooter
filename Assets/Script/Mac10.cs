@@ -1,7 +1,6 @@
 using UnityEngine;
-using System.Collections;
 
-public class AK47 : Weapon
+public class Mac10 : Weapon
 {
     public override bool IsAutomatic => true; // auto
 
@@ -10,6 +9,6 @@ public class AK47 : Weapon
     public override void TryShoot(Vector2 direction)
     {
         base.TryShoot(direction);
-        // Add ak-specific behavior here if needed
+        // Add Mac10-specific behavior here if needed
     }
 }

@@ -15,6 +15,17 @@ public class Weapon : MonoBehaviour
     [SerializeField] protected int _magSize;
     protected int _currentMagSize;
 
+    protected float spreadAngleMax => weaponData.spreadAngleMax;
+    protected float spreadAngleMin => weaponData.spreadAngleMin;
+
+    protected float spreadAngleIncreasePerShot => weaponData.spreadAngleIncreasePerShot;
+    protected float spreadRecoveryRate => weaponData.spreadRecoveryRate;
+    protected int weaponCritChance => weaponData.weaponCritChance;
+    protected float weaponCritMultiplier => weaponData.weaponCritMultiplier;
+
+    private float currentSpread = 0f;   // Current spread state
+    private float lastShotTime = 0f;
+
     public virtual bool IsAutomatic => true;
     public virtual bool CanShootWhileReLoad => false;
 
@@ -26,12 +37,28 @@ public class Weapon : MonoBehaviour
         _currentMagSize = _magSize;
     }
 
+    private void Update()
+    {
+        // Only recover if not shooting recently
+        if (Time.time - lastShotTime > 0.1f && currentSpread > spreadAngleMin)
+        {
+            currentSpread -= spreadRecoveryRate * Time.deltaTime;
+            currentSpread = Mathf.Max(currentSpread, spreadAngleMin);
+            //Debug.LogWarning("Accuracy increased");
+        }
+        if (currentSpread == spreadAngleMin) 
+        {
+            //Debug.Log("Accuracy fully restored");
+        }
+    }
+
+
 
     public virtual void TryShoot(Vector2 direction)
     {
 
         if(_isReloading && CanShootWhileReLoad == false) return;
-        Debug.Log($"TryShoot called on {gameObject.name}, activeSelf: {gameObject.activeSelf}, enabled: {enabled}");
+        //Debug.Log($"TryShoot called on {gameObject.name}, activeSelf: {gameObject.activeSelf}, enabled: {enabled}");
 
         if (!gameObject.activeInHierarchy)
         {
@@ -50,13 +77,31 @@ public class Weapon : MonoBehaviour
 
 
 
-        if (Time.time >= _nextFireTime && _currentMagSize >0 && _isReloading == false)
+        if (Time.time >= _nextFireTime && _currentMagSize > 0 && !_isReloading)
         {
-            Shoot(direction);
+            // Apply recoil-based spread
+            Vector2 spreadDirection = ApplyDynamicSpread(direction);
+
+            Shoot(spreadDirection);
+            //Debug.Log("Spread Dir: " + spreadDirection);
+
             _currentMagSize--;
             _nextFireTime = Time.time + 1f / weaponData.fireRate;
+
+            currentSpread = Mathf.Min(currentSpread + spreadAngleIncreasePerShot, spreadAngleMax);
+            lastShotTime = Time.time;
         }
     }
+    protected Vector2 ApplyDynamicSpread(Vector2 baseDirection)
+    {
+        float angle = Mathf.Atan2(baseDirection.y, baseDirection.x) * Mathf.Rad2Deg;
+        float randomSpread = Random.Range(-currentSpread / 2f, currentSpread / 2f);
+        float finalAngle = angle + randomSpread;
+
+        float rad = finalAngle * Mathf.Deg2Rad;
+        return new Vector2(Mathf.Cos(rad), Mathf.Sin(rad)).normalized;
+    }
+
 
     public virtual void Shoot(Vector2 direction)
     {
@@ -65,7 +110,7 @@ public class Weapon : MonoBehaviour
             Debug.LogError("Missing bullet prefab!");
             return;
         }
-        Debug.Log($"Shoot direction: {direction}, weapon: {gameObject.name}");
+        //Debug.Log($"Shoot direction: {direction}, weapon: {gameObject.name}");
         // Angle for rotation
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         Quaternion rotation = Quaternion.Euler(0, 0, angle);
@@ -77,7 +122,14 @@ public class Weapon : MonoBehaviour
         // Pass damage to bullet
         BulletBehaviour bulletScript = bullet.GetComponent<BulletBehaviour>();
         bulletScript.direction = direction;
-        bulletScript.SetDamage(weaponData.damage); // <- pass damage from SO
+
+        int rng = Random.Range(0, 100);
+        bool isCrit = rng < weaponCritChance;
+        float rawDmg = isCrit ? weaponData.damage * weaponData.weaponCritMultiplier : weaponData.damage;
+        int finalDmg = Mathf.RoundToInt(rawDmg);
+        bulletScript.SetDamage(finalDmg, isCrit);
+
+
 
 
         // Sound

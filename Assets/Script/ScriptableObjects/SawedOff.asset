@@ -31,3 +31,9 @@ MonoBehaviour:
   isAutomatic: 0
   weaponPrefab: {fileID: 0}
   magSize: 5
+  spreadAngleMax: 0
+  spreadAngleMin: 0
+  spreadAngleIncreasePerShot: 0
+  spreadRecoveryRate: 0
+  weaponCritChance: 10
+  weaponCritMultiplier: 1.5

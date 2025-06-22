@@ -72,7 +72,7 @@ public class Enemy
     {
         if(target is IDamageable damageable)
         {
-            damageable.TakeDmg(_enemyAtk);
+            damageable.TakeDmg(_enemyAtk , false);
         }
     }
 

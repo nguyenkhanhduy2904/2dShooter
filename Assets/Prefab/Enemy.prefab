@@ -193,6 +193,13 @@ MonoBehaviour:
   - {fileID: 8300000, guid: c98112105197f4b448df6f250a32abed, type: 3}
   - {fileID: 8300000, guid: ad063042809398343b10b4363108babc, type: 3}
   - {fileID: 8300000, guid: 2746406f879a09b48b41dad67fb2fbee, type: 3}
+  _enemyCritHurtedSounds:
+  - {fileID: 8300000, guid: 0061bf6f00c88cc41865e7c98d31d356, type: 3}
+  - {fileID: 8300000, guid: c83a703fff4b8af40b2a364eecc5fed1, type: 3}
+  - {fileID: 8300000, guid: 5ce2c9dc6b40045428e7b3a1b07a8cf8, type: 3}
+  - {fileID: 8300000, guid: 81363fabb180c134286199f22d91d01b, type: 3}
+  - {fileID: 8300000, guid: 7c68c690637942946aaef5715487eca3, type: 3}
+  - {fileID: 8300000, guid: bbc0b084846d21e41912a4667922cb60, type: 3}
 --- !u!120 &-9216473093359161450
 LineRenderer:
   serializedVersion: 2

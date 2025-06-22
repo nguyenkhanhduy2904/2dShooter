@@ -8,7 +8,7 @@ namespace Assets.Script
 {
     public interface IDamageable
     {
-        public void TakeDmg(int dmg);
+        public void TakeDmg(int dmg, bool _isCrit);
         public void DealDmg(IDamageable target);
     }
 }

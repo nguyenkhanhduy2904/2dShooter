@@ -7,10 +7,11 @@ public class BulletBehaviour : MonoBehaviour
     public Vector2 direction = Vector2.right;
     private Rigidbody2D _rb;
     private int _damage = 10; // default value, overwritten later
-
-    public void SetDamage(int dmg)
+    private bool _isCrit;
+    public void SetDamage(int damage, bool isCrit = false)
     {
-        _damage = dmg;
+        _damage = damage;
+        _isCrit = isCrit;
     }
 
     private void Start()
@@ -29,7 +30,7 @@ public class BulletBehaviour : MonoBehaviour
             IDamageable target = collision.GetComponent<IDamageable>();
             if (target != null)
             {
-                target.TakeDmg(_damage); // use damage from weapon
+                target.TakeDmg(_damage, _isCrit); // use damage from weapon
             }
 
             Destroy(gameObject);

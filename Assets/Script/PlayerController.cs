@@ -106,7 +106,7 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     #region Damage Handling
 
-    public void TakeDmg(int dmg)
+    public void TakeDmg(int dmg, bool _isCrit)
     {
         _playerHealth -= dmg;
         _playerHealth = Mathf.Clamp(_playerHealth, 0, PlayerMaxHealth);

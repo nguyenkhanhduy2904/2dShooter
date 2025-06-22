@@ -1,15 +1,14 @@
 using UnityEngine;
-using System.Collections;
 
-public class AK47 : Weapon
+public class Deagle : Weapon
 {
-    public override bool IsAutomatic => true; // auto
+    public override bool IsAutomatic => false; // semi-auto
 
 
     // Optional: override TryShoot if it behaves differently
     public override void TryShoot(Vector2 direction)
     {
         base.TryShoot(direction);
-        // Add ak-specific behavior here if needed
+        // Add DE-specific behavior here if needed
     }
 }

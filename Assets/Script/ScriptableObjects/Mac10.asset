@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c38ec75a2c7707149b462e84483327ca, type: 3}
+  m_Name: Mac10
+  m_EditorClassIdentifier: 
+  weaponName: Mac10
+  icon: {fileID: 21300000, guid: e2209eec82a34a048887f46bf4eccf97, type: 3}
+  bulletPrefab: {fileID: 4435246658327050908, guid: 33343256bd2bff548bc874b3b98fa6fd, type: 3}
+  shootSounds:
+  - {fileID: 8300000, guid: f56d658ff93aefb4ca388587feeb0721, type: 3}
+  - {fileID: 8300000, guid: 5e6800f032eb2e04e8351abd96c13d04, type: 3}
+  clipEmptySound:
+  - {fileID: 8300000, guid: ea2e5c1e152ec534aae02a7358b400e2, type: 3}
+  reloadProcedure:
+  - {fileID: 8300000, guid: c0e8e96f2d9ac5546b71d7c20d7929b4, type: 3}
+  - {fileID: 8300000, guid: 33b9ac950e115714e8ddb39abcb04979, type: 3}
+  - {fileID: 8300000, guid: 45a8a80f94656ba4dad20c517e793619, type: 3}
+  - {fileID: 8300000, guid: c05c5de8d1f700b4baef77110ad365ae, type: 3}
+  - {fileID: 8300000, guid: caf664fbc6bbd904bad24ce43c7ee35e, type: 3}
+  fireRate: 20
+  damage: 12
+  bulletSpeed: 20
+  isAutomatic: 1
+  weaponPrefab: {fileID: 0}
+  magSize: 30
+  spreadAngleMax: 30
+  spreadAngleMin: 10
+  spreadAngleIncreasePerShot: 9
+  spreadRecoveryRate: 8
+  weaponCritChance: 10
+  weaponCritMultiplier: 1.5

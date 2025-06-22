@@ -34,6 +34,7 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
 
     [Header("Audio")]
     [SerializeField] private AudioClip[] _enemyHurtedSounds;
+    [SerializeField] private AudioClip[] _enemyCritHurtedSounds;
 
 
 
@@ -151,7 +152,7 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
         Debug.Log("Swing!");
         if (dist <= _enemyRange) 
         {
-            _playerTarget.TakeDmg(_enemyAtk);
+            _playerTarget.TakeDmg(_enemyAtk, false);
             ChangeState(EnemyState.Recover);
         }
         else
@@ -196,20 +197,31 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
         }
     }
 
-    public void TakeDmg(int amount)
+    public void TakeDmg(int amount, bool isCrit = false)
     {
         if (_currentState == EnemyState.Dead) return;
 
         _enemyHealth -= amount;
         _enemyHealth = Mathf.Clamp(_enemyHealth, 0, _enemyMaxHealth);
-        Debug.Log($"{_enemyName} takes {amount} damage. HP now: {_enemyHealth}");
-        SoundFXManager.Instance?.PlaySoundFXClip(_enemyHurtedSounds, transform, 0.2f);
 
+        if (isCrit)
+        {
+            Debug.Log($"{_enemyName} took a CRITICAL hit: {amount} damage!");
+            SoundFXManager.Instance.PlaySoundFXClip(_enemyCritHurtedSounds, transform, 0.5f);
+        }
+            
+        else
+        {
+            Debug.Log($"{_enemyName} took {amount} damage.");
+            SoundFXManager.Instance.PlaySoundFXClip(_enemyHurtedSounds, transform, 0.5f);
+        }
+            
 
 
         if (_enemyHealth <= 0)
             ChangeState(EnemyState.Dead);
     }
+
 
     public void Heal(int amount)
     {
@@ -220,7 +232,7 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
 
     public void DealDmg(IDamageable target)
     {
-        target.TakeDmg(_enemyAtk);
+        target.TakeDmg(_enemyAtk , false);
     }
 
     void Die()

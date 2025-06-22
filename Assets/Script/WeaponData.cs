@@ -16,4 +16,11 @@ public class WeaponData : ScriptableObject
     public bool isAutomatic = false;
     public GameObject weaponPrefab; // assign prefab here
     public int magSize;
+    public float spreadAngleMax;
+    public float spreadAngleMin;
+    public float spreadAngleIncreasePerShot;
+    public float spreadRecoveryRate;
+
+    public int weaponCritChance;
+    public float weaponCritMultiplier;
 }

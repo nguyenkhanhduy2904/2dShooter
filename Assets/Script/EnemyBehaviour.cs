@@ -37,7 +37,7 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
     [SerializeField] private AudioClip[] _enemyCritHurtedSounds;
 
 
-
+    [SerializeField] private GameObject _floatingTextPreFab;
 
     void Awake()
     {
@@ -208,19 +208,57 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
         {
             Debug.Log($"{_enemyName} took a CRITICAL hit: {amount} damage!");
             SoundFXManager.Instance.PlaySoundFXClip(_enemyCritHurtedSounds, transform, 0.5f);
+            ShowDamage(amount.ToString(), isCrit);
+
         }
-            
+
         else
         {
             Debug.Log($"{_enemyName} took {amount} damage.");
             SoundFXManager.Instance.PlaySoundFXClip(_enemyHurtedSounds, transform, 0.5f);
+            ShowDamage(amount.ToString(), isCrit);
+
         }
-            
+
 
 
         if (_enemyHealth <= 0)
             ChangeState(EnemyState.Dead);
     }
+
+    void ShowDamage(string text, bool isCrit = false)
+    {
+        GameObject prefab = Instantiate(_floatingTextPreFab, transform.position, Quaternion.identity);
+        TextMesh textMesh = prefab.GetComponentInChildren<TextMesh>();
+
+        textMesh.text = text;
+
+        // Color and style based on crit
+        if (isCrit)
+        {
+            textMesh.color = Color.red;
+            textMesh.fontSize = 50;
+            // Enable Crit Icon
+            Transform critIcon = prefab.transform.Find("FloatingText/CritIcon");
+
+
+            if (critIcon != null) 
+            {
+                Debug.Log("found it");
+                critIcon.gameObject.SetActive(true);
+            }
+
+           
+        }
+        else
+        {
+            textMesh.color = Color.white;
+            textMesh.fontSize = 32;
+        }
+
+        Destroy(prefab, 1f);
+    }
+
 
 
     public void Heal(int amount)

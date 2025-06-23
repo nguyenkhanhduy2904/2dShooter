@@ -200,6 +200,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 81363fabb180c134286199f22d91d01b, type: 3}
   - {fileID: 8300000, guid: 7c68c690637942946aaef5715487eca3, type: 3}
   - {fileID: 8300000, guid: bbc0b084846d21e41912a4667922cb60, type: 3}
+  _floatingTextPreFab: {fileID: 2996679915331620059, guid: 0e5590444d39a034886020c70a63223b, type: 3}
 --- !u!120 &-9216473093359161450
 LineRenderer:
   serializedVersion: 2

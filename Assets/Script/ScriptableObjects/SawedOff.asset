@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: SawedOff
   icon: {fileID: 21300000, guid: 3fa963ca811b6b247a8de1ae66ef6b35, type: 3}
-  bulletPrefab: {fileID: 4435246658327050908, guid: 33343256bd2bff548bc874b3b98fa6fd, type: 3}
+  bulletPrefab: {fileID: 5093998968776047349, guid: 2a32aaf8d6958504998f33c3497bc176, type: 3}
   shootSounds:
   - {fileID: 8300000, guid: f8b3de7420805e24e8f640959d781b9d, type: 3}
   clipEmptySound:
@@ -29,11 +29,14 @@ MonoBehaviour:
   damage: 30
   bulletSpeed: 10
   isAutomatic: 0
-  weaponPrefab: {fileID: 0}
+  weaponPrefab: {fileID: 2393239497888438554, guid: e5c7c64e04b2ca04cbcf2d65f9735a77, type: 3}
   magSize: 5
+  reserveAmmo: 30
   spreadAngleMax: 0
   spreadAngleMin: 0
   spreadAngleIncreasePerShot: 0
   spreadRecoveryRate: 0
   weaponCritChance: 10
   weaponCritMultiplier: 1.5
+  pierceAmount: 1
+  pickupPrefab: {fileID: 5238927855000826228, guid: 3795b0129694e044591d7da60e5b24d6, type: 3}

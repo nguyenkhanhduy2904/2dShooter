@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c38ec75a2c7707149b462e84483327ca, type: 3}
+  m_Name: AWP
+  m_EditorClassIdentifier: 
+  weaponName: AWP
+  icon: {fileID: 21300000, guid: e801f2ba888ca2a4da5fe10e6dbf5a1e, type: 3}
+  bulletPrefab: {fileID: 5093998968776047349, guid: 2a32aaf8d6958504998f33c3497bc176, type: 3}
+  shootSounds:
+  - {fileID: 8300000, guid: 49e6b5b2fe9461745960601c96e0a574, type: 3}
+  - {fileID: 8300000, guid: 36c897ca481e03c419f86053e77f78f3, type: 3}
+  clipEmptySound:
+  - {fileID: 8300000, guid: ea2e5c1e152ec534aae02a7358b400e2, type: 3}
+  reloadProcedure:
+  - {fileID: 8300000, guid: 73c439e6c3577fc438735ef08d373d8e, type: 3}
+  - {fileID: 8300000, guid: 7824e5e101a032e41a605a4fa1eefb13, type: 3}
+  - {fileID: 8300000, guid: 41caab90255260c4594302787370d6f5, type: 3}
+  - {fileID: 8300000, guid: 09f7e1d209e364e47b32fc3a14f20192, type: 3}
+  - {fileID: 8300000, guid: d4d1c3a9c17ad2240b178d844a8493c6, type: 3}
+  - {fileID: 8300000, guid: ab10a2f521f7eca44a79de807dad20fd, type: 3}
+  fireRate: 0.5
+  damage: 120
+  bulletSpeed: 20
+  isAutomatic: 0
+  weaponPrefab: {fileID: 6245661050808277100, guid: 641275c76144d5c4782a7928f8790c77, type: 3}
+  magSize: 5
+  reserveAmmo: 20
+  spreadAngleMax: 50
+  spreadAngleMin: 0
+  spreadAngleIncreasePerShot: 0
+  spreadRecoveryRate: 50
+  weaponCritChance: 0
+  weaponCritMultiplier: 0
+  pierceAmount: 3
+  pickupPrefab: {fileID: 1561403191430690916, guid: eef98c74c20c7ec4ab2a048fce3c2c3e, type: 3}

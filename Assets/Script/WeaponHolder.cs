@@ -1,44 +1,171 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class WeaponHolder : MonoBehaviour
 {
+    public List<WeaponAmmoState> weaponStates = new(); // stores ammo for each unlocked weapon
     [SerializeField] private Weapon currentWeapon;
     [SerializeField] private float orbitDistance = 0.5f; // Max distance from player
     [SerializeField] private Transform playerTransform;
     [SerializeField] private Transform weaponSlot; // This is where the weapon prefab is attached
 
-    [SerializeField] private GameObject[] testWeaponPrefab; // Drag your Glock18 prefab here in Inspector
-    int _currentWeaponIndex = 0;
+    [SerializeField] private List<WeaponData> carriedWeapons = new();
+    private int maxWeaponCount = 2;
+    private int currentWeaponIndex = 0;
+    //[SerializeField] private GameObject[] testWeaponPrefab; // Drag your Glock18 prefab here in Inspector
+    //[SerializeField] private WeaponData[] testWeaponData;
+
+    //int _currentWeaponIndex = 0;
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        //// Equip weapon on key press (e.g., cycling through test weapons)
+        //if (Input.GetKeyDown(KeyCode.E))
+        //{
+        //    if (testWeaponData.Length == 0) return;
+
+        //    Debug.Log("Pressed E: Equipping test weapon");
+
+        //    // Cycle weapon index
+        //    _currentWeaponIndex = (_currentWeaponIndex + 1) % testWeaponData.Length;
+
+        //    EquipWeapon(testWeaponData[_currentWeaponIndex]);
+        //}
+
+        if (Input.GetKeyDown(KeyCode.Q))
         {
-            Debug.Log("Pressed E: Equipping test weapon");
-            EquipWeapon(testWeaponPrefab[_currentWeaponIndex]);
-            if(_currentWeaponIndex < testWeaponPrefab.Length - 1)
-            {
-                _currentWeaponIndex++;
-            }
-            else
-            {
-                _currentWeaponIndex = 0;
-            }
-           
-            
-            
+            CycleWeapon();
+        }
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            DropCurrentWeapon();
         }
 
 
+        // Null checks
         if (currentWeapon == null || playerTransform == null)
-        {
-            Debug.LogWarning("WeaponHolder: Missing weapon or playerTransform!");
             return;
-        }
-
-       
 
         RotateToMouse();
         HandleShooting();
+        HandleReload(); // Call reload here to handle input consistently
+    }
+
+    //public void TryPickupWeapon(WeaponData newWeapon)
+    //{ 
+
+    //    // Already carrying this weapon?
+    //    if (carriedWeapons.Exists(w => w == newWeapon))
+    //    {
+    //        Debug.Log("Already have this weapon");
+    //        return;
+    //    }
+
+    //    if (carriedWeapons.Count < maxWeaponCount)
+    //    {
+    //        carriedWeapons.Add(newWeapon);
+    //        EquipWeapon(newWeapon);
+    //        Debug.Log("Picked up new weapon: " + newWeapon.weaponName);
+    //    }
+    //    else
+    //    {
+    //        // Swap logic - replace current weapon
+    //        int currentIndex = carriedWeapons.FindIndex(w => w == currentWeapon.weaponData);
+    //        carriedWeapons[currentIndex] = newWeapon;
+    //        EquipWeapon(newWeapon);
+    //        Debug.Log("Swapped weapon to: " + newWeapon.weaponName);
+    //    }
+    //}
+    public void TryPickupWeapon(WeaponData newWeapon, int savedMag = -1, int savedReserve = -1)
+    {
+        if (carriedWeapons.Exists(w => w == newWeapon))
+        {
+            Debug.Log("Already have this weapon");
+            return;
+        }
+
+        if (carriedWeapons.Count < maxWeaponCount)
+        {
+            carriedWeapons.Add(newWeapon);
+            EquipWeapon(newWeapon, savedMag, savedReserve);
+            Debug.Log("Picked up new weapon: " + newWeapon.weaponName);
+        }
+        else
+        {
+            // Drop old weapon
+            var oldWeaponData = currentWeapon.weaponData;
+            int oldMag = currentWeapon.CurrentMag;
+            int oldReserve = currentWeapon.CurrentReserve;
+            SpawnDroppedWeapon(oldWeaponData, oldMag, oldReserve);
+
+            // Replace
+            int currentIndex = carriedWeapons.FindIndex(w => w == oldWeaponData);
+            carriedWeapons[currentIndex] = newWeapon;
+            EquipWeapon(newWeapon, savedMag, savedReserve);
+            Debug.Log("Swapped weapon to: " + newWeapon.weaponName);
+        }
+    }
+
+    private void SpawnDroppedWeapon(WeaponData weaponData, int mag, int reserve)
+    {
+        if (weaponData.pickupPrefab == null)
+        {
+            Debug.LogWarning("No pickup prefab assigned for: " + weaponData.weaponName);
+            return;
+        }
+
+        // Random drop position around the player (between 0.5 and 1.5 units away)
+        Vector2 randomOffset = Random.insideUnitCircle.normalized * Random.Range(0.5f, 1.5f);
+        Vector3 dropPos = transform.position + new Vector3(randomOffset.x, randomOffset.y, 0);
+
+        GameObject drop = Instantiate(weaponData.pickupPrefab, dropPos, Quaternion.identity);
+
+        var pickup = drop.GetComponent<WeaponPickUp>();
+        if (pickup != null)
+        {
+            pickup.weaponData = weaponData;
+            pickup.savedMag = mag;
+            pickup.savedReserve = reserve;
+        }
+    }
+
+    public void DropCurrentWeapon()
+    {
+        if (currentWeapon == null) return;
+
+        var data = currentWeapon.weaponData;
+        var mag = currentWeapon.CurrentMag;
+        var reserve = currentWeapon.CurrentReserve;
+
+        // Spawn drop
+        SpawnDroppedWeapon(data, mag, reserve);
+
+        // Remove from inventory
+        carriedWeapons.Remove(data);
+        weaponStates.RemoveAll(w => w.weaponData == data);
+
+        Destroy(currentWeapon.gameObject);
+        currentWeapon = null;
+
+        Debug.Log("Dropped weapon: " + data.weaponName);
+
+        // Optionally auto-equip another weapon if any left
+        if (carriedWeapons.Count > 0)
+        {
+            EquipWeapon(carriedWeapons[0]);
+        }
+    }
+
+
+
+
+
+
+    public void CycleWeapon()
+    {
+        if (carriedWeapons.Count == 0) return;
+
+        currentWeaponIndex = (currentWeaponIndex + 1) % carriedWeapons.Count;
+        EquipWeapon(carriedWeapons[currentWeaponIndex]);
     }
 
     public void HandleShooting()
@@ -56,6 +183,7 @@ public class WeaponHolder : MonoBehaviour
 
             currentWeapon.TryShoot(direction);
         }
+        //SyncAmmoState();
     }
 
     public void HandleReload()
@@ -66,6 +194,7 @@ public class WeaponHolder : MonoBehaviour
         {
             currentWeapon.Reload();
         }
+        //SyncAmmoState();
     }
 
     public void RotateToMouse()
@@ -94,23 +223,102 @@ public class WeaponHolder : MonoBehaviour
         currentWeapon.FlipSprite(clampedOffset);
     }
 
-    public void EquipWeapon(GameObject weaponPrefab)
+    //public void EquipWeapon(WeaponData weaponData)
+    //{
+    //    // Save old weapon state before switching
+    //    if (currentWeapon != null)
+    //    {
+    //        var oldState = weaponStates.Find(w => w.weaponData == currentWeapon.weaponData);
+    //        if (oldState != null)
+    //        {
+    //            oldState.currentMag = currentWeapon.CurrentMag;
+    //            oldState.currentReserve = currentWeapon.CurrentReserve;
+    //        }
+
+    //        Destroy(currentWeapon.gameObject); // or disable if pooled
+    //    }
+
+    //    // Spawn new weapon prefab
+    //    GameObject weaponGO = Instantiate(weaponData.weaponPrefab, transform);
+    //    currentWeapon = weaponGO.GetComponent<Weapon>();
+    //    currentWeapon.InitHolder(this); //  Pass self to the weapon
+
+    //    // Load stored ammo if exists
+    //    var newState = weaponStates.Find(w => w.weaponData == weaponData);
+    //    if (newState != null)
+    //    {
+    //        currentWeapon.LoadAmmo(newState.currentMag, newState.currentReserve);
+    //        Debug.Log($"[LOAD] {weaponData.weaponName} => Loaded Mag: {newState.currentMag}, Reserve: {newState.currentReserve}");
+    //    }
+    //    else
+    //    {
+    //        // If first time using weapon, add it to tracking
+    //        currentWeapon.InitAmmoFromData(); // only here
+    //        weaponStates.Add(new WeaponAmmoState(weaponData, weaponData.magSize, weaponData.reserveAmmo));
+    //        currentWeapon.LoadAmmo(weaponData.magSize, weaponData.reserveAmmo);
+    //    }
+    //}
+
+
+    public void EquipWeapon(WeaponData weaponData, int mag = -1, int reserve = -1)
     {
         if (currentWeapon != null)
         {
+            var oldState = weaponStates.Find(w => w.weaponData == currentWeapon.weaponData);
+            if (oldState != null)
+            {
+                oldState.currentMag = currentWeapon.CurrentMag;
+                oldState.currentReserve = currentWeapon.CurrentReserve;
+            }
+
             Destroy(currentWeapon.gameObject);
         }
 
-        GameObject weaponInstance = Instantiate(weaponPrefab, weaponSlot);
-        weaponInstance.transform.localPosition = Vector3.zero;
-        currentWeapon = weaponInstance.GetComponent<Weapon>();
+        GameObject weaponGO = Instantiate(weaponData.weaponPrefab, transform);
+        currentWeapon = weaponGO.GetComponent<Weapon>();
+        currentWeapon.InitHolder(this);
 
-        if (currentWeapon == null)
+        var state = weaponStates.Find(w => w.weaponData == weaponData);
+        if (state != null)
         {
-            Debug.LogError("Equipped weapon prefab does not have a Weapon script!");
+            // Override ammo if specified
+            state.currentMag = mag >= 0 ? mag : state.currentMag;
+            state.currentReserve = reserve >= 0 ? reserve : state.currentReserve;
+
+            currentWeapon.LoadAmmo(state.currentMag, state.currentReserve);
+        }
+        else
+        {
+            int finalMag = mag >= 0 ? mag : weaponData.magSize;
+            int finalReserve = reserve >= 0 ? reserve : weaponData.reserveAmmo;
+
+            weaponStates.Add(new WeaponAmmoState(weaponData, finalMag, finalReserve));
+            currentWeapon.InitAmmoFromData();
+            currentWeapon.LoadAmmo(finalMag, finalReserve);
         }
     }
-    
+
+
+
+    public void SyncAmmoState()
+    {
+        if (currentWeapon == null) return;
+
+        var state = weaponStates.Find(w => w.weaponData == currentWeapon.weaponData);
+        if (state != null)
+        {
+            state.currentMag = currentWeapon.CurrentMag;
+            state.currentReserve = currentWeapon.CurrentReserve;
+
+            Debug.Log($"[SYNC] Saved: {state.weaponData.weaponName}, Mag: {state.currentMag}, Reserve: {state.currentReserve}");
+        }
+        else
+        {
+            Debug.LogWarning("No weapon state found to sync!");
+        }
+    }
+
+
 
     public Weapon GetCurrentWeapon()
     {

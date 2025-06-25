@@ -46,6 +46,7 @@ public class SawOff: Weapon
             SoundFXManager.Instance.PlaySoundFXClip(weaponData.shootSounds, transform, 0.15f);
             _nextFireTime = Time.time + 1f / weaponData.fireRate;
             _currentMagSize--;
+            _holder?.SyncAmmoState();
         }
 
 
@@ -60,34 +61,74 @@ public class SawOff: Weapon
             Debug.LogError("Missing bullet prefab!");
             return;
         }
-        Debug.Log($"Shoot direction: {direction}, weapon: {gameObject.name}");
-        // Angle for rotation
+
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         Quaternion rotation = Quaternion.Euler(0, 0, angle);
 
-        // Spawn bullet
         GameObject bullet = Instantiate(weaponData.bulletPrefab, firePoint.position, rotation);
-        //bullet.GetComponent<BulletBehaviour>().direction = direction;
 
-        // Pass damage to bullet
-        BulletBehaviour bulletScript = bullet.GetComponent<BulletBehaviour>();
-        bulletScript.direction = direction;
-        bulletScript.SetDamage(weaponData.damage); // <- pass damage from SO
+        PierceableBullet bulletScript = bullet.GetComponent<PierceableBullet>();
+        if (bulletScript != null)
+        {
+            bulletScript.direction = direction;
 
+            int rng = Random.Range(0, 100);
+            bool isCrit = rng < weaponCritChance;
+            float rawDmg = isCrit ? weaponData.damage * weaponData.weaponCritMultiplier : weaponData.damage;
+            int finalDmg = Mathf.RoundToInt(rawDmg);
 
-        //// Sound
+            bulletScript.SetDamage(finalDmg, isCrit);
+            bulletScript.SetPierceCount(weaponData.pierceAmount);
+        }
+
         //if (weaponData.shootSounds != null && weaponData.shootSounds.Length > 0)
         //{
         //    var clip = weaponData.shootSounds[Random.Range(0, weaponData.shootSounds.Length)];
         //    AudioSource.PlayClipAtPoint(clip, transform.position);
         //}
 
-        // Muzzle Flash
-        //if (muzzleFlash != null)
-        //{
-        //    StartCoroutine(ShowMuzzleFlash());
-        //}
+        if (muzzleFlash != null)
+        {
+            StartCoroutine(ShowMuzzleFlash());
+        }
+
     }
+
+    //public override void Shoot(Vector2 direction)
+    //{
+    //    if (weaponData.bulletPrefab == null)
+    //    {
+    //        Debug.LogError("Missing bullet prefab!");
+    //        return;
+    //    }
+    //    Debug.Log($"Shoot direction: {direction}, weapon: {gameObject.name}");
+    //    // Angle for rotation
+    //    float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+    //    Quaternion rotation = Quaternion.Euler(0, 0, angle);
+
+    //    // Spawn bullet
+    //    GameObject bullet = Instantiate(weaponData.bulletPrefab, firePoint.position, rotation);
+    //    //bullet.GetComponent<BulletBehaviour>().direction = direction;
+
+    //    // Pass damage to bullet
+    //    BulletBehaviour bulletScript = bullet.GetComponent<BulletBehaviour>();
+    //    bulletScript.direction = direction;
+    //    bulletScript.SetDamage(weaponData.damage); // <- pass damage from SO
+
+
+    //    //// Sound
+    //    //if (weaponData.shootSounds != null && weaponData.shootSounds.Length > 0)
+    //    //{
+    //    //    var clip = weaponData.shootSounds[Random.Range(0, weaponData.shootSounds.Length)];
+    //    //    AudioSource.PlayClipAtPoint(clip, transform.position);
+    //    //}
+
+    //    // Muzzle Flash
+    //    //if (muzzleFlash != null)
+    //    //{
+    //    //    StartCoroutine(ShowMuzzleFlash());
+    //    //}
+    //}
     public override void Reload()
     {
         if (!_isReloading) // Optional: prevent double reload
@@ -122,10 +163,16 @@ public class SawOff: Weapon
             }
 
             // Add 1 bullet after successful wait
-            int randomIndex = Random.Range(0, weaponData.reloadProcedure.Length - 3);
-            SoundFXManager.Instance.PlaySoundFXClipAt(weaponData.reloadProcedure, transform, 0.5f, randomIndex);
-            _currentMagSize++;
-            
+            if (_currentReserveAmmo > 0)
+            {
+                int randomIndex = Random.Range(0, weaponData.reloadProcedure.Length - 3);
+                SoundFXManager.Instance.PlaySoundFXClipAt(weaponData.reloadProcedure, transform, 0.5f, randomIndex);
+
+                _currentMagSize++;
+                _currentReserveAmmo--;
+                _holder?.SyncAmmoState();
+            }
+
 
             if (_currentMagSize == _magSize)
             {

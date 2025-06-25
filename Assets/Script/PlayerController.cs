@@ -59,20 +59,26 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     #region Movement
 
-    private void HandleMovement()// run in fix update
+    private void HandleMovement()
     {
         float moveX = Input.GetKey(KeyCode.A) ? -1f : Input.GetKey(KeyCode.D) ? 1f : 0f;
         float moveY = Input.GetKey(KeyCode.W) ? 1f : Input.GetKey(KeyCode.S) ? -1f : 0f;
 
         Vector2 moveDir = new Vector2(moveX, moveY).normalized;
-        Vector2 targetPos = _rb.position + moveDir * _moveSpeed * Time.deltaTime;
 
-        // Only move if no wall ahead
+        Vector2 targetPos = _rb.position + moveDir * _moveSpeed * Time.fixedDeltaTime;
+
+        // Check if wall is ahead
         if (!Physics2D.OverlapBox(targetPos, _boxSize, 0f, _layerMask))
         {
-            _rb.MovePosition(targetPos);
+            _rb.linearVelocity = moveDir * _moveSpeed;
+        }
+        else
+        {
+            _rb.linearVelocity = Vector2.zero; // Block movement if wall ahead
         }
     }
+
 
 
 

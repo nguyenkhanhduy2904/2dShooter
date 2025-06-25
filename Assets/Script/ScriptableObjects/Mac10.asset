@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: Mac10
   icon: {fileID: 21300000, guid: e2209eec82a34a048887f46bf4eccf97, type: 3}
-  bulletPrefab: {fileID: 4435246658327050908, guid: 33343256bd2bff548bc874b3b98fa6fd, type: 3}
+  bulletPrefab: {fileID: 5093998968776047349, guid: 2a32aaf8d6958504998f33c3497bc176, type: 3}
   shootSounds:
   - {fileID: 8300000, guid: f56d658ff93aefb4ca388587feeb0721, type: 3}
   - {fileID: 8300000, guid: 5e6800f032eb2e04e8351abd96c13d04, type: 3}
@@ -30,11 +30,14 @@ MonoBehaviour:
   damage: 12
   bulletSpeed: 20
   isAutomatic: 1
-  weaponPrefab: {fileID: 0}
+  weaponPrefab: {fileID: 725506453601931625, guid: ccfd7dd7fe7b438428fc8942e91e378e, type: 3}
   magSize: 30
+  reserveAmmo: 90
   spreadAngleMax: 30
   spreadAngleMin: 10
   spreadAngleIncreasePerShot: 9
   spreadRecoveryRate: 8
   weaponCritChance: 10
   weaponCritMultiplier: 1.5
+  pierceAmount: 1
+  pickupPrefab: {fileID: 6390879853005641365, guid: 97a4d8f8aeac73b40aa07d7a842868a7, type: 3}

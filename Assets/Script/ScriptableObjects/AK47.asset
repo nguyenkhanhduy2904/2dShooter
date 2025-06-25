@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: AK-47
   icon: {fileID: 21300000, guid: c9ef79ba59db38f40bd698e29162563d, type: 3}
-  bulletPrefab: {fileID: 4435246658327050908, guid: 33343256bd2bff548bc874b3b98fa6fd, type: 3}
+  bulletPrefab: {fileID: 5093998968776047349, guid: 2a32aaf8d6958504998f33c3497bc176, type: 3}
   shootSounds:
   - {fileID: 8300000, guid: ecfefbeac3489504ebb50a4a824be1e6, type: 3}
   - {fileID: 8300000, guid: cecd896edcbf3e04b8f3b9b2c96b9d27, type: 3}
@@ -31,11 +31,14 @@ MonoBehaviour:
   damage: 35
   bulletSpeed: 20
   isAutomatic: 1
-  weaponPrefab: {fileID: 2571993390151222993, guid: aebe7bdf160211746b5bf0f57efae170, type: 3}
+  weaponPrefab: {fileID: 5234676639576102306, guid: aebe7bdf160211746b5bf0f57efae170, type: 3}
   magSize: 30
+  reserveAmmo: 90
   spreadAngleMax: 15
   spreadAngleMin: 0.5
   spreadAngleIncreasePerShot: 3
   spreadRecoveryRate: 10
   weaponCritChance: 20
   weaponCritMultiplier: 2
+  pierceAmount: 2
+  pickupPrefab: {fileID: 4331513465255243340, guid: 2cdeee0f5d9623c48add7f67d9d85dc9, type: 3}

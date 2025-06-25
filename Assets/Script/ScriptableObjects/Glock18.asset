@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: Glock18
   icon: {fileID: 21300000, guid: 76e1f7391bdef7243820880a793ddd5f, type: 3}
-  bulletPrefab: {fileID: 4435246658327050908, guid: 33343256bd2bff548bc874b3b98fa6fd, type: 3}
+  bulletPrefab: {fileID: 5093998968776047349, guid: 2a32aaf8d6958504998f33c3497bc176, type: 3}
   shootSounds:
   - {fileID: 8300000, guid: 6ad0e9e12dd9391449bb19fdf722bc34, type: 3}
   - {fileID: 8300000, guid: f77184195d6036d47aec0d517c95838e, type: 3}
@@ -32,9 +32,12 @@ MonoBehaviour:
   isAutomatic: 0
   weaponPrefab: {fileID: 3893843552096977287, guid: abbc4e21bc3a1764b843b8ffd841b454, type: 3}
   magSize: 15
+  reserveAmmo: 120
   spreadAngleMax: 7.5
   spreadAngleMin: 0.5
   spreadAngleIncreasePerShot: 2
   spreadRecoveryRate: 5
   weaponCritChance: 10
   weaponCritMultiplier: 1.5
+  pierceAmount: 1
+  pickupPrefab: {fileID: 6092484394966468009, guid: f9e54a84296a01843b58b6750093b845, type: 3}

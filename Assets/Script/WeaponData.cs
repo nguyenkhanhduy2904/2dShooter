@@ -16,6 +16,7 @@ public class WeaponData : ScriptableObject
     public bool isAutomatic = false;
     public GameObject weaponPrefab; // assign prefab here
     public int magSize;
+    public int reserveAmmo;
     public float spreadAngleMax;
     public float spreadAngleMin;
     public float spreadAngleIncreasePerShot;
@@ -23,4 +24,8 @@ public class WeaponData : ScriptableObject
 
     public int weaponCritChance;
     public float weaponCritMultiplier;
+
+    public int pierceAmount = 1;
+
+    public GameObject pickupPrefab; // assign in the Inspector
 }

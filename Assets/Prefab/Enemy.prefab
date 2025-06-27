@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2741159909990426160}
   - component: {fileID: -8842253479436139742}
   - component: {fileID: -9216473093359161450}
+  - component: {fileID: -1905189470578542263}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -308,6 +309,22 @@ LineRenderer:
   m_UseWorldSpace: 0
   m_Loop: 1
   m_ApplyActiveColorSpace: 1
+--- !u!114 &-1905189470578542263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4526603208277295717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f54ba5709db781b48a4e9a0361c1d754, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  droppedItemPrefab: {fileID: 1872967038840027560, guid: 83b5f730aeed6a0439f1c9be46aeb98c, type: 3}
+  lootList:
+  - {fileID: 11400000, guid: 55f8ed76c8fdbea4ba77d20735b6a2d2, type: 2}
+  - {fileID: 11400000, guid: 7f4141015aaebea4490c425229f45503, type: 2}
 --- !u!1 &7416525029626530628
 GameObject:
   m_ObjectHideFlags: 0

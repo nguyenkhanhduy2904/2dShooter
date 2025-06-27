@@ -275,6 +275,7 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
 
     void Die()
     {
+        GetComponent<LootBag>().InstantiateLoot(transform.position);
         Debug.Log($"{_enemyName} has died.");
         Destroy(gameObject);
         SceneManager.NotifyEnemyDied();

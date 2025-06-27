@@ -293,5 +293,11 @@ public class Weapon : MonoBehaviour
         Debug.Log($"[APPLY] Weapon Loaded: Mag={_currentMagSize}, Reserve={_currentReserveAmmo}");
     }
 
+    public void AddReserveAmmo(int amount)
+    {
+        _currentReserveAmmo += amount;
+    }
+
+
 
 }

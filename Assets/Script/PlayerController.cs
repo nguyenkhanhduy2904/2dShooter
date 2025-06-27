@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour, IDamageable
 {
+    [SerializeField] private HealthBarScript healthBar;
     [Header("Stats")]
     [SerializeField] private string _playerName = "Default";
     [SerializeField] private int _playerHealth;
@@ -29,6 +30,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         _rb = GetComponent<Rigidbody2D>();
         _playerHealth = PlayerMaxHealth;
         _playerSpeed = PlayerMaxSpeed;
+        healthBar.SetMaxHealth(_playerHealth);
 
         if (weaponHolder == null)
             Debug.LogWarning("PlayerController: WeaponHolder is not assigned!");
@@ -117,6 +119,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         _playerHealth -= dmg;
         _playerHealth = Mathf.Clamp(_playerHealth, 0, PlayerMaxHealth);
         Debug.Log($"{_playerName} took {dmg} damage. Health: {_playerHealth}");
+        healthBar.SetHealth(_playerHealth);
 
         SoundFXManager.Instance?.PlaySoundFXClip(_hurtedSounds, transform, 1f);
 
@@ -129,6 +132,14 @@ public class PlayerController : MonoBehaviour, IDamageable
     public void DealDmg(IDamageable target)
     {
         // Future expansion
+    }
+
+    public void Heal(int amount)
+    {
+        _playerHealth += amount;
+        _playerHealth = Mathf.Clamp(_playerHealth, 0, PlayerMaxHealth);
+        healthBar.SetHealth(_playerHealth);
+        Debug.Log($"{_playerName} heal {amount}. Health: {_playerHealth}");
     }
 
     private void Die()

@@ -318,6 +318,15 @@ public class WeaponHolder : MonoBehaviour
         }
     }
 
+    public void AddAmmoToCurrentWeapon(int amount)
+    {
+        if (currentWeapon != null)
+        {
+            currentWeapon.AddReserveAmmo(amount);
+            Debug.Log($"Added {amount} ammo to {currentWeapon.weaponData.weaponName}");
+            SyncAmmoState();
+        }
+    }
 
 
     public Weapon GetCurrentWeapon()

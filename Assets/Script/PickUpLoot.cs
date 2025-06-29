@@ -9,7 +9,7 @@ public class PickUpLoot : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            // Try to get the WeaponHolder component (or whatever handles ammo)
+            
             var weaponHolder = collision.GetComponentInChildren<WeaponHolder>();
 
             if (weaponHolder != null)
@@ -17,12 +17,19 @@ public class PickUpLoot : MonoBehaviour
                 switch (loot.lootName)
                 {
                     case "Ammo":
-                        int ammoAmount = 10;
+                        var currentWeapon = weaponHolder.GetCurrentWeapon();
+                        int magSize = currentWeapon._magSize;
+                        int ammoAmount = Mathf.Max(Mathf.FloorToInt(magSize * 0.2f), 1);//convert to int, round down, but min is 1
+
                         weaponHolder.AddAmmoToCurrentWeapon(ammoAmount);
                         break;
                     case "Health":
-                        int amount = 20;
+                        
                         var Player = collision.GetComponent<PlayerController>();
+                        int health = Player.PlayerHealth;
+                        int maxhealth = PlayerController.PlayerMaxHealth;
+                        int lossHealth = maxhealth - health;
+                        int amount = Mathf.Max(Mathf.FloorToInt(lossHealth * 0.3f), 10);
                         if (Player != null)
                         {
                             Debug.Log("Player is not null");

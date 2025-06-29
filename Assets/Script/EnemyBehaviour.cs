@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using Assets.Script;
+using TMPro;
 
 public class EnemyBehaviour : MonoBehaviour, IDamageable
 {
@@ -229,7 +230,7 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
     void ShowDamage(string text, bool isCrit = false)
     {
         GameObject prefab = Instantiate(_floatingTextPreFab, transform.position, Quaternion.identity);
-        TextMesh textMesh = prefab.GetComponentInChildren<TextMesh>();
+        TextMeshPro textMesh = prefab.GetComponentInChildren<TextMeshPro>();
 
         textMesh.text = text;
 
@@ -237,7 +238,7 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
         if (isCrit)
         {
             textMesh.color = Color.red;
-            textMesh.fontSize = 50;
+            textMesh.fontSize = 10f;
             // Enable Crit Icon
             Transform critIcon = prefab.transform.Find("FloatingText/CritIcon");
 
@@ -253,7 +254,7 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
         else
         {
             textMesh.color = Color.white;
-            textMesh.fontSize = 32;
+            textMesh.fontSize = 5f;
         }
 
         Destroy(prefab, 1f);

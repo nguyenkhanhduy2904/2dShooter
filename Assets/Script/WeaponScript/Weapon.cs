@@ -12,7 +12,7 @@ public class Weapon : MonoBehaviour
     [SerializeField] protected GameObject muzzleFlash;
     
     protected float _nextFireTime;
-    [SerializeField] protected int _magSize;
+    [SerializeField] public int _magSize;
     protected int _currentMagSize;
     [SerializeField] protected int _currentReserveAmmo;
 

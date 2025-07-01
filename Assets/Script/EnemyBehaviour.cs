@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using Assets.Script;
 using TMPro;
+using Pathfinding;
 
 public class EnemyBehaviour : MonoBehaviour, IDamageable
 {
@@ -25,6 +26,9 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
     [Header("Targeting")]
     GameObject _player;
     IDamageable _playerTarget;
+    //public AIPath aiPath;
+    public AILerp aiLerp;
+    bool wasHit = false;
 
     [Header("Components")]
     Rigidbody2D _rb;
@@ -40,6 +44,8 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
 
     [SerializeField] private GameObject _floatingTextPreFab;
 
+    public SpriteRenderer spriteRenderer;
+
     void Awake()
     {
         _enemyHealth = _enemyMaxHealth;
@@ -47,13 +53,19 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
 
     void Start()
     {
+        //aiPath = GetComponent<AIPath>();
+        aiLerp = GetComponent<AILerp>();
         _player = GameObject.FindWithTag("Player");
         _playerTarget = _player.GetComponent<IDamageable>();
         _rb = GetComponent<Rigidbody2D>();
         _rangeCircle = GetComponent<LineRenderer>();
+
+        spriteRenderer = GetComponent<SpriteRenderer>();
         DrawRangeCircle();
 
         ChangeState(EnemyState.Idle);
+
+
     }
 
     void Update()
@@ -65,12 +77,13 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
         switch (_currentState)
         {
             case EnemyState.Idle:
-                if (dist <= _enemyRange * 3f) // detect player
+                if (dist <= _enemyRange * 3f || wasHit) // detect player
                     ChangeState(EnemyState.Chase);
                 break;
 
             case EnemyState.Chase:
-                MoveToPlayer();
+                //MoveToPlayer();
+                UpdateDestination();
                 if (dist <= _enemyRange && _canAttack)
                     ChangeState(EnemyState.Charge);
                 break;
@@ -84,16 +97,49 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
         }
     }
 
+    void changeSpriteDirection()
+    {
+        if (_player != null)
+        {
+            Vector3 dir = _player.transform.position - transform.position;
+
+            // Simple left/right flip
+            if (dir.x < 0)
+            {
+                // Face left
+                spriteRenderer.flipX = true;
+            }
+            else
+            {
+                // Face right
+                spriteRenderer.flipX = false;
+            }
+        }
+    }
+
+
     void MoveToPlayer()
     {
-        Vector2 direction = (_player.transform.position - transform.position).normalized;
-        _rb.linearVelocity = direction * _enemySpeed;
+        //Vector2 direction = (_player.transform.position - transform.position).normalized;
+        //_rb.linearVelocity = direction * _enemySpeed;
+
+        //aiPath.destination = _player.transform.position;
+        aiLerp.destination = _player.transform.position;
         float dist = Vector2.Distance(transform.position, _player.transform.position);
+        changeSpriteDirection();
         if (dist <= _enemyRange)
         {
             ChangeState(EnemyState.Idle);
         }
     }
+    void UpdateDestination()
+    {
+        if (_currentState == EnemyState.Chase)
+        {
+            aiLerp.destination = _player.transform.position;
+        }
+    }
+
 
     void ChangeState(EnemyState newState)
     {
@@ -112,21 +158,38 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
         switch (_currentState)
         {
             case EnemyState.Idle:
-                _rb.linearVelocity = Vector2.zero;
+                //_rb.linearVelocity = Vector2.zero; //this is now obsolete cause AIpath using tranform movement. using tranform instead
+                aiLerp.canMove = false;
                 break;
 
             case EnemyState.Chase:
+               
+                aiLerp.canMove = true;
                 break;
 
             case EnemyState.Charge:
+                aiLerp.canMove = false;
                 _rb.linearVelocity = Vector2.zero;
                 _currentStateRoutine = StartCoroutine(ChargeAndAttack());
                 break;
 
             case EnemyState.Recover:
+                float dist = Vector2.Distance(transform.position, _player.transform.position);
+                if (dist <= _enemyRange)
+                {
+                    aiLerp.canMove = false;
+                    
+                }
+                else
+                {
+                    aiLerp.canMove = true;
+                   
+                }
                 if (_recoveryRoutine != null)
                     StopCoroutine(_recoveryRoutine);
                 _recoveryRoutine = StartCoroutine(Recover());
+
+
                 break;
 
             case EnemyState.Dead:
@@ -172,16 +235,46 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
         float timer = 0f;
         while (timer < _enemyAtkSpeed)
         {
-            MoveToPlayer();
+           
             timer += Time.deltaTime;
             yield return null;
         }
 
         _canAttack = true;
+        float dist = Vector2.Distance(transform.position, _player.transform.position);
+        if (dist <= _enemyRange)
+        {
+           ChangeState(EnemyState.Charge);
+        }
+        else
+        {
+           ChangeState(EnemyState.Chase);
 
-        if (_currentState == EnemyState.Recover)
-            ChangeState(EnemyState.Chase);
+        }
+        
     }
+
+    public void InterruptAttack()
+    {
+        if (_currentStateRoutine != null)
+        {
+            StopCoroutine(_currentStateRoutine);
+            _currentStateRoutine = null;
+        }
+        if (_recoveryRoutine != null)
+        {
+            StopCoroutine(_recoveryRoutine);
+            _canAttack = true;
+            _recoveryRoutine = null;
+        }
+    }
+
+    public void ChangeStateToChase()
+    {
+        ChangeState(EnemyState.Chase);
+    }
+
+
 
 
     void DrawRangeCircle()
@@ -201,7 +294,7 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
     public void TakeDmg(int amount, bool isCrit = false)
     {
         if (_currentState == EnemyState.Dead) return;
-
+        wasHit = true;
         _enemyHealth -= amount;
         _enemyHealth = Mathf.Clamp(_enemyHealth, 0, _enemyMaxHealth);
 
@@ -227,7 +320,7 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
             ChangeState(EnemyState.Dead);
     }
 
-    void ShowDamage(string text, bool isCrit = false)
+    public void ShowDamage(string text, bool isCrit = false)
     {
         GameObject prefab = Instantiate(_floatingTextPreFab, transform.position, Quaternion.identity);
         TextMeshPro textMesh = prefab.GetComponentInChildren<TextMeshPro>();

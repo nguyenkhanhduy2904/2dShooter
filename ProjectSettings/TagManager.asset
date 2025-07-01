@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Wall
   - Enemy
+  - ExplosionBarrel
   layers:
   - Default
   - TransparentFX

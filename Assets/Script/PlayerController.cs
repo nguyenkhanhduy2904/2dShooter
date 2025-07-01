@@ -1,5 +1,6 @@
 using Assets.Script;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour, IDamageable
@@ -24,6 +25,11 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     [Header("Audio")]
     [SerializeField] private AudioClip[] _hurtedSounds;
+
+
+    [SerializeField] private GameObject explosionPrefab;
+
+    [SerializeField] private GameObject _floatingTextPreFab;
 
     private void Start()
     {
@@ -108,6 +114,24 @@ public class PlayerController : MonoBehaviour, IDamageable
         weaponHolder.RotateToMouse();
         weaponHolder.HandleShooting();
         weaponHolder.HandleReload();
+        HandleExplosion();
+    }
+
+    private void HandleExplosion()
+    {
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            // Instantiate explosion at player position
+            GameObject explosionObj = Instantiate(
+                explosionPrefab,
+                transform.position,
+                Quaternion.identity
+            );
+
+            // (Optional) Configure explosion
+            //Explosion explosion = explosionObj.GetComponent<Explosion>();
+            //explosion.Init(5f, 80, 2f); // radius, damage, lifetime
+        }
     }
 
     #endregion
@@ -132,6 +156,39 @@ public class PlayerController : MonoBehaviour, IDamageable
     public void DealDmg(IDamageable target)
     {
         // Future expansion
+    }
+
+    public void ShowDamage(string text, bool isCrit = false)
+    {
+        GameObject prefab = Instantiate(_floatingTextPreFab, transform.position, Quaternion.identity);
+        TextMeshPro textMesh = prefab.GetComponentInChildren<TextMeshPro>();
+
+        textMesh.text = text;
+
+        // Color and style based on crit
+        if (isCrit)
+        {
+            textMesh.color = Color.red;
+            textMesh.fontSize = 10f;
+            // Enable Crit Icon
+            Transform critIcon = prefab.transform.Find("FloatingText/CritIcon");
+
+
+            if (critIcon != null)
+            {
+                Debug.Log("found it");
+                critIcon.gameObject.SetActive(true);
+            }
+
+
+        }
+        else
+        {
+            textMesh.color = Color.white;
+            textMesh.fontSize = 5f;
+        }
+
+        Destroy(prefab, 1f);
     }
 
     public void Heal(int amount)

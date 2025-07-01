@@ -10,5 +10,7 @@ namespace Assets.Script
     {
         public void TakeDmg(int dmg, bool _isCrit);
         public void DealDmg(IDamageable target);
+
+        public void ShowDamage(string text, bool isCrit = false);
     }
 }

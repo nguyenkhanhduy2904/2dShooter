@@ -15,6 +15,9 @@ GameObject:
   - component: {fileID: -8842253479436139742}
   - component: {fileID: -9216473093359161450}
   - component: {fileID: -1905189470578542263}
+  - component: {fileID: -1553493963765917797}
+  - component: {fileID: -969348312464871653}
+  - component: {fileID: -5620395393263212710}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -185,6 +188,7 @@ MonoBehaviour:
   _enemyAtkSpeed: 0.5
   _enemyRange: 1.5
   _segments: 60
+  aiLerp: {fileID: 0}
   _enemyHurtedSounds:
   - {fileID: 8300000, guid: 9397afe9d224bbc4bbc301fc278dff08, type: 3}
   - {fileID: 8300000, guid: 847ea492ca32bc146967a4c697886c33, type: 3}
@@ -202,6 +206,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 7c68c690637942946aaef5715487eca3, type: 3}
   - {fileID: 8300000, guid: bbc0b084846d21e41912a4667922cb60, type: 3}
   _floatingTextPreFab: {fileID: 2996679915331620059, guid: 0e5590444d39a034886020c70a63223b, type: 3}
+  spriteRenderer: {fileID: 0}
 --- !u!120 &-9216473093359161450
 LineRenderer:
   serializedVersion: 2
@@ -325,6 +330,85 @@ MonoBehaviour:
   lootList:
   - {fileID: 11400000, guid: 55f8ed76c8fdbea4ba77d20735b6a2d2, type: 2}
   - {fileID: 11400000, guid: 7f4141015aaebea4490c425229f45503, type: 2}
+--- !u!114 &-1553493963765917797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4526603208277295717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 373b52eb9bf8c40f785bb6947a1aee66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  drawGizmos: 1
+  detailedGizmos: 0
+  startEndModifier:
+    addPoints: 0
+    exactStartPoint: 3
+    exactEndPoint: 3
+    useRaycasting: 0
+    mask:
+      serializedVersion: 2
+      m_Bits: 4294967295
+    useGraphRaycasting: 0
+  traversableTags: -1
+  tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  graphMask:
+    value: -1
+--- !u!114 &-969348312464871653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4526603208277295717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 847a14d4dc9cc43679ab34fc78e0182f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 4
+  autoRepath:
+    mode: 2
+    interval: 2
+    sensitivity: 10
+    maximumInterval: 2
+    visualizeSensitivity: 0
+  canMove: 1
+  speed: 3
+  orientation: 1
+  enableRotation: 0
+  rotationSpeed: 10
+  interpolatePathSwitches: 1
+  switchPathInterpolationSpeed: 20
+  targetCompatibility: {fileID: 0}
+  repathRateCompatibility: NaN
+  canSearchCompability: 0
+--- !u!114 &-5620395393263212710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4526603208277295717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb6a34d769a1e4ac7b0b30e433aa443c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  smoothType: 0
+  subdivisions: 2
+  iterations: 2
+  strength: 0.5
+  uniformLength: 1
+  maxSegmentLength: 0.5
+  bezierTangentLength: 0.4
+  offset: 0.2
+  factor: 0.1
 --- !u!1 &7416525029626530628
 GameObject:
   m_ObjectHideFlags: 0
@@ -341,7 +425,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3190572482881668985
 Transform:
   m_ObjectHideFlags: 0

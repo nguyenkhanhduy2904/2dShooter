@@ -9,6 +9,8 @@ public class WeaponData : ScriptableObject
     public AudioClip[] shootSounds;
     public AudioClip[] clipEmptySound;
     public AudioClip[] reloadProcedure;
+    public AudioClip[] pickUpSounds;
+    public AudioClip[] dropSounds;
 
     public float fireRate = 5f;
     public int damage = 10;

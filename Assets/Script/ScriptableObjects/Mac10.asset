@@ -26,6 +26,16 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 45a8a80f94656ba4dad20c517e793619, type: 3}
   - {fileID: 8300000, guid: c05c5de8d1f700b4baef77110ad365ae, type: 3}
   - {fileID: 8300000, guid: caf664fbc6bbd904bad24ce43c7ee35e, type: 3}
+  pickUpSounds:
+  - {fileID: 8300000, guid: 4910909cd77ac804793a43f9d9774e77, type: 3}
+  - {fileID: 8300000, guid: 201fc713f3c320c4bbce6f6c10e637d4, type: 3}
+  dropSounds:
+  - {fileID: 8300000, guid: 48503a33669b1e14d9c196235ebb29c6, type: 3}
+  - {fileID: 8300000, guid: 473e834d2d0f4d343ac5e261872fafc1, type: 3}
+  - {fileID: 8300000, guid: f7a33f01c88f95c49a4efc5397260e7f, type: 3}
+  - {fileID: 8300000, guid: 5206accaffd773b4ca7bcc7c6fd5db70, type: 3}
+  - {fileID: 8300000, guid: f926219062a48824eae2588161ca6d1f, type: 3}
+  - {fileID: 8300000, guid: b23ddbd978fc05749901f6a881a4656c, type: 3}
   fireRate: 20
   damage: 12
   bulletSpeed: 20

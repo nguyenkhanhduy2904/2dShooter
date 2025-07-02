@@ -118,6 +118,7 @@ public class WeaponHolder : MonoBehaviour
         Vector3 dropPos = transform.position + new Vector3(randomOffset.x, randomOffset.y, 0);
 
         GameObject drop = Instantiate(weaponData.pickupPrefab, dropPos, Quaternion.identity);
+        SoundFXManager.Instance.PlaySoundFXClip(weaponData.dropSounds, transform, 1f);
 
         var pickup = drop.GetComponent<WeaponPickUp>();
         if (pickup != null)
@@ -277,6 +278,7 @@ public class WeaponHolder : MonoBehaviour
         GameObject weaponGO = Instantiate(weaponData.weaponPrefab, transform);
         currentWeapon = weaponGO.GetComponent<Weapon>();
         currentWeapon.InitHolder(this);
+        SoundFXManager.Instance.PlaySoundFXClip(weaponData.pickUpSounds, transform, 1f);
 
         var state = weaponStates.Find(w => w.weaponData == weaponData);
         if (state != null)

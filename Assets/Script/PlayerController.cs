@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour, IDamageable
     public static int PlayerMaxHealth = 100;
     public static float PlayerMaxSpeed = 10f;
 
+    int _playerCoins;
+
     [Header("Movement")]
     [SerializeField] private float _moveSpeed = 10f;
     [SerializeField] private LayerMask _layerMask;
@@ -25,6 +27,8 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     [Header("Audio")]
     [SerializeField] private AudioClip[] _hurtedSounds;
+    [SerializeField] private AudioClip[] _healingSounds;
+    [SerializeField] private AudioClip[] _getCoinSounds;
 
 
     [SerializeField] private GameObject explosionPrefab;
@@ -33,6 +37,7 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     private void Start()
     {
+        _playerCoins = 0;
         _rb = GetComponent<Rigidbody2D>();
         _playerHealth = PlayerMaxHealth;
         _playerSpeed = PlayerMaxSpeed;
@@ -196,7 +201,14 @@ public class PlayerController : MonoBehaviour, IDamageable
         _playerHealth += amount;
         _playerHealth = Mathf.Clamp(_playerHealth, 0, PlayerMaxHealth);
         healthBar.SetHealth(_playerHealth);
+        SoundFXManager.Instance.PlaySoundFXClip(_healingSounds, transform, 1f);
         Debug.Log($"{_playerName} heal {amount}. Health: {_playerHealth}");
+    }
+
+    public void GetCoin()
+    {
+        _playerCoins++;
+        SoundFXManager.Instance.PlaySoundFXClip(_getCoinSounds, transform, 1f);
     }
 
     private void Die()
@@ -208,7 +220,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     #endregion
 
     #region Properties
-
+    
     public int PlayerHealth => _playerHealth;
     public float PlayerSpeed => _playerSpeed;
     public string PlayerName => _playerName;

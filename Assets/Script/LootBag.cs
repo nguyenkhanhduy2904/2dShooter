@@ -29,9 +29,10 @@ public class LootBag : MonoBehaviour
         }
     }
 
-    public void InstantiateLoot(Vector3 spawnPosition)
+    public List<GameObject> InstantiateLoot(Vector3 spawnPosition)
     {
         List<Loot> droppedItems = getDroppedItems();
+        List<GameObject> droppedGameObjects = new List<GameObject>();
         if (droppedItems.Count > 0)
         {
             for (int i = 0; i < droppedItems.Count; i++)
@@ -39,12 +40,13 @@ public class LootBag : MonoBehaviour
                 GameObject lootGameObject = Instantiate(droppedItemPrefab, spawnPosition, Quaternion.identity);
                 lootGameObject.GetComponentInChildren<SpriteRenderer>().sprite = droppedItems[i].lootSprite;
                 lootGameObject.GetComponent<PickUpLoot>().loot = droppedItems[i];
-
+                droppedGameObjects.Add(lootGameObject);
 
                 float dropForce = 500f;
                 Vector2 dropDirection = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
                 lootGameObject.GetComponent<Rigidbody2D>().AddForce(dropDirection * dropForce, ForceMode2D.Impulse);
             }
         }
+        return droppedGameObjects;
     }
 }

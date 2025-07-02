@@ -4,6 +4,7 @@ public class PickUpLoot : MonoBehaviour
 {
     //public int ammoAmount = 10;
     public Loot loot;
+    [SerializeField] AudioClip[] _pickUpSounds;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -11,6 +12,7 @@ public class PickUpLoot : MonoBehaviour
         {
             
             var weaponHolder = collision.GetComponentInChildren<WeaponHolder>();
+           
 
             if (weaponHolder != null)
             {
@@ -18,10 +20,17 @@ public class PickUpLoot : MonoBehaviour
                 {
                     case "Ammo":
                         var currentWeapon = weaponHolder.GetCurrentWeapon();
-                        int magSize = currentWeapon._magSize;
-                        int ammoAmount = Mathf.Max(Mathf.FloorToInt(magSize * 0.2f), 1);//convert to int, round down, but min is 1
+                        if (currentWeapon != null)
+                        {
+                            int magSize = currentWeapon._magSize;
+                            int ammoAmount = Mathf.Max(Mathf.FloorToInt(magSize * 0.2f), 1);//convert to int, round down, but min is 1
 
-                        weaponHolder.AddAmmoToCurrentWeapon(ammoAmount);
+                            weaponHolder.AddAmmoToCurrentWeapon(ammoAmount);
+                            SoundFXManager.Instance.PlaySoundFXClip(_pickUpSounds, transform, 1f);
+
+                            Destroy(gameObject); // Remove the pickup
+                        }
+                        
                         break;
                     case "Health":
                         
@@ -39,17 +48,20 @@ public class PickUpLoot : MonoBehaviour
                             Debug.Log("Player is null");
                         }
                         Player.Heal(amount);
+                        SoundFXManager.Instance.PlaySoundFXClip(_pickUpSounds, transform, 1f);
+                        Destroy(gameObject); // Remove the pickup
                         break;
                     default:
                         break;
 
                 }
+                
 
             }
 
 
 
-            Destroy(gameObject); // Remove the pickup
+            
         }
     }
 }

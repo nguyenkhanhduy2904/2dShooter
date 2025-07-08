@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b5bb6d259c092e43b8e87efd7cc829d, type: 3}
+  m_Name: Default_Orc
+  m_EditorClassIdentifier: 
+  _enemyName: Default_Orc
+  _enemyMaxHealth: 200
+  _enemyAtk: 30
+  _enemySpeed: 5
+  _enemyAtkSpeed: 1.5
+  _enemyRange: 1.5
+  _enemyAggroRange: 4
+  _enemyHurtedSounds:
+  - {fileID: 8300000, guid: 9397afe9d224bbc4bbc301fc278dff08, type: 3}
+  - {fileID: 8300000, guid: 847ea492ca32bc146967a4c697886c33, type: 3}
+  - {fileID: 8300000, guid: e53a1d661bfd37c49891492b946880f8, type: 3}
+  - {fileID: 8300000, guid: 065d4fcb1055f0c4396ab43d640bf554, type: 3}
+  - {fileID: 8300000, guid: d04c26e9dc94606479ae7d950e17b828, type: 3}
+  - {fileID: 8300000, guid: c98112105197f4b448df6f250a32abed, type: 3}
+  - {fileID: 8300000, guid: ad063042809398343b10b4363108babc, type: 3}
+  - {fileID: 8300000, guid: 2746406f879a09b48b41dad67fb2fbee, type: 3}
+  _enemyCritHurtedSounds:
+  - {fileID: 8300000, guid: 0061bf6f00c88cc41865e7c98d31d356, type: 3}
+  - {fileID: 8300000, guid: c83a703fff4b8af40b2a364eecc5fed1, type: 3}
+  - {fileID: 8300000, guid: 5ce2c9dc6b40045428e7b3a1b07a8cf8, type: 3}
+  - {fileID: 8300000, guid: 81363fabb180c134286199f22d91d01b, type: 3}
+  - {fileID: 8300000, guid: 7c68c690637942946aaef5715487eca3, type: 3}
+  - {fileID: 8300000, guid: bbc0b084846d21e41912a4667922cb60, type: 3}
+  _floatingTextPreFab: {fileID: 2996679915331620059, guid: 0e5590444d39a034886020c70a63223b, type: 3}

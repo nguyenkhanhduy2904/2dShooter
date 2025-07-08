@@ -8,16 +8,23 @@ public class Explosion : MonoBehaviour
 {
     [SerializeField] private float radius = 3f;
     [SerializeField] private int damage = 50;
-    [SerializeField] private LayerMask damageableLayers;
+    //[SerializeField] private LayerMask damageableLayers;
+   
     [SerializeField] private float lifetime = 1f;
     //[SerializeField] Transform _explosionPoint;
 
+
+    [SerializeField] private float fadeDuration = 0.5f; // how long it fades out
+    [SerializeField] private float delayBeforeFade = 0.3f; // time to wait before starting fade
+
+    SpriteRenderer spriteRenderer;
     private List<IDamageable> targets = new List<IDamageable>();
 
     void Start()
     {
         Explode();
         Debug.Log("Kaboom!!!");
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     public void Init(float radius, int damage, float lifetime)
@@ -55,6 +62,7 @@ public class Explosion : MonoBehaviour
                 enemy.InterruptAttack();
             }
             StartCoroutine(Knockback(targetTransform, direction, 2f, 0.2f));
+          
 
 
 
@@ -63,7 +71,8 @@ public class Explosion : MonoBehaviour
         // Optionally play animation or sound here
 
         // Destroy after lifetime
-        //Destroy(gameObject, lifetime);
+        StartCoroutine(FadeSprite());
+        Destroy(gameObject, lifetime);
     }
 
     private IEnumerator Knockback(Transform target, Vector3 direction, float distance, float duration)
@@ -102,6 +111,27 @@ public class Explosion : MonoBehaviour
         {
             enemy.ChangeStateToChase();
         }
+    }
+
+    IEnumerator FadeSprite()
+    {
+        // Wait before starting the fade (let animation play)
+        yield return new WaitForSeconds(delayBeforeFade);
+
+        float elapsed = 0f;
+        Color startColor = spriteRenderer.color;
+
+        while (elapsed < fadeDuration)
+        {
+            float t = elapsed / fadeDuration;
+            spriteRenderer.color = new Color(startColor.r, startColor.g, startColor.b, Mathf.Lerp(1f, 0f, t));
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        // Ensure fully transparent at the end
+        spriteRenderer.color = new Color(startColor.r, startColor.g, startColor.b, 0f);
+
     }
 
 

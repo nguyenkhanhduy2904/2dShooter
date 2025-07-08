@@ -33,7 +33,7 @@ public class PierceableBullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Enemy"))
+        if (collision.CompareTag("Enemy") || collision.CompareTag("ExplosionBarrel"))
         {
             Debug.Log("Hit " + collision.gameObject.name);
 

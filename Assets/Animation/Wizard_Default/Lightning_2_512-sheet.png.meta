@@ -1,0 +1,882 @@
+fileFormatVersion: 2
+guid: fd885b65ea716994492252c43a43506b
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -8033210959156072819
+    second: Lightning_2_512-sheet_0
+  - first:
+      213: -8662941964325593610
+    second: Lightning_2_512-sheet_1
+  - first:
+      213: 1703874351839745111
+    second: Lightning_2_512-sheet_2
+  - first:
+      213: 122164908119339602
+    second: Lightning_2_512-sheet_3
+  - first:
+      213: -781970649721581115
+    second: Lightning_2_512-sheet_4
+  - first:
+      213: -5947371938128174621
+    second: Lightning_2_512-sheet_5
+  - first:
+      213: 1652214007237360668
+    second: Lightning_2_512-sheet_6
+  - first:
+      213: -932504984495684609
+    second: Lightning_2_512-sheet_7
+  - first:
+      213: -7385226597823038011
+    second: Lightning_2_512-sheet_8
+  - first:
+      213: 6183694294120360192
+    second: Lightning_2_512-sheet_9
+  - first:
+      213: 2268380107277013995
+    second: Lightning_2_512-sheet_10
+  - first:
+      213: -8051666411147278017
+    second: Lightning_2_512-sheet_11
+  - first:
+      213: -4852345723609388712
+    second: Lightning_2_512-sheet_12
+  - first:
+      213: -7095128743200276376
+    second: Lightning_2_512-sheet_13
+  - first:
+      213: -250416414538584354
+    second: Lightning_2_512-sheet_14
+  - first:
+      213: -6744574335303757301
+    second: Lightning_2_512-sheet_15
+  - first:
+      213: -1467326543452431188
+    second: Lightning_2_512-sheet_16
+  - first:
+      213: 6377870567783500001
+    second: Lightning_2_512-sheet_17
+  - first:
+      213: 7823608871804616640
+    second: Lightning_2_512-sheet_18
+  - first:
+      213: -1646957076860737926
+    second: Lightning_2_512-sheet_19
+  - first:
+      213: -3892930767842501460
+    second: Lightning_2_512-sheet_20
+  - first:
+      213: 8238719210254892976
+    second: Lightning_2_512-sheet_21
+  - first:
+      213: 229235548993153877
+    second: Lightning_2_512-sheet_22
+  - first:
+      213: 728747936905596661
+    second: Lightning_2_512-sheet_23
+  - first:
+      213: -1333492584153436969
+    second: Lightning_2_512-sheet_24
+  - first:
+      213: -289521398430363697
+    second: Lightning_2_512-sheet_25
+  - first:
+      213: -8223113352601474679
+    second: Lightning_2_512-sheet_26
+  - first:
+      213: -1893544889112623455
+    second: Lightning_2_512-sheet_27
+  - first:
+      213: -6438381024293127491
+    second: Lightning_2_512-sheet_28
+  - first:
+      213: 2547934038323829082
+    second: Lightning_2_512-sheet_29
+  - first:
+      213: -8771381314776864820
+    second: Lightning_2_512-sheet_30
+  - first:
+      213: -2150129686432853683
+    second: Lightning_2_512-sheet_31
+  - first:
+      213: 3020132281700794295
+    second: Lightning_2_512-sheet_32
+  - first:
+      213: -5227914408964933699
+    second: Lightning_2_512-sheet_33
+  - first:
+      213: 6607639748584023271
+    second: Lightning_2_512-sheet_34
+  - first:
+      213: -9163984222297445701
+    second: Lightning_2_512-sheet_35
+  - first:
+      213: -8599501035458425567
+    second: Lightning_2_512-sheet_36
+  - first:
+      213: 3487204640335507556
+    second: Lightning_2_512-sheet_37
+  - first:
+      213: -6632648841616241024
+    second: Lightning_2_512-sheet_38
+  - first:
+      213: -7736014160476398437
+    second: Lightning_2_512-sheet_39
+  - first:
+      213: -5992636329820379379
+    second: Lightning_2_512-sheet_40
+  - first:
+      213: -1024299879684416358
+    second: Lightning_2_512-sheet_41
+  - first:
+      213: -6148225815906681
+    second: Lightning_2_512-sheet_42
+  - first:
+      213: 6879247590731866037
+    second: Lightning_2_512-sheet_43
+  - first:
+      213: -1410302446107234460
+    second: Lightning_2_512-sheet_44
+  - first:
+      213: -3175864483235772297
+    second: Lightning_2_512-sheet_45
+  - first:
+      213: -2057097512609501087
+    second: Lightning_2_512-sheet_46
+  - first:
+      213: -602273236107904535
+    second: Lightning_2_512-sheet_47
+  - first:
+      213: -6791550250448597097
+    second: Lightning_2_512-sheet_48
+  - first:
+      213: 7667873049633900785
+    second: Lightning_2_512-sheet_49
+  - first:
+      213: 1377340252958907542
+    second: Lightning_2_512-sheet_50
+  - first:
+      213: -6960446526835451563
+    second: Lightning_2_512-sheet_51
+  - first:
+      213: 7223172424671100212
+    second: Lightning_2_512-sheet_52
+  - first:
+      213: -2964775804104323542
+    second: Lightning_2_512-sheet_53
+  - first:
+      213: 5986769206855163163
+    second: Lightning_2_512-sheet_54
+  - first:
+      213: -5323600626806313770
+    second: Lightning_2_512-sheet_55
+  - first:
+      213: 2640605629864817764
+    second: Lightning_2_512-sheet_56
+  - first:
+      213: -2238830432338452456
+    second: Lightning_2_512-sheet_57
+  - first:
+      213: 2291879263856104439
+    second: Lightning_2_512-sheet_58
+  - first:
+      213: -6585462203199686269
+    second: Lightning_2_512-sheet_59
+  - first:
+      213: 4760284427147229259
+    second: Lightning_2_512-sheet_60
+  - first:
+      213: 4418791541129320424
+    second: Lightning_2_512-sheet_61
+  - first:
+      213: -4434190156830409093
+    second: Lightning_2_512-sheet_62
+  - first:
+      213: 601990586310506244
+    second: Lightning_2_512-sheet_63
+  - first:
+      213: 5224181213693359188
+    second: Lightning_2_512-sheet_64
+  - first:
+      213: 7143032230861519422
+    second: Lightning_2_512-sheet_65
+  - first:
+      213: 2123594435382282463
+    second: Lightning_2_512-sheet_66
+  - first:
+      213: -1365826702188940262
+    second: Lightning_2_512-sheet_67
+  - first:
+      213: -3131782751242911407
+    second: Lightning_2_512-sheet_68
+  - first:
+      213: 5637996323648229376
+    second: Lightning_2_512-sheet_69
+  - first:
+      213: 524131285269915652
+    second: Lightning_2_512-sheet_70
+  - first:
+      213: -1087496573271477599
+    second: Lightning_2_512-sheet_71
+  - first:
+      213: -7317330482699612844
+    second: Lightning_2_512-sheet_72
+  - first:
+      213: -6263212326968497205
+    second: Lightning_2_512-sheet_73
+  - first:
+      213: 2366768444259707323
+    second: Lightning_2_512-sheet_74
+  - first:
+      213: 6709842253772348356
+    second: Lightning_2_512-sheet_75
+  - first:
+      213: -9167834017499192806
+    second: Lightning_2_512-sheet_76
+  - first:
+      213: -2067639519016963359
+    second: Lightning_2_512-sheet_77
+  - first:
+      213: -2295679646163922746
+    second: Lightning_2_512-sheet_78
+  - first:
+      213: -4801890085829150714
+    second: Lightning_2_512-sheet_79
+  - first:
+      213: -3936907758974574140
+    second: Lightning_2_512-sheet_80
+  - first:
+      213: -81032024814801627
+    second: Lightning_2_512-sheet_81
+  - first:
+      213: -1579584842764726177
+    second: Lightning_2_512-sheet_82
+  - first:
+      213: 6874542864593873199
+    second: Lightning_2_512-sheet_83
+  - first:
+      213: -2575268884059902293
+    second: Lightning_2_512-sheet_84
+  - first:
+      213: -1508239934741003521
+    second: Lightning_2_512-sheet_85
+  - first:
+      213: -690655740054159104
+    second: Lightning_2_512-sheet_86
+  - first:
+      213: 460552339230325138
+    second: Lightning_2_512-sheet_87
+  - first:
+      213: 7997730812848780335
+    second: Lightning_2_512-sheet_88
+  - first:
+      213: -7606974496043068692
+    second: Lightning_2_512-sheet_89
+  - first:
+      213: -2524024609963542769
+    second: Lightning_2_512-sheet_90
+  - first:
+      213: -7803903135446016345
+    second: Lightning_2_512-sheet_91
+  - first:
+      213: 2256728674720684676
+    second: Lightning_2_512-sheet_92
+  - first:
+      213: 5609942678048585586
+    second: Lightning_2_512-sheet_93
+  - first:
+      213: 2923124495664870954
+    second: Lightning_2_512-sheet_94
+  - first:
+      213: -2168482922963505951
+    second: Lightning_2_512-sheet_95
+  - first:
+      213: 1820556724352428391
+    second: Lightning_2_512-sheet_96
+  - first:
+      213: -1608536909575904911
+    second: Lightning_2_512-sheet_97
+  - first:
+      213: 1698250796218000005
+    second: Lightning_2_512-sheet_98
+  - first:
+      213: -1218502960158996642
+    second: Lightning_2_512-sheet_99
+  - first:
+      213: 4682549869683459414
+    second: Lightning_2_512-sheet_100
+  - first:
+      213: -8687695485238807184
+    second: Lightning_2_512-sheet_101
+  - first:
+      213: -1044255016801730118
+    second: Lightning_2_512-sheet_102
+  - first:
+      213: -8363629289226220204
+    second: Lightning_2_512-sheet_103
+  - first:
+      213: -679682923508985730
+    second: Lightning_2_512-sheet_104
+  - first:
+      213: 3034005049633661076
+    second: Lightning_2_512-sheet_105
+  - first:
+      213: 5485323153048892170
+    second: Lightning_2_512-sheet_106
+  - first:
+      213: 1400506046670239778
+    second: Lightning_2_512-sheet_107
+  - first:
+      213: -4024075254746474356
+    second: Lightning_2_512-sheet_108
+  - first:
+      213: 2959127107316682157
+    second: Lightning_2_512-sheet_109
+  - first:
+      213: 7005396175433335127
+    second: Lightning_2_512-sheet_110
+  - first:
+      213: 4338496153631886166
+    second: Lightning_2_512-sheet_111
+  - first:
+      213: 320375509886412054
+    second: Lightning_2_512-sheet_112
+  - first:
+      213: -989179666675465012
+    second: Lightning_2_512-sheet_113
+  - first:
+      213: -3022152680350380551
+    second: Lightning_2_512-sheet_114
+  - first:
+      213: 1785676569463921531
+    second: Lightning_2_512-sheet_115
+  - first:
+      213: -5833143560827296370
+    second: Lightning_2_512-sheet_116
+  - first:
+      213: 6096119143109771350
+    second: Lightning_2_512-sheet_117
+  - first:
+      213: 4749487642427770130
+    second: Lightning_2_512-sheet_118
+  - first:
+      213: 9222909299117332361
+    second: Lightning_2_512-sheet_119
+  - first:
+      213: 6226363945784324359
+    second: Lightning_2_512-sheet_120
+  - first:
+      213: 2569812966690610847
+    second: Lightning_2_512-sheet_121
+  - first:
+      213: -1552007116749566134
+    second: Lightning_2_512-sheet_122
+  - first:
+      213: -3129931262653753387
+    second: Lightning_2_512-sheet_123
+  - first:
+      213: 1551203799078509749
+    second: Lightning_2_512-sheet_124
+  - first:
+      213: 4305006072408362214
+    second: Lightning_2_512-sheet_125
+  - first:
+      213: -7879208034704736011
+    second: Lightning_2_512-sheet_126
+  - first:
+      213: -4340673816879132520
+    second: Lightning_2_512-sheet_127
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Lightning_2_512-sheet_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1536
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d8e2ab5c13d448090800000000000000
+      internalID: -8033210959156072819
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lightning_2_512-sheet_1
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 1536
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6fd5c828e2c07c780800000000000000
+      internalID: -8662941964325593610
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lightning_2_512-sheet_2
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 1536
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7549e4b02b065a710800000000000000
+      internalID: 1703874351839745111
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lightning_2_512-sheet_3
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 1536
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 252b870365402b100800000000000000
+      internalID: 122164908119339602
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lightning_2_512-sheet_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1024
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c1509e46d1e525f0800000000000000
+      internalID: -781970649721581115
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lightning_2_512-sheet_5
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 1024
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3e16eb89bb0b67da0800000000000000
+      internalID: -5947371938128174621
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lightning_2_512-sheet_6
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 1024
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c1cbe42c2e7dde610800000000000000
+      internalID: 1652214007237360668
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lightning_2_512-sheet_7
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 1024
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff38adf38a31f03f0800000000000000
+      internalID: -932504984495684609
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lightning_2_512-sheet_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 512
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5cdbdf2b987628990800000000000000
+      internalID: -7385226597823038011
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lightning_2_512-sheet_9
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 512
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 00967a8a235e0d550800000000000000
+      internalID: 6183694294120360192
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lightning_2_512-sheet_10
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 512
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be31fcd60b7ea7f10800000000000000
+      internalID: 2268380107277013995
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lightning_2_512-sheet_11
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 512
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f394f910f0cb24090800000000000000
+      internalID: -8051666411147278017
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lightning_2_512-sheet_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 85960e0f54109acb0800000000000000
+      internalID: -4852345723609388712
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lightning_2_512-sheet_13
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 0
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 86042e9eff9098d90800000000000000
+      internalID: -7095128743200276376
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lightning_2_512-sheet_14
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 0
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ede20850997568cf0800000000000000
+      internalID: -250416414538584354
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lightning_2_512-sheet_15
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 0
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b02d00750657662a0800000000000000
+      internalID: -6744574335303757301
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: f54cce13ad6de414baa0388ffcb168f6
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Lightning_2_512-sheet_0: -8033210959156072819
+      Lightning_2_512-sheet_1: -8662941964325593610
+      Lightning_2_512-sheet_10: 2268380107277013995
+      Lightning_2_512-sheet_11: -8051666411147278017
+      Lightning_2_512-sheet_12: -4852345723609388712
+      Lightning_2_512-sheet_13: -7095128743200276376
+      Lightning_2_512-sheet_14: -250416414538584354
+      Lightning_2_512-sheet_15: -6744574335303757301
+      Lightning_2_512-sheet_2: 1703874351839745111
+      Lightning_2_512-sheet_3: 122164908119339602
+      Lightning_2_512-sheet_4: -781970649721581115
+      Lightning_2_512-sheet_5: -5947371938128174621
+      Lightning_2_512-sheet_6: 1652214007237360668
+      Lightning_2_512-sheet_7: -932504984495684609
+      Lightning_2_512-sheet_8: -7385226597823038011
+      Lightning_2_512-sheet_9: 6183694294120360192
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

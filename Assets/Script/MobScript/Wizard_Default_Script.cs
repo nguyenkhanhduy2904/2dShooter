@@ -15,18 +15,53 @@ public class Wizard_Default_Script : EnemyBehaviour
 
     public override void Update()
     {
+        if (_currentState == EnemyState.Dead) return;
         base.Update();
         if (_canTeleport == false) return;
         float dist = Vector2.Distance(transform.position, _player.transform.position);
-        if (dist < 2f) // Example trigger
+        if (dist < 2f || _enemyHealth <= Mathf.RoundToInt(_enemyMaxHealth * 0.5f)) // trigger teleport if player too close or wizard health drop below 50%
         {
-            InterruptAttack();
-            TryRandomTeleport();
-            //StartCoroutine(TeleportCooldown());
-            //_canTeleport = false; // Maybe you add a cooldown flag
-            ChangeState(EnemyState.Idle); //  THIS is essential
+           StartTeleport();
         }
     }
+
+    public void StartTeleport()
+    {
+        _canTeleport = false;
+        StartCoroutine(TeleportSequence());
+    }
+
+    private IEnumerator TeleportSequence()
+    {
+        InterruptAttack();
+        _collider.enabled = false;
+
+        
+        _animator.Play("teleport_anim");
+        yield return null;//wait 1 frame for the _animator to update
+        float animLenght = _animator.GetCurrentAnimatorStateInfo(0).length;
+        
+        yield return new WaitForSeconds(animLenght); // adjust to your animation length
+
+        _animator.enabled = false;
+        spriteRenderer.enabled = false;
+        
+        TryRandomTeleport();
+
+        // Optionally play teleport-in animation
+        //_animator.Play("teleport_in_anim");
+        _animator.enabled = true;
+        spriteRenderer.enabled = true;
+        
+        _collider.enabled = true;
+
+       
+        ChangeState(EnemyState.Idle);
+
+      
+        StartCoroutine(TeleportCooldown());
+    }
+
     public void TryRandomTeleport()
     {
         for (int i = 0; i < maxAttempts; i++)
@@ -39,9 +74,9 @@ public class Wizard_Default_Script : EnemyBehaviour
 
             Vector3 candidatePos = _player.transform.position + (Vector3)offset;
 
-            // Optional: clamp inside map bounds
-            candidatePos.x = Mathf.Clamp(candidatePos.x, -7.5f, 7.5f);
-            candidatePos.y = Mathf.Clamp(candidatePos.y, -4f, 4f);
+            //// Optional: clamp inside map bounds
+            //candidatePos.x = Mathf.Clamp(candidatePos.x, -7.5f, 7.5f);
+            //candidatePos.y = Mathf.Clamp(candidatePos.y, -4f, 4f);
 
             // Check A* walkability
             GraphNode node = AstarPath.active.GetNearest(candidatePos).node;
@@ -49,13 +84,14 @@ public class Wizard_Default_Script : EnemyBehaviour
             {
                 Debug.Log("Teleporting to: " + candidatePos);
                 aiLerp.Teleport(candidatePos); // <-- ONLY THIS
-                _canTeleport = false;
+                
                 return;
             }
         }
 
         // All attempts failed
         Debug.Log("Teleport failed: no walkable spot found.");
+        _canTeleport = true;
     }
 
     IEnumerator TeleportCooldown()// use this if the wizard can teleport multiple times

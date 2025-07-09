@@ -14,7 +14,7 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
 
     [Header("Stats")]
     [SerializeField] string _enemyName;
-    [SerializeField] int _enemyMaxHealth;
+    [SerializeField] protected int _enemyMaxHealth;
     [SerializeField] protected int _enemyAtk;
     [SerializeField] float _enemySpeed;
     [SerializeField] float _enemyAtkSpeed;
@@ -25,7 +25,7 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
 
     bool _canAttack = true;
 
-    int _enemyHealth;
+    protected int _enemyHealth;
     protected EnemyState _currentState;
 
     [Header("Targeting")]
@@ -38,7 +38,8 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
     [Header("Components")]
     Rigidbody2D _rb;
     LineRenderer _rangeCircle;
-    Animator _animator;
+    protected Collider2D _collider;
+    protected Animator _animator;
 
     Coroutine _currentStateRoutine;
     Coroutine _recoveryRoutine;
@@ -82,6 +83,7 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
         _player = GameObject.FindWithTag("Player");
         _playerTarget = _player.GetComponent<IDamageable>();
         _rb = GetComponent<Rigidbody2D>();
+        _collider = GetComponent<Collider2D>();
         _rangeCircle = GetComponent<LineRenderer>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         //_spriteTransform = transform.GetChild(0);
@@ -234,6 +236,7 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
 
             case EnemyState.Dead:
                 _rb.linearVelocity = Vector2.zero;
+                InterruptAttack();
                 Die();
                 break;
         }

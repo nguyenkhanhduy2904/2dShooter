@@ -331,23 +331,20 @@ MonoBehaviour:
   obstacleMask:
     serializedVersion: 2
     m_Bits: 128
-  _enemyName: 
-  _enemyMaxHealth: 0
-  _enemyAtk: 0
-  _enemySpeed: 0
-  _enemyAtkSpeed: 0
-  _enemyRange: 0
-  _enemyAggroRange: 0
   _segments: 60
   aiLerp: {fileID: 0}
   _enemyHurtedSounds: []
   _enemyCritHurtedSounds: []
+  _attackChargeUpSounds: []
   _floatingTextPreFab: {fileID: 0}
   spriteRenderer: {fileID: 0}
   bulletPrefab: {fileID: 4435246658327050908, guid: eff2a6b0f18a82540b4a528250afe888, type: 3}
   teleportRadius: 5
   maxAttempts: 8
   teleportCoolDown: 5
+  _teleportSounds:
+  - {fileID: 8300000, guid: bb7ab9bfc7227824aa2f0e26e3a0570e, type: 3}
+  - {fileID: 8300000, guid: 7a43fbe2bb73ffb419f79e538e2d9cb4, type: 3}
 --- !u!1 &7217599135875865029
 GameObject:
   m_ObjectHideFlags: 0

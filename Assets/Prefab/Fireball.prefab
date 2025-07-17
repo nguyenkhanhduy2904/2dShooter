@@ -378,3 +378,9 @@ MonoBehaviour:
   _explosionSounds:
   - {fileID: 8300000, guid: 3324a764f2232514f94137c0e0e0915d, type: 3}
   - {fileID: 8300000, guid: 64663f18593d2a345a5e73271c3cee07, type: 3}
+  - {fileID: 8300000, guid: 95021c368ca19124680cac43def58a8a, type: 3}
+  - {fileID: 8300000, guid: b15e6f1ac6f98ad4d92d96ae3858e4e8, type: 3}
+  - {fileID: 8300000, guid: 130a22137a1070f4c9c37ae2c7e0f597, type: 3}
+  - {fileID: 8300000, guid: 70da324dc44d9f34da0390db3e7b9daa, type: 3}
+  _fireBallInAirSounds:
+  - {fileID: 8300000, guid: d80434ad6fc20d74aa260df5bad76d27, type: 3}

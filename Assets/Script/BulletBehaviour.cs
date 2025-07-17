@@ -8,6 +8,8 @@ public class BulletBehaviour : MonoBehaviour
     private Rigidbody2D _rb;
     public int _damage = 10; // default value, overwritten later
     public bool _isCrit;
+    public AudioClip[] arrowInAirSounds;
+    public AudioClip[] arrowHitSounds;
     public void SetDamage(int damage, bool isCrit = false)
     {
         _damage = damage;
@@ -18,6 +20,7 @@ public class BulletBehaviour : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody2D>();
         _rb.linearVelocity = direction.normalized * _bulletSpeed;
+        SoundFXManager.Instance.PlaySoundFXClip(arrowInAirSounds, transform, 1f);
         Destroy(gameObject, 3f);
     }
 
@@ -32,7 +35,7 @@ public class BulletBehaviour : MonoBehaviour
             {
                 target.TakeDmg(_damage, _isCrit); // use damage from enemy stat
             }
-
+            SoundFXManager.Instance.PlaySoundFXClip(arrowHitSounds, transform, 1f);
             Destroy(gameObject);
         }
     }

@@ -12,6 +12,8 @@ public class Wizard_Default_Script : EnemyBehaviour
     [SerializeField] float teleportCoolDown = 5f;
     bool _canTeleport = true;
 
+    [SerializeField] AudioClip[] _teleportSounds;
+
 
     public override void Update()
     {
@@ -28,6 +30,7 @@ public class Wizard_Default_Script : EnemyBehaviour
     public void StartTeleport()
     {
         _canTeleport = false;
+        SoundFXManager.Instance.PlaySoundFXClip(_teleportSounds, transform, 1f);
         StartCoroutine(TeleportSequence());
     }
 
@@ -82,6 +85,7 @@ public class Wizard_Default_Script : EnemyBehaviour
             GraphNode node = AstarPath.active.GetNearest(candidatePos).node;
             if (node != null && node.Walkable)
             {
+                
                 Debug.Log("Teleporting to: " + candidatePos);
                 aiLerp.Teleport(candidatePos); // <-- ONLY THIS
                 

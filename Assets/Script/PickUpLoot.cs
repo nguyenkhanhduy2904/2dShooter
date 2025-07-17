@@ -34,21 +34,36 @@ public class PickUpLoot : MonoBehaviour
                         break;
                     case "Health":
                         
-                        var Player = collision.GetComponent<PlayerController>();
-                        int health = Player.PlayerHealth;
-                        int maxhealth = PlayerController.PlayerMaxHealth;
-                        int lossHealth = maxhealth - health;
-                        int amount = Mathf.Max(Mathf.FloorToInt(lossHealth * 0.3f), 10);
-                        if (Player != null)
+                        //var Player = collision.GetComponent<PlayerController>();
+                        //int health = Player.PlayerHealth;
+                        //int maxhealth = PlayerController.PlayerMaxHealth;
+                        //int lossHealth = maxhealth - health;
+                        //int amount = Mathf.Max(Mathf.FloorToInt(lossHealth * 0.3f), 10);
+                        //if (Player != null)
+                        //{
+                        //    Debug.Log("Player is not null");
+                        //}
+                        //else
+                        //{
+                        //    Debug.Log("Player is null");
+                        //}
+                        //Player.Heal(amount);
+                        //SoundFXManager.Instance.PlaySoundFXClip(_pickUpSounds, transform, 1f);
+
+                        InventoryScript inven = collision.GetComponentInChildren<InventoryScript>();
+                        if (inven != null)
                         {
-                            Debug.Log("Player is not null");
+                            inven.AddItem(loot.usableItemRef, 1);
+                            SoundFXManager.Instance.PlaySoundFXClip(_pickUpSounds, transform, 1f);
+                            
+
                         }
                         else
                         {
-                            Debug.Log("Player is null");
+                            Debug.LogWarning("No inventory found on player!");
                         }
-                        Player.Heal(amount);
-                        SoundFXManager.Instance.PlaySoundFXClip(_pickUpSounds, transform, 1f);
+
+
                         Destroy(gameObject); // Remove the pickup
                         break;
                     default:

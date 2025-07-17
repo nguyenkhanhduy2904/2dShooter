@@ -120,6 +120,15 @@ public class PlayerController : MonoBehaviour, IDamageable
         weaponHolder.HandleShooting();
         weaponHolder.HandleReload();
         HandleExplosion();
+        if (Input.GetKey(KeyCode.CapsLock))
+        {
+            Time.timeScale = 0.2f;
+        }
+        else
+        {
+            Time.timeScale = 1f;
+        }
+
     }
 
     private void HandleExplosion()

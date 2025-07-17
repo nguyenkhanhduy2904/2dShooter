@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using Assets.Script;
 using Pathfinding;
+using System.Security;
 
 public class Explosion : MonoBehaviour
 {
@@ -16,15 +17,23 @@ public class Explosion : MonoBehaviour
 
     [SerializeField] private float fadeDuration = 0.5f; // how long it fades out
     [SerializeField] private float delayBeforeFade = 0.3f; // time to wait before starting fade
+    [SerializeField] ParticleSystem _exploParticalPrefab;
+    ParticleSystem _exploParticalInstant;
 
     SpriteRenderer spriteRenderer;
     private List<IDamageable> targets = new List<IDamageable>();
 
     void Start()
     {
+       
         Explode();
         Debug.Log("Kaboom!!!");
         spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
+    void SpawnExplodeParticle()
+    {
+        _exploParticalInstant = Instantiate(_exploParticalPrefab, transform.position, Quaternion.identity);
     }
 
     public void Init(float radius, int damage, float lifetime)
@@ -72,6 +81,7 @@ public class Explosion : MonoBehaviour
 
         // Destroy after lifetime
         StartCoroutine(FadeSprite());
+        SpawnExplodeParticle();
         Destroy(gameObject, lifetime);
     }
 

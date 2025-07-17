@@ -120,48 +120,7 @@ public class Weapon : MonoBehaviour
     }
 
 
-    //public virtual void Shoot(Vector2 direction)
-    //{
-    //    if (weaponData.bulletPrefab == null)
-    //    {
-    //        Debug.LogError("Missing bullet prefab!");
-    //        return;
-    //    }
-    //    //Debug.Log($"Shoot direction: {direction}, weapon: {gameObject.name}");
-    //    // Angle for rotation
-    //    float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-    //    Quaternion rotation = Quaternion.Euler(0, 0, angle);
-
-    //    // Spawn bullet
-    //    GameObject bullet = Instantiate(weaponData.bulletPrefab, firePoint.position, rotation);
-    //    //bullet.GetComponent<BulletBehaviour>().direction = direction;
-
-    //    // Pass damage to bullet
-    //    BulletBehaviour bulletScript = bullet.GetComponent<BulletBehaviour>();
-    //    bulletScript.direction = direction;
-
-    //    int rng = Random.Range(0, 100);
-    //    bool isCrit = rng < weaponCritChance;
-    //    float rawDmg = isCrit ? weaponData.damage * weaponData.weaponCritMultiplier : weaponData.damage;
-    //    int finalDmg = Mathf.RoundToInt(rawDmg);
-    //    bulletScript.SetDamage(finalDmg, isCrit);
-
-
-
-
-    //    // Sound
-    //    if (weaponData.shootSounds != null && weaponData.shootSounds.Length > 0)
-    //    {
-    //        var clip = weaponData.shootSounds[Random.Range(0, weaponData.shootSounds.Length)];
-    //        AudioSource.PlayClipAtPoint(clip, transform.position);
-    //    }
-
-    //    // Muzzle Flash
-    //    if (muzzleFlash != null)
-    //    {
-    //        StartCoroutine(ShowMuzzleFlash());
-    //    }
-    //}
+    
 
     public virtual void Shoot(Vector2 direction)
     {

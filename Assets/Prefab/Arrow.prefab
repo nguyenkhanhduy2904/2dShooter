@@ -258,6 +258,13 @@ MonoBehaviour:
   direction: {x: 1, y: 0}
   _damage: 10
   _isCrit: 0
+  arrowInAirSounds:
+  - {fileID: 8300000, guid: 0f1139431f5df1f428440eb23a3a6229, type: 3}
+  arrowHitSounds:
+  - {fileID: 8300000, guid: 74bf8a7415cb45442923e063ad38ee48, type: 3}
+  - {fileID: 8300000, guid: 1487509c690a4f34aa25f48d8ab6add3, type: 3}
+  - {fileID: 8300000, guid: 0bec635a7198a114d8576fc53d374c44, type: 3}
+  - {fileID: 8300000, guid: 509b510c18a750d4c8dc59800ede431e, type: 3}
 --- !u!96 &4882564302663189588
 TrailRenderer:
   serializedVersion: 3

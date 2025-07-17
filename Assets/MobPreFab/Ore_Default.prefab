@@ -438,15 +438,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mobData: {fileID: 11400000, guid: 4f5a52c0c0c98994fb3c381114ad3dfc, type: 2}
-  _enemyName: Creep
-  _enemyMaxHealth: 100
-  _enemyAtk: 30
-  _enemySpeed: 5
-  _enemyAtkSpeed: 1.5
-  _enemyRange: 1.5
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 0
   _segments: 60
   aiLerp: {fileID: 0}
   _enemyHurtedSounds: []
   _enemyCritHurtedSounds: []
+  _attackChargeUpSounds:
+  - {fileID: 8300000, guid: 662368c20c74f1347bfe72d20c30a417, type: 3}
+  - {fileID: 8300000, guid: 43ee5d708d955024a8d299dd01f323d7, type: 3}
+  - {fileID: 8300000, guid: 80bd9d4bd8318a14485df52d305370ad, type: 3}
   _floatingTextPreFab: {fileID: 2996679915331620059, guid: 0e5590444d39a034886020c70a63223b, type: 3}
   spriteRenderer: {fileID: 0}

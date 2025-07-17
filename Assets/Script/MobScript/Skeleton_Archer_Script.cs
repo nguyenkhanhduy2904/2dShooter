@@ -5,10 +5,12 @@ using static UnityEditor.Experimental.GraphView.GraphView;
 public class Skeleton_Archer_Script: EnemyBehaviour
 {
     [SerializeField] GameObject bulletPrefab;
+     
 
     public override IEnumerator ChargeAndAttack(float animLenght)
     {
         Debug.Log("Charging...");
+        SoundFXManager.Instance.PlaySoundFXClip(_attackChargeUpSounds, transform, 1f);
         yield return new WaitForSeconds(animLenght);
 
         float dist = Vector2.Distance(transform.position, _player.transform.position);

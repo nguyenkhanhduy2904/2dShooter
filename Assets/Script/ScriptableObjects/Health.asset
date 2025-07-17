@@ -15,3 +15,4 @@ MonoBehaviour:
   lootSprite: {fileID: 21300000, guid: 7b3876a2b72c44540a4bbd5aaba9e506, type: 3}
   lootName: Health
   dropChance: 100
+  usableItemRef: {fileID: 11400000, guid: eba8dc03a9986084fbbb8697a24a8ae5, type: 2}

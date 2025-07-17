@@ -13,13 +13,13 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
     protected enum EnemyState { Idle, Chase, Charge, Attack, Recover, Dead }
 
     [Header("Stats")]
-    [SerializeField] string _enemyName;
-    [SerializeField] protected int _enemyMaxHealth;
-    [SerializeField] protected int _enemyAtk;
-    [SerializeField] float _enemySpeed;
-    [SerializeField] float _enemyAtkSpeed;
-    [SerializeField] protected float _enemyRange;
-    [SerializeField] protected float _enemyAggroRange;
+    string _enemyName;
+    protected int _enemyMaxHealth;
+    protected int _enemyAtk;
+    float _enemySpeed;
+    float _enemyAtkSpeed;
+    protected float _enemyRange;
+    protected float _enemyAggroRange;
     [SerializeField] int _segments = 60;
     
 
@@ -48,6 +48,7 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
     [SerializeField] private AudioClip[] _enemyHurtedSounds;
     [SerializeField] private AudioClip[] _enemyCritHurtedSounds;
 
+    [SerializeField] protected AudioClip[] _attackChargeUpSounds;
 
     [SerializeField] private GameObject _floatingTextPreFab;
 
@@ -246,11 +247,12 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
     public virtual IEnumerator ChargeAndAttack(float animLenght)
     {
         Debug.Log("Charging...");
-        
-        yield return new WaitForSeconds(animLenght);
+        SoundFXManager.Instance.PlaySoundFXClip(_attackChargeUpSounds, transform, 1f);
+
+        yield return new WaitForSeconds(0.2f);
 
         float dist = Vector2.Distance(transform.position, _player.transform.position);
-        
+
         if (dist > _enemyRange)
         {
             ChangeState(EnemyState.Chase);
@@ -259,20 +261,24 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
         }
 
         Debug.Log("Swing!");
-        if (dist <= _enemyRange) 
+        if (dist <= _enemyRange)
         {
-         
             _playerTarget.TakeDmg(_enemyAtk, false);
-            ChangeState(EnemyState.Recover);
         }
         else
         {
-            Debug.Log("Player dogded!!");
+            Debug.Log("Player dodged!!");
             ChangeState(EnemyState.Chase);
+            yield break; // Exit early
         }
-        //yield return new WaitForSeconds(0.25f);
 
+        // Now wait for animation to finish fully
+        yield return new WaitForSeconds(animLenght - 0.2f);
+
+        // Only then enter Recover
+        ChangeState(EnemyState.Recover);
     }
+
 
 
     private bool HasLineOfSight()
@@ -450,7 +456,7 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
         aiLerp.canMove = false;
 
         _animator.Play("death_anim");
-
+        GetComponent<LootBag>().InstantiateLoot(transform.position);
         // Optionally: ensure the Animator updates before querying length
         yield return null;
 
@@ -458,8 +464,8 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
 
         yield return new WaitForSeconds(animLength + 0.5f);
 
-        // Drop loot AFTER animation
-        GetComponent<LootBag>().InstantiateLoot(transform.position);
+      
+        
         Debug.Log($"{_enemyName} has died.");
 
         SceneManager.NotifyEnemyDied();

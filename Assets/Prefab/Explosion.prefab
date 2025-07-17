@@ -51,6 +51,7 @@ MonoBehaviour:
   lifetime: 1
   fadeDuration: 0.5
   delayBeforeFade: 0.3
+  _exploParticalPrefab: {fileID: 8194992990867289333, guid: 99bc28c0d45f51c4fbac01080b73edc7, type: 3}
 --- !u!95 &7143961203659408575
 Animator:
   serializedVersion: 7

@@ -35,7 +35,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: bae54715ceda58649a34796fdf737af8, type: 3}
   - {fileID: 8300000, guid: 8ab0e16ae4f187e48a730ab6291190d4, type: 3}
   fireRate: 5
-  damage: 10
+  damage: 20
   bulletSpeed: 20
   isAutomatic: 0
   weaponPrefab: {fileID: 3893843552096977287, guid: abbc4e21bc3a1764b843b8ffd841b454, type: 3}
@@ -45,7 +45,7 @@ MonoBehaviour:
   spreadAngleMin: 0.5
   spreadAngleIncreasePerShot: 2
   spreadRecoveryRate: 5
-  weaponCritChance: 10
+  weaponCritChance: 30
   weaponCritMultiplier: 1.5
   pierceAmount: 1
   pickupPrefab: {fileID: 6092484394966468009, guid: f9e54a84296a01843b58b6750093b845, type: 3}

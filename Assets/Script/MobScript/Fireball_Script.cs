@@ -10,6 +10,7 @@ public class Fireball_Script : MonoBehaviour
     public int _damage = 10; // default value, overwritten later
     public bool _isCrit;
     [SerializeField] AudioClip[] _explosionSounds;
+    [SerializeField] AudioClip[] _fireBallInAirSounds;
     public void SetDamage(int damage, bool isCrit = false)
     {
         _damage = damage;
@@ -20,6 +21,7 @@ public class Fireball_Script : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody2D>();
         _rb.linearVelocity = direction.normalized * _bulletSpeed;
+        SoundFXManager.Instance.PlaySoundFXClip(_fireBallInAirSounds, transform, 1f);
         Destroy(gameObject, 3f);
     }
 

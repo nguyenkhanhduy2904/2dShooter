@@ -12,7 +12,7 @@ public class LootBag : MonoBehaviour
         List<Loot> possibleItems = new List<Loot>();
         foreach (Loot item in lootList)
         {
-            if (random <= item.dropChance) 
+            if (random <= item.dropChance)
             {
                 possibleItems.Add(item);
             }
@@ -33,20 +33,34 @@ public class LootBag : MonoBehaviour
     {
         List<Loot> droppedItems = getDroppedItems();
         List<GameObject> droppedGameObjects = new List<GameObject>();
+
         if (droppedItems.Count > 0)
         {
             for (int i = 0; i < droppedItems.Count; i++)
             {
-                GameObject lootGameObject = Instantiate(droppedItemPrefab, spawnPosition, Quaternion.identity);
+                // Spawn all from the same point
+                GameObject lootGameObject = Instantiate(
+                    droppedItemPrefab,
+                    spawnPosition,
+                    Quaternion.identity
+                );
+
                 lootGameObject.GetComponentInChildren<SpriteRenderer>().sprite = droppedItems[i].lootSprite;
                 lootGameObject.GetComponent<PickUpLoot>().loot = droppedItems[i];
                 droppedGameObjects.Add(lootGameObject);
 
-                float dropForce = 500f;
-                Vector2 dropDirection = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
-                lootGameObject.GetComponent<Rigidbody2D>().AddForce(dropDirection * dropForce, ForceMode2D.Impulse);
+                //float dropForce = 500f;
+                //float angle = Random.Range(0f, 360f) * Mathf.Deg2Rad;
+                //Vector2 dropDirection = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
+
+                //lootGameObject.GetComponent<Rigidbody2D>().AddForce(
+                //    dropDirection * dropForce,
+                //    ForceMode2D.Impulse
+                //);
             }
         }
+
         return droppedGameObjects;
     }
+
 }

@@ -73,8 +73,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -49232119
+  m_SortingLayer: 2
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: e2209eec82a34a048887f46bf4eccf97, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -98,6 +98,7 @@ GameObject:
   - component: {fileID: 824934918676917324}
   - component: {fileID: 5321209526888047311}
   - component: {fileID: 3780238953943281218}
+  - component: {fileID: -5598898387423518234}
   m_Layer: 0
   m_Name: Mac10_Dropped
   m_TagString: Untagged
@@ -182,3 +183,15 @@ MonoBehaviour:
   weaponData: {fileID: 11400000, guid: 9890ac78d93eea64d87d4d60c7302185, type: 2}
   savedMag: -1
   savedReserve: -1
+--- !u!114 &-5598898387423518234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6390879853005641365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0592b572eaf33144b9caaf89e5ae0cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

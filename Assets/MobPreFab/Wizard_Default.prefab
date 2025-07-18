@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 2876272248826407006}
   - component: {fileID: 6595221127268787802}
   - component: {fileID: 7569133907270269960}
+  - component: {fileID: -5818352844202479809}
   m_Layer: 0
   m_Name: Wizard_Default
   m_TagString: Enemy
@@ -345,6 +346,18 @@ MonoBehaviour:
   _teleportSounds:
   - {fileID: 8300000, guid: bb7ab9bfc7227824aa2f0e26e3a0570e, type: 3}
   - {fileID: 8300000, guid: 7a43fbe2bb73ffb419f79e538e2d9cb4, type: 3}
+--- !u!114 &-5818352844202479809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2001474405961146105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0592b572eaf33144b9caaf89e5ae0cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7217599135875865029
 GameObject:
   m_ObjectHideFlags: 0
@@ -419,8 +432,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -49232119
+  m_SortingLayer: 2
   m_SortingOrder: 1
   m_Sprite: {fileID: -1776305582, guid: 824cb31be0034f14984cad4038f21a2a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

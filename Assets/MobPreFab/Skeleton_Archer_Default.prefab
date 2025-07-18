@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 5125104878924162695}
   - component: {fileID: 6611974372024167370}
   - component: {fileID: -2191459545481911445}
+  - component: {fileID: 3117437040549849355}
   m_Layer: 0
   m_Name: Skeleton_Archer_Default
   m_TagString: Enemy
@@ -340,6 +341,18 @@ MonoBehaviour:
   _floatingTextPreFab: {fileID: 0}
   spriteRenderer: {fileID: 0}
   bulletPrefab: {fileID: 4435246658327050908, guid: 33343256bd2bff548bc874b3b98fa6fd, type: 3}
+--- !u!114 &3117437040549849355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 90288587734910058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0592b572eaf33144b9caaf89e5ae0cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4074504238868218404
 GameObject:
   m_ObjectHideFlags: 0
@@ -414,8 +427,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -49232119
+  m_SortingLayer: 2
   m_SortingOrder: 1
   m_Sprite: {fileID: 1675855578, guid: 1efc57a1b538f084fbd2db56e4715ee9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

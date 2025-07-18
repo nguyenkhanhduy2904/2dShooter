@@ -52,6 +52,7 @@ MonoBehaviour:
   firePointSprite: {fileID: 988276638125714608}
   muzzleFlash: {fileID: 8198105962073716695}
   _magSize: 30
+  _currentReserveAmmo: 0
 --- !u!1 &2879716598137263387
 GameObject:
   m_ObjectHideFlags: 0
@@ -125,8 +126,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -49232119
+  m_SortingLayer: 2
   m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: e2209eec82a34a048887f46bf4eccf97, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

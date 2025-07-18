@@ -2,13 +2,15 @@ using UnityEngine;
 
 public class LootDrop : MonoBehaviour
 {
+    public Transform spriteHolder;  // assign this in Inspector (child holding SpriteRenderer)
+
     private Vector3 groundPosition;
     private float verticalVelocity;
     private float gravity = -10f;
     private float currentHeight;
-    private TrailRenderer trailRenderer;
-
     private Vector3 horizontalVelocity;
+
+    private TrailRenderer trailRenderer;
 
     void Start()
     {
@@ -25,6 +27,7 @@ public class LootDrop : MonoBehaviour
 
     void Update()
     {
+        // Gravity simulation
         verticalVelocity += gravity * Time.deltaTime;
         currentHeight += verticalVelocity * Time.deltaTime;
 
@@ -36,16 +39,18 @@ public class LootDrop : MonoBehaviour
 
             if (trailRenderer != null)
             {
-                // Stop emitting new trail
                 trailRenderer.emitting = false;
-
-                //// Immediately clear any remaining trail
-                //trailRenderer.Clear();
             }
         }
 
+        // Move the root object horizontally (ground level)
         groundPosition += horizontalVelocity * Time.deltaTime;
-        transform.position = groundPosition + new Vector3(0f, currentHeight, 0f);
-    }
+        transform.position = groundPosition;
 
+        // Move the sprite up/down visually (fake jump)
+        if (spriteHolder != null)
+        {
+            spriteHolder.localPosition = new Vector3(0f, currentHeight, 0f);
+        }
+    }
 }

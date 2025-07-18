@@ -73,8 +73,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -49232119
+  m_SortingLayer: 2
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: be0bad5390709e8448cf566da354017a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -98,6 +98,7 @@ GameObject:
   - component: {fileID: 4199451234632841420}
   - component: {fileID: 8769790527971753101}
   - component: {fileID: 6270416650806306636}
+  - component: {fileID: 2642789708126504007}
   m_Layer: 0
   m_Name: Deagle_Dropped
   m_TagString: Untagged
@@ -182,3 +183,15 @@ MonoBehaviour:
   weaponData: {fileID: 11400000, guid: 62ad2cb0a83827b48a173d4419684898, type: 2}
   savedMag: -1
   savedReserve: -1
+--- !u!114 &2642789708126504007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7961383349128550687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0592b572eaf33144b9caaf89e5ae0cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

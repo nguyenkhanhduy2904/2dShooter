@@ -22,6 +22,9 @@ public class PlayerController : MonoBehaviour, IDamageable
     private Rigidbody2D _rb;
     private Vector2 _boxSize = new Vector2(0.5f, 0.5f);
 
+    bool isMoving = false;
+    public bool isAlive { get; private set; } = true;
+
     [Header("Weapon")]
     [SerializeField] private WeaponHolder weaponHolder; // Reference to new WeaponHolder component
 
@@ -29,6 +32,10 @@ public class PlayerController : MonoBehaviour, IDamageable
     [SerializeField] private AudioClip[] _hurtedSounds;
     [SerializeField] private AudioClip[] _healingSounds;
     [SerializeField] private AudioClip[] _getCoinSounds;
+
+    [Header("Animation")]
+    [SerializeField] private Animator _animator;
+    [SerializeField] private SpriteRenderer _spriteRenderer;
 
 
     [SerializeField] private GameObject explosionPrefab;
@@ -42,6 +49,8 @@ public class PlayerController : MonoBehaviour, IDamageable
         _playerHealth = PlayerMaxHealth;
         _playerSpeed = PlayerMaxSpeed;
         healthBar.SetMaxHealth(_playerHealth);
+        _animator = GetComponentInChildren<Animator>();
+        //_spriteRenderer = GetComponentInChildren<SpriteRenderer>();
 
         if (weaponHolder == null)
             Debug.LogWarning("PlayerController: WeaponHolder is not assigned!");
@@ -50,6 +59,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     private void Update()
     {
         //HandleMovement();
+        if(!isAlive) return;
         if (weaponHolder != null)
         {
             HandleInput();
@@ -67,7 +77,18 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     private void FixedUpdate()
     {
+        if (!isAlive) return;
         HandleMovement();
+        //Debug.Log("isMoving =" + isMoving);
+        if (isMoving && !_animator.GetCurrentAnimatorStateInfo(0).IsName("IndianaJone_Move"))
+        {
+            _animator.Play("IndianaJone_Move");
+        }
+        else if (!isMoving && !_animator.GetCurrentAnimatorStateInfo(0).IsName("IndianaJone_Idle"))
+        {
+            _animator.Play("IndianaJone_Idle");
+        }
+
     }
 
     #region Movement
@@ -77,14 +98,34 @@ public class PlayerController : MonoBehaviour, IDamageable
         float moveX = Input.GetKey(KeyCode.A) ? -1f : Input.GetKey(KeyCode.D) ? 1f : 0f;
         float moveY = Input.GetKey(KeyCode.W) ? 1f : Input.GetKey(KeyCode.S) ? -1f : 0f;
 
-        Vector2 moveDir = new Vector2(moveX, moveY).normalized;
+        
+
+        // Simple flag: if any key is pressed, mark as moving
+        isMoving = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) ||
+                   Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D);
+
+        if (Input.GetKey(KeyCode.A))
+        {
+            _spriteRenderer.flipX = true;
+        }
+        else if (Input.GetKey(KeyCode.D)) 
+        { 
+            _spriteRenderer.flipX = false;
+        }
+
+
+            Vector2 moveDir = new Vector2(moveX, moveY).normalized;
 
         Vector2 targetPos = _rb.position + moveDir * _moveSpeed * Time.fixedDeltaTime;
+
+        
 
         // Check if wall is ahead
         if (!Physics2D.OverlapBox(targetPos, _boxSize, 0f, _layerMask))
         {
             _rb.linearVelocity = moveDir * _moveSpeed;
+           
+            
         }
         else
         {
@@ -220,9 +261,14 @@ public class PlayerController : MonoBehaviour, IDamageable
         SoundFXManager.Instance.PlaySoundFXClip(_getCoinSounds, transform, 1f);
     }
 
-    private void Die()
+    public void Die()
     {
-        Debug.Log($"{_playerName} died.");
+        Debug.LogWarning("You die");
+        isAlive = false;
+        _animator.Play("IndianaJone_Die");
+        _rb.linearVelocity = Vector2.zero;
+       
+        GetComponent<Collider2D>().enabled = false; // optional: stop interactions
         // TODO: Add death animation, respawn, etc.
     }
 

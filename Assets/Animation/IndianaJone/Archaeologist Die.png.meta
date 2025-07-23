@@ -1,37 +1,22 @@
 fileFormatVersion: 2
-guid: 04dbcf3202ebfc94491f7750216f59ee
+guid: 5c4f58d90c66ab3448b384661e8c967b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1733087341866461178
-    second: TX Tileset Wall_0
+      213: -6628525529845460043
+    second: Archaeologist Die_0
   - first:
-      213: 6957734447361721616
-    second: TX Tileset Wall_1
+      213: -622038995969762719
+    second: Archaeologist Die_1
   - first:
-      213: 6591716156378716260
-    second: TX Tileset Wall_2
+      213: 4220065318818853038
+    second: Archaeologist Die_2
   - first:
-      213: 2165944517536112100
-    second: TX Tileset Wall_3
+      213: 4871925725340759357
+    second: Archaeologist Die_3
   - first:
-      213: 6429608448122266744
-    second: TX Tileset Wall_4
-  - first:
-      213: -8038740358467470550
-    second: TX Tileset Wall_5
-  - first:
-      213: -5334644376926737371
-    second: TX Tileset Wall_6
-  - first:
-      213: -5954229690154693420
-    second: TX Tileset Wall_7
-  - first:
-      213: -522149132528552129
-    second: TX Tileset Wall_8
-  - first:
-      213: 6981085378657702106
-    second: TX Tileset Wall_9
+      213: 4845979339144052698
+    second: Archaeologist Die_4
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -140,13 +125,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: TX Tileset Wall_0
+      name: Archaeologist Die_0
       rect:
         serializedVersion: 2
-        x: 31
-        y: 351
-        width: 98
-        height: 130
+        x: 22
+        y: 0
+        width: 18
+        height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -155,20 +140,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 608d25fae36d2f7e0800000000000000
-      internalID: -1733087341866461178
+      spriteID: 5b314f8662fb204a0800000000000000
+      internalID: -6628525529845460043
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TX Tileset Wall_1
+      name: Archaeologist Die_1
       rect:
         serializedVersion: 2
-        x: 151
-        y: 375
-        width: 116
-        height: 106
+        x: 86
+        y: 0
+        width: 23
+        height: 19
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -177,20 +162,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0158e70cd96de8060800000000000000
-      internalID: 6957734447361721616
+      spriteID: 16a18c034d21e57f0800000000000000
+      internalID: -622038995969762719
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TX Tileset Wall_2
+      name: Archaeologist Die_2
       rect:
         serializedVersion: 2
-        x: 287
-        y: 383
-        width: 12
-        height: 98
+        x: 152
+        y: 0
+        width: 27
+        height: 12
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -199,20 +184,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 46818297bea7a7b50800000000000000
-      internalID: 6591716156378716260
+      spriteID: ea0b4217c0fa09a30800000000000000
+      internalID: 4220065318818853038
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TX Tileset Wall_3
+      name: Archaeologist Die_3
       rect:
         serializedVersion: 2
-        x: 343
-        y: 383
-        width: 10
-        height: 98
+        x: 216
+        y: 0
+        width: 27
+        height: 13
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -221,20 +206,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4edd1f2201bfe0e10800000000000000
-      internalID: 2165944517536112100
+      spriteID: d35f50772ae8c9340800000000000000
+      internalID: 4871925725340759357
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TX Tileset Wall_4
+      name: Archaeologist Die_4
       rect:
         serializedVersion: 2
-        x: 383
-        y: 471
-        width: 98
-        height: 10
+        x: 280
+        y: 0
+        width: 27
+        height: 12
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -243,118 +228,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 874ad2b61de8a3950800000000000000
-      internalID: 6429608448122266744
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: TX Tileset Wall_5
-      rect:
-        serializedVersion: 2
-        x: 383
-        y: 351
-        width: 66
-        height: 98
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: a2b33fb2c38a07090800000000000000
-      internalID: -8038740358467470550
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: TX Tileset Wall_6
-      rect:
-        serializedVersion: 2
-        x: 31
-        y: 255
-        width: 130
-        height: 66
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 52c2f3e043987f5b0800000000000000
-      internalID: -5334644376926737371
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: TX Tileset Wall_7
-      rect:
-        serializedVersion: 2
-        x: 191
-        y: 255
-        width: 34
-        height: 66
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 4dcce37c4a35e5da0800000000000000
-      internalID: -5954229690154693420
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: TX Tileset Wall_8
-      rect:
-        serializedVersion: 2
-        x: 31
-        y: 159
-        width: 66
-        height: 66
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: f377bd36124f0c8f0800000000000000
-      internalID: -522149132528552129
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: TX Tileset Wall_9
-      rect:
-        serializedVersion: 2
-        x: 127
-        y: 159
-        width: 66
-        height: 66
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: ad0d09d1a2cc1e060800000000000000
-      internalID: 6981085378657702106
+      spriteID: adf309aa880604340800000000000000
+      internalID: 4845979339144052698
       vertices: []
       indices: 
       edges: []
@@ -373,16 +248,11 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      TX Tileset Wall_0: -1733087341866461178
-      TX Tileset Wall_1: 6957734447361721616
-      TX Tileset Wall_2: 6591716156378716260
-      TX Tileset Wall_3: 2165944517536112100
-      TX Tileset Wall_4: 6429608448122266744
-      TX Tileset Wall_5: -8038740358467470550
-      TX Tileset Wall_6: -5334644376926737371
-      TX Tileset Wall_7: -5954229690154693420
-      TX Tileset Wall_8: -522149132528552129
-      TX Tileset Wall_9: 6981085378657702106
+      Archaeologist Die_0: -6628525529845460043
+      Archaeologist Die_1: -622038995969762719
+      Archaeologist Die_2: 4220065318818853038
+      Archaeologist Die_3: 4871925725340759357
+      Archaeologist Die_4: 4845979339144052698
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -47,8 +47,11 @@ TagManager:
   - name: Background
     uniqueID: 4248137165
     locked: 0
-  - name: Foreground
+  - name: SceneObject
     uniqueID: 4245735177
+    locked: 0
+  - name: Foreground
+    uniqueID: 2334046791
     locked: 0
   - name: UI
     uniqueID: 1204872619

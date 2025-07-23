@@ -53,6 +53,8 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
     [SerializeField] private GameObject _floatingTextPreFab;
 
     public SpriteRenderer spriteRenderer;
+
+    [SerializeField] private SceneManager _sceneManager;
     //Transform _spriteTransform;
 
     void Awake()
@@ -69,12 +71,9 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
         _enemyCritHurtedSounds = _mobData._enemyCritHurtedSounds;
 
         _floatingTextPreFab = _mobData._floatingTextPreFab;//init stat and resource
-
-
-
-
-
         _enemyHealth = _enemyMaxHealth;
+
+
     }
 
     void Start()
@@ -86,7 +85,7 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
         _rb = GetComponent<Rigidbody2D>();
         _collider = GetComponent<Collider2D>();
         _rangeCircle = GetComponent<LineRenderer>();
-        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        //spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         //_spriteTransform = transform.GetChild(0);
         
         //Debug.Log("Using child transform: " + _spriteTransform.name);
@@ -104,7 +103,12 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
     virtual public void Update()
     {
         changeSpriteDirection();
-        if (_player == null || _currentState == EnemyState.Dead) return;
+        if (_player == null || !_sceneManager._player.isAlive || _currentState == EnemyState.Dead)
+        {
+            _animator.Play("idle_anim");
+            return;
+        }
+
 
         float dist = Vector2.Distance(transform.position, _player.transform.position);
 
@@ -112,6 +116,7 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
         {
             case EnemyState.Idle:
                 _animator.Play("idle_anim");
+                //if (_sceneManager._player.isAlive == false) break;
                 if (dist <= _enemyAggroRange && HasLineOfSight() || wasHit ) // detect player
                     ChangeState(EnemyState.Chase);
                 break;
@@ -125,8 +130,15 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
                 break;
 
             case EnemyState.Charge:
+                if (_sceneManager._player.isAlive == false)
+                {
+                    ChangeState(EnemyState.Idle);
+                    break;
+                }
+                break;
             case EnemyState.Attack:
             case EnemyState.Recover:
+
                 //MoveToPlayer();
                 // Handled by coroutine
                 break;
@@ -184,9 +196,20 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
 
     protected void ChangeState(EnemyState newState)
     {
-        // If changing to the same state, skip (except maybe Charge to force restart)
-        if (_currentState == newState && newState != EnemyState.Charge) return;
+        if (!_sceneManager._player.isAlive)
+        {
+            _currentState = EnemyState.Idle;
+            return;
+        }
 
+
+        // If changing to the same state, skip (except maybe Charge to force restart)
+        if (_currentState == newState && newState != EnemyState.Charge ) return;
+        //if (!_sceneManager._player.isAlive)
+        //{
+        //    _currentState = EnemyState.Idle;
+        //    return;
+        //}
         _currentState = newState;
 
         // Optionally stop only the main coroutine if needed
@@ -206,6 +229,7 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
             case EnemyState.Chase:
                
                 aiLerp.canMove = true;
+
                 break;
 
             case EnemyState.Charge:
@@ -246,10 +270,19 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
 
     public virtual IEnumerator ChargeAndAttack(float animLenght)
     {
+
         Debug.Log("Charging...");
         SoundFXManager.Instance.PlaySoundFXClip(_attackChargeUpSounds, transform, 1f);
 
         yield return new WaitForSeconds(0.2f);
+
+        if (_sceneManager._player.isAlive == false)
+        {
+            ChangeState(EnemyState.Idle);
+            yield break;
+        }
+        
+
 
         float dist = Vector2.Distance(transform.position, _player.transform.position);
 
@@ -311,24 +344,38 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
         float timer = 0f;
         while (timer < _enemyAtkSpeed)
         {
-           
+            if (!_sceneManager._player.isAlive)
+            {
+                ChangeState(EnemyState.Idle);
+                yield break;
+            }
+
             timer += Time.deltaTime;
             yield return null;
         }
 
         _canAttack = true;
+
+        // Final check before deciding what to do next
+        if (!_sceneManager._player.isAlive)
+        {
+            ChangeState(EnemyState.Idle);
+            yield break;
+        }
+
         float dist = Vector2.Distance(transform.position, _player.transform.position);
+
         if (dist <= _enemyRange)
         {
-           ChangeState(EnemyState.Charge);
+            // Only go back to Charge if player still alive
+            ChangeState(EnemyState.Charge);
         }
         else
         {
-           ChangeState(EnemyState.Chase);
-
+            ChangeState(EnemyState.Chase);
         }
-        
     }
+
 
     public void InterruptAttack()
     {
@@ -349,6 +396,14 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
     {
         ChangeState(EnemyState.Chase);
     }
+
+    public void ForceIdle()
+    {
+        _currentState = EnemyState.Idle;
+        _animator.Play("idle_anim");
+        aiLerp.SetPath(null);
+    }
+
 
 
 
@@ -468,7 +523,7 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
         
         Debug.Log($"{_enemyName} has died.");
 
-        SceneManager.NotifyEnemyDied();
+       
         
 
         // Now destroy

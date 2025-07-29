@@ -11,24 +11,24 @@ public class UIInventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExit
     public TextMeshProUGUI quantityText;
     //public GameObject highlight;
 
-    private ItemSlot currentSlot;
+    private InventorySlot currentSlot;
 
-    public void SetSlot(ItemSlot slot)
+    public void SetSlot(InventorySlot slot)
     {
         Debug.Log($"SetSlot called with slot = {slot}");
         if (slot != null)
         {
-            Debug.Log($"slot.item = {slot.item}");
-            if (slot.item != null)
-                Debug.Log($"slot.item.icon = {slot.item.itemIcon}");
+            Debug.Log($"slot.item = {slot.itemData}");
+            if (slot.itemData != null)
+                Debug.Log($"slot.item.icon = {slot.itemData.itemSprite}");
         }
         Debug.Log($"iconImage = {iconImage}");
         Debug.Log($"quantityText = {quantityText}");
         currentSlot = slot;
 
-        if (slot != null && slot.item != null)
+        if (slot != null && slot.itemData != null)
         {
-            iconImage.sprite = slot.item.itemIcon;
+            iconImage.sprite = slot.itemData.itemSprite;
             iconImage.color = Color.white;
             quantityText.text = slot.quantity > 1 ? slot.quantity.ToString() : "";
         }
@@ -54,9 +54,9 @@ public class UIInventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExit
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (currentSlot != null && currentSlot.item != null)
+        if (currentSlot != null && currentSlot.itemData != null)
         {
-            Debug.Log($"Clicked {currentSlot.item.itemName}");
+            Debug.Log($"Clicked {currentSlot.itemData.itemName}");
             // You could call inventory.UseItem() here if you like
         }
     }

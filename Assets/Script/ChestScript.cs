@@ -21,7 +21,8 @@ public class ChestScript : MonoBehaviour
             SoundFXManager.Instance.PlaySoundFXClip(_chestOpenSounds, transform, 1f);
             
             Vector3 offset = new Vector3 (Random.Range(-1f, 1), Random.Range(-1f, 1));
-            List<GameObject> droppedItems = GetComponent<LootBag>().InstantiateLoot(transform.position);
+            //List<GameObject> droppedItems = GetComponent<LootBag>().InstantiateLoot(transform.position);
+            List<GameObject> droppedItems = GetComponent<Inventory>().InstantiateItem(transform.position);
 
             _wasOpened = true;
 

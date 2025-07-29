@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class InventoryUI : MonoBehaviour
 {
-    public InventoryScript inventory;
+    public Inventory inventory;
     public GameObject slotPrefab;
     public Transform slotsParent;
 
@@ -19,16 +19,16 @@ public class InventoryUI : MonoBehaviour
             uiSlots.Add(uiSlot);
         }
 
-        RefreshUI();
+        //RefreshUI();
     }
 
     public void RefreshUI()
     {
         for (int i = 0; i < uiSlots.Count; i++)
         {
-            if (i < inventory.slots.Count)
+            if (i < inventory.inventorySlots.Count)
             {
-                uiSlots[i].SetSlot(inventory.slots[i]);
+                uiSlots[i].SetSlot(inventory.inventorySlots[i]);
             }
             else
             {

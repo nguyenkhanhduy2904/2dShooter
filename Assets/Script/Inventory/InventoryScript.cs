@@ -59,16 +59,16 @@ public class InventoryScript : MonoBehaviour
         _player = GetComponentInParent<PlayerController>().gameObject;
 
     }
-    public void Update()
-    {
-        for (int i = 0; i < Mathf.Min(slots.Count, 9); i++)
-        {
-            if (Input.GetKeyDown(KeyCode.Alpha1 + i))
-            {
-                UseItem(i);
-            }
-        }
-    }
+    //public void Update()
+    //{
+    //    for (int i = 0; i < Mathf.Min(slots.Count, 9); i++)
+    //    {
+    //        if (Input.GetKeyDown(KeyCode.Alpha1 + i))
+    //        {
+    //            UseItem(i);
+    //        }
+    //    }
+    //}
 
     
 

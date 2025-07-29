@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e796f450f2d8a704f8930eac9736480e, type: 3}
+  m_Name: StopWatch
+  m_EditorClassIdentifier: 
+  itemName: StopWatch
+  itemSprite: {fileID: -5499391131515986958, guid: bac490c336d8df841aa99d77fc223050, type: 3}
+  itemType: 0
+  itemEffect: {fileID: 11400000, guid: 018141dbddc8b3e44a0c20eb1710cbde, type: 2}

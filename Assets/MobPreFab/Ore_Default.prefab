@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6713668959115674814}
   - component: {fileID: 3904463413867980425}
   - component: {fileID: 5099642018209984759}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -120,7 +120,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7320639079228297557}
   - component: {fileID: 6009447061013430171}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -209,13 +209,13 @@ GameObject:
   - component: {fileID: 5878307452721920442}
   - component: {fileID: 7129199915407387349}
   - component: {fileID: 6764953396206548142}
-  - component: {fileID: 2506398460881270298}
   - component: {fileID: 3769609969523022251}
   - component: {fileID: 7043160494467626540}
   - component: {fileID: 9109143217639939737}
   - component: {fileID: -337460245181192729}
   - component: {fileID: -4260198397293284}
-  m_Layer: 0
+  - component: {fileID: 6802247270320335545}
+  m_Layer: 8
   m_Name: Ore_Default
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -419,22 +419,6 @@ LineRenderer:
   m_UseWorldSpace: 0
   m_Loop: 1
   m_ApplyActiveColorSpace: 1
---- !u!114 &2506398460881270298
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7259095303048352551}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f54ba5709db781b48a4e9a0361c1d754, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  droppedItemPrefab: {fileID: 1872967038840027560, guid: 83b5f730aeed6a0439f1c9be46aeb98c, type: 3}
-  lootList:
-  - {fileID: 11400000, guid: 55f8ed76c8fdbea4ba77d20735b6a2d2, type: 2}
-  - {fileID: 11400000, guid: 7f4141015aaebea4490c425229f45503, type: 2}
 --- !u!114 &3769609969523022251
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -553,3 +537,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0592b572eaf33144b9caaf89e5ae0cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6802247270320335545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7259095303048352551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea1f7a530ef11c34681249b4266a23ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventorySlots: []
+  droppedItemPrefab: {fileID: 8378528521104538345, guid: 7e9e9e4ed7b7c2145acb03dcddd135c8, type: 3}
+  display: {fileID: 0}
+  tempHolder:
+  - itemData: {fileID: 11400000, guid: 2d3a714e74354484794c750385993f3a, type: 2}
+    quantity: 4
+  - itemData: {fileID: 11400000, guid: 92785cae74a8db84895c713cd1a34f3b, type: 2}
+    quantity: 1
+  - itemData: {fileID: 11400000, guid: fdb99c60d0a60684eb5027bceb09f8b4, type: 2}
+    quantity: 3

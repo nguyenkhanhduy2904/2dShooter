@@ -5,7 +5,7 @@ public class WeaponHolder : MonoBehaviour
 {
     public List<WeaponAmmoState> weaponStates = new(); // stores ammo for each unlocked weapon
     [SerializeField] private Weapon currentWeapon;
-    [SerializeField] private float orbitDistance = 0.5f; // Max distance from player
+    [SerializeField] private float orbitDistance = 50f; // Max distance from player
     [SerializeField] private Transform playerTransform;
     [SerializeField] private Transform weaponSlot; // This is where the weapon prefab is attached
 
@@ -198,23 +198,23 @@ public class WeaponHolder : MonoBehaviour
         //SyncAmmoState();
     }
 
-    public void RotateToMouse()
+    public Vector3 RotateToMouse()
     {
-        if(currentWeapon == null)
-        {
-            return;
-        }
+        
         Vector3 mouseWorld = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mouseWorld.z = 0f;
-
+        if (currentWeapon == null)
+        {
+            return mouseWorld;
+        }
         Vector3 dirFromPlayer = mouseWorld - playerTransform.position;
 
         // Limit weapon distance from player
         float distance = Mathf.Min(dirFromPlayer.magnitude, orbitDistance);
         Vector3 clampedOffset = dirFromPlayer.normalized * distance;
-
+        Vector3 offset = new Vector3(0, -0.25f, 0); // move down 0.5 units
         // Move weapon to orbit position
-        transform.position = playerTransform.position + clampedOffset;
+        transform.position = playerTransform.position + clampedOffset + offset;
 
         // Rotate weapon to face the direction
         float angle = Mathf.Atan2(clampedOffset.y, clampedOffset.x) * Mathf.Rad2Deg;
@@ -222,6 +222,8 @@ public class WeaponHolder : MonoBehaviour
 
         // Flip visual sprite inside the weapon prefab
         currentWeapon.FlipSprite(clampedOffset);
+
+        return mouseWorld;
     }
 
     //public void EquipWeapon(WeaponData weaponData)

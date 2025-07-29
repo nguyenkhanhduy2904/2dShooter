@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93f669de038423b418c5b8eb03130db7, type: 3}
+  m_Name: Time Scale Effect
+  m_EditorClassIdentifier: 
+  FXSound:
+  - {fileID: 8300000, guid: 5205a43f1bc8bc24fa8c9f131c87991b, type: 3}
+  - {fileID: 8300000, guid: df2d3001e97f0db43a053791783ffe29, type: 3}
+  - {fileID: 8300000, guid: 4ae1bf4011a330b4a8a3871dbc971b8b, type: 3}
+  ParticalPrefab: {fileID: 0}
+  duration: 10
+  bufferTime: 0.25
+  scale: 0.2

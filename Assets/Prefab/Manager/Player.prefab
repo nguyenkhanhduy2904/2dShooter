@@ -271,6 +271,7 @@ MonoBehaviour:
   _spriteRenderer: {fileID: 7867844327426560319}
   explosionPrefab: {fileID: 4035894571826229028, guid: 639daa97daafb8f48aec511019fe6c59, type: 3}
   _floatingTextPreFab: {fileID: 0}
+  lootBag: {fileID: 0}
 --- !u!50 &5065827651445325693
 Rigidbody2D:
   serializedVersion: 5

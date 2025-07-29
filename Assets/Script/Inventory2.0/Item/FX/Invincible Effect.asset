@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9047e11749b2264469f9d0e258abab86, type: 3}
+  m_Name: Invincible Effect
+  m_EditorClassIdentifier: 
+  FXSound:
+  - {fileID: 8300000, guid: fa387a3497107774281d5be5158f277e, type: 3}
+  - {fileID: 8300000, guid: 2c43afd52fdf6394ea0b2d3a2e87b175, type: 3}
+  - {fileID: 8300000, guid: 6068e432ae5f1044dafe7af99b59e8f1, type: 3}
+  ParticalPrefab: {fileID: 8771972552311404799, guid: bbf9e36a48d6c5648a13889afab076fd, type: 3}
+  duration: 1.5
+  bufferTime: 0.25

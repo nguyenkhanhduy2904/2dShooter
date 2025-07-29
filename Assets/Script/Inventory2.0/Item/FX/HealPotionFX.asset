@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d104ea03c869d043b0a406c1c257a11, type: 3}
+  m_Name: HealPotionFX
+  m_EditorClassIdentifier: 
+  FXSound:
+  - {fileID: 8300000, guid: 5cea6b0f8ed32e041960367c22427f66, type: 3}
+  ParticalPrefab: {fileID: 816465188801161578, guid: 14c4aff50d3c6394fa91589de8c4f99a, type: 3}
+  healAmount: 50

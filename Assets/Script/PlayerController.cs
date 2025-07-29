@@ -1,7 +1,10 @@
 using Assets.Script;
 using System.Collections;
 using TMPro;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
+using System.Collections.Generic;
+using System;
 
 public class PlayerController : MonoBehaviour, IDamageable
 {
@@ -12,7 +15,8 @@ public class PlayerController : MonoBehaviour, IDamageable
     [SerializeField] private float _playerSpeed;
 
     public static int PlayerMaxHealth = 100;
-    public static float PlayerMaxSpeed = 10f;
+    public static float PlayerNormalSpeed = 10f;
+
 
     int _playerCoins;
 
@@ -26,7 +30,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     public bool isAlive { get; private set; } = true;
 
     [Header("Weapon")]
-    [SerializeField] private WeaponHolder weaponHolder; // Reference to new WeaponHolder component
+    [SerializeField] public WeaponHolder weaponHolder; // Reference to new WeaponHolder component
 
     [Header("Audio")]
     [SerializeField] private AudioClip[] _hurtedSounds;
@@ -42,12 +46,22 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     [SerializeField] private GameObject _floatingTextPreFab;
 
+    [SerializeField] LootBag lootBag;
+
+    InventoryScript _inventoryScript;
+
+
+    bool isInvincible = false;
+
+
+
     private void Start()
     {
+        
         _playerCoins = 0;
         _rb = GetComponent<Rigidbody2D>();
         _playerHealth = PlayerMaxHealth;
-        _playerSpeed = PlayerMaxSpeed;
+        
         healthBar.SetMaxHealth(_playerHealth);
         _animator = GetComponentInChildren<Animator>();
         //_spriteRenderer = GetComponentInChildren<SpriteRenderer>();
@@ -72,6 +86,7 @@ public class PlayerController : MonoBehaviour, IDamageable
                 
             }
         }
+        //HandleItem();
        
     }
 
@@ -161,14 +176,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         weaponHolder.HandleShooting();
         weaponHolder.HandleReload();
         HandleExplosion();
-        if (Input.GetKey(KeyCode.CapsLock))
-        {
-            Time.timeScale = 0.2f;
-        }
-        else
-        {
-            Time.timeScale = 1f;
-        }
+       
 
     }
 
@@ -195,6 +203,9 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     public void TakeDmg(int dmg, bool _isCrit)
     {
+        if (isInvincible) return;
+
+
         _playerHealth -= dmg;
         _playerHealth = Mathf.Clamp(_playerHealth, 0, PlayerMaxHealth);
         Debug.Log($"{_playerName} took {dmg} damage. Health: {_playerHealth}");
@@ -250,10 +261,46 @@ public class PlayerController : MonoBehaviour, IDamageable
     {
         _playerHealth += amount;
         _playerHealth = Mathf.Clamp(_playerHealth, 0, PlayerMaxHealth);
-        healthBar.SetHealth(_playerHealth);
-        SoundFXManager.Instance.PlaySoundFXClip(_healingSounds, transform, 1f);
+        //healthBar.SetHealth(_playerHealth);
+        //SoundFXManager.Instance.PlaySoundFXClip(_healingSounds, transform, 1f);
         Debug.Log($"{_playerName} heal {amount}. Health: {_playerHealth}");
     }
+
+    public void SpeedModify(float speed, float duration)
+    {
+        _moveSpeed = speed;
+        Debug.Log("player speed currently is:" + _moveSpeed);
+        StartCoroutine(StartCountDown(duration, () => {
+            _moveSpeed = PlayerNormalSpeed;
+        }));
+
+
+    }
+
+    public void TimeScaleModify(float scale, float duration)
+    {
+        Time.timeScale = scale;
+        StartCoroutine(StartCountDown(duration * scale, () => { Time.timeScale = 1f; }));// cancel it out bc coroutine also affect by timeScale
+    }
+
+    public void InvincibleActivate(float duration)
+    {
+        isInvincible = true;
+        StartCoroutine(StartCountDown(duration, () => { isInvincible = false; }));
+    }
+
+    public void ChangeSpriteColor(float duration, Color color)
+    {
+        _spriteRenderer.color = color;
+        StartCoroutine(StartCountDown(duration, () => { _spriteRenderer.color = Color.white;}));
+    }
+    public IEnumerator StartCountDown(float duration, Action onFinished)
+    {
+        yield return new WaitForSeconds(duration);
+        onFinished?.Invoke();
+    }
+
+
 
     public void GetCoin()
     {
@@ -267,17 +314,33 @@ public class PlayerController : MonoBehaviour, IDamageable
         isAlive = false;
         _animator.Play("IndianaJone_Die");
         _rb.linearVelocity = Vector2.zero;
-       
+        weaponHolder.DropCurrentWeapon();
+        weaponHolder.DropCurrentWeapon();
+        //lootBag.InstantiateLoot(transform.position);
+
+
         GetComponent<Collider2D>().enabled = false; // optional: stop interactions
         // TODO: Add death animation, respawn, etc.
     }
 
+
+
+    void HandleItem()
+    {
+        for (int i = 0; i < Mathf.Min(_inventoryScript.slots.Count, 9); i++)
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha1 + i))
+            {
+                _inventoryScript.UseItem(i);
+            }
+        }
+    }
     #endregion
 
     #region Properties
     
     public int PlayerHealth => _playerHealth;
-    public float PlayerSpeed => _playerSpeed;
+    public float MoveSpeed => _moveSpeed;
     public string PlayerName => _playerName;
 
     #endregion

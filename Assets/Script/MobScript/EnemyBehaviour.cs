@@ -3,6 +3,8 @@ using System.Collections;
 using Assets.Script;
 using TMPro;
 using Pathfinding;
+using System;
+using System.Net;
 
 public class EnemyBehaviour : MonoBehaviour, IDamageable
 {
@@ -10,7 +12,7 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
     [SerializeField] Mob_SO _mobData;
     [SerializeField] LayerMask obstacleMask;
 
-    protected enum EnemyState { Idle, Chase, Charge, Attack, Recover, Dead }
+    protected enum EnemyState { Idle, Chase, Charge, Attack, Recover, Stunned,  Dead }
 
     [Header("Stats")]
     string _enemyName;
@@ -102,10 +104,16 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
 
     virtual public void Update()
     {
-        changeSpriteDirection();
-        if (_player == null || !_sceneManager._player.isAlive || _currentState == EnemyState.Dead)
+        
+        if (_player == null || !_sceneManager._player.isAlive)
         {
             _animator.Play("idle_anim");
+            return;
+        }
+
+        if (_currentState == EnemyState.Dead)
+        {
+            // Don't play idle if dead
             return;
         }
 
@@ -123,6 +131,7 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
 
             case EnemyState.Chase:
                 //MoveToPlayer();
+                changeSpriteDirection();
                 _animator.Play("move_anim");
                 UpdateDestination();
                 if (dist <= _enemyRange && _canAttack && HasLineOfSight())
@@ -130,6 +139,7 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
                 break;
 
             case EnemyState.Charge:
+                changeSpriteDirection();
                 if (_sceneManager._player.isAlive == false)
                 {
                     ChangeState(EnemyState.Idle);
@@ -138,9 +148,14 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
                 break;
             case EnemyState.Attack:
             case EnemyState.Recover:
+                changeSpriteDirection();
 
                 //MoveToPlayer();
                 // Handled by coroutine
+                break;
+            case EnemyState.Stunned:
+               
+
                 break;
         }
     }
@@ -187,10 +202,7 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
     //}
     void UpdateDestination()
     {
-        if (_currentState == EnemyState.Chase)
-        {
-            aiLerp.destination = _player.transform.position;
-        }
+        aiLerp.destination = _player.transform.position;
     }
 
 
@@ -204,12 +216,8 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
 
 
         // If changing to the same state, skip (except maybe Charge to force restart)
-        if (_currentState == newState && newState != EnemyState.Charge ) return;
-        //if (!_sceneManager._player.isAlive)
-        //{
-        //    _currentState = EnemyState.Idle;
-        //    return;
-        //}
+        if (_currentState == newState && newState != EnemyState.Charge) return;
+
         _currentState = newState;
 
         // Optionally stop only the main coroutine if needed
@@ -229,7 +237,7 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
             case EnemyState.Chase:
                
                 aiLerp.canMove = true;
-
+               
                 break;
 
             case EnemyState.Charge:
@@ -264,6 +272,12 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
                 InterruptAttack();
                 Die();
                 break;
+            case EnemyState.Stunned:
+                aiLerp.canMove = false;
+                InterruptAttack();
+                
+                break;
+
         }
     }
 
@@ -404,6 +418,33 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
         aiLerp.SetPath(null);
     }
 
+    public void ForceStopAllAction(float duration)
+    {
+        //StopAllCoroutines();
+        
+        ChangeState(EnemyState.Stunned);
+        _animator.speed = 0f; //freeze the animation at this frame
+        
+       
+        StartCoroutine(StartCountDown(duration, () => 
+        {
+            _animator.speed = 1f;
+            aiLerp.canMove = true;
+            ChangeStateToChase();
+            UpdateDestination();
+        
+        
+        }));
+
+        
+    }
+
+    public IEnumerator StartCountDown(float duration, Action onFinished)
+    {
+        yield return new WaitForSecondsRealtime(duration);
+        onFinished?.Invoke();
+    }
+
 
 
 
@@ -511,7 +552,8 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
         aiLerp.canMove = false;
 
         _animator.Play("death_anim");
-        GetComponent<LootBag>().InstantiateLoot(transform.position);
+        Debug.Log("Play death anim");
+        GetComponent<Inventory>().InstantiateItem(transform.position);
         // Optionally: ensure the Animator updates before querying length
         yield return null;
 

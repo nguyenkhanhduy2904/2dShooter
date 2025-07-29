@@ -4,6 +4,7 @@ public class SceneManager : MonoBehaviour
 {
 
     [SerializeField] public PlayerController _player;
+    
 
 
     private void Update()
@@ -22,6 +23,12 @@ public class SceneManager : MonoBehaviour
             }
 
         }
+    }
+
+    public void SpawnAOEEffect (Vector3 startPos, Vector3 endPos, GameObject AOEeffect, Vector3 scale)
+    {
+        GameObject instance = Instantiate(AOEeffect, endPos, Quaternion.identity);
+        instance.transform.localScale = scale;
     }
 
 

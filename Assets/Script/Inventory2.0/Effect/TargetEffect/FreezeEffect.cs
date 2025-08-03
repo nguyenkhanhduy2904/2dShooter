@@ -9,6 +9,6 @@ public class FreezeEffect : ItemEffect
     public override void ApplyEffect(GameObject user)
     {
         var _player = user.GetComponent<PlayerController>();
-        SceneManager.SpawnAOEEffect(user.transform.position, _player.weaponHolder.RotateToMouse(), AoEEffect, scale);
+        SceneManager.SpawnAOEEffect(user.transform.position, _player.weaponHolder2.GetMousePositionInWorld(), AoEEffect, scale);
     }
 }

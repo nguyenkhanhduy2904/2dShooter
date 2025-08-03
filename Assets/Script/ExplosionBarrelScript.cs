@@ -1,12 +1,13 @@
 using Assets.Script;
 using TMPro;
 using UnityEngine;
+using System.Collections;
 
 public class ExplosionBarrelScript : MonoBehaviour, IDamageable
 {
     [SerializeField] private GameObject _explosionPrefab;
     [SerializeField] private int _barrelMaxHealth = 50;
-
+    public SpriteRenderer _explosionRenderer;
     [SerializeField] private GameObject _floatingTextPreFab;
     [SerializeField] private AudioClip[] _metalHitSounds;
     [SerializeField] private AudioClip[] _explosionSounds;
@@ -15,6 +16,7 @@ public class ExplosionBarrelScript : MonoBehaviour, IDamageable
     private void Start()
     {
         _barrelHealth = _barrelMaxHealth;
+        _explosionRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
 
@@ -68,8 +70,13 @@ public class ExplosionBarrelScript : MonoBehaviour, IDamageable
 
         Destroy(prefab, 1f);
     }
+    public IEnumerator ChangeColor(Color color, float time)
+    {
+        _explosionRenderer.color = color;
+        yield return new WaitForSeconds(time);
+    }
 
-    public void DealDmg(IDamageable target)
+    public void DealDmg(IDamageable target, int dmg, bool isCrit)
     {
         //this object cannot deal dmg by itself, the dmg will come from the explosion instead
     }

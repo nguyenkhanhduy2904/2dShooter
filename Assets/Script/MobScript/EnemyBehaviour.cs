@@ -23,7 +23,8 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
     protected float _enemyRange;
     protected float _enemyAggroRange;
     [SerializeField] int _segments = 60;
-    
+    float critChance = 0;
+    float critMultiplier = 1.5f;
 
     bool _canAttack = true;
 
@@ -310,7 +311,8 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
         Debug.Log("Swing!");
         if (dist <= _enemyRange)
         {
-            _playerTarget.TakeDmg(_enemyAtk, false);
+            //_playerTarget.TakeDmg(_enemyAtk, false);
+            DealDmg(_playerTarget, _enemyAtk, false);
         }
         else
         {
@@ -467,6 +469,7 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
     {
         //Debug.Log("TakeDmg() called");
         if (_currentState == EnemyState.Dead) return;
+        StartCoroutine(ChangeColor(Color.red, 0.1f));
         wasHit = true;
         _enemyHealth -= amount;
         _enemyHealth = Mathf.Clamp(_enemyHealth, 0, _enemyMaxHealth);
@@ -527,6 +530,43 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
         Destroy(prefab, 1f);
     }
 
+    public IEnumerator ChangeColor(Color color, float time)
+    {
+        spriteRenderer.color = color;
+        yield return new WaitForSeconds(time);
+        spriteRenderer.color = Color.white;
+    }
+
+    public void KnockBack(Transform source, float time, float distance)
+    {
+        StartCoroutine(KnockBackCoroutine(source, time, distance));
+    }
+
+    private IEnumerator KnockBackCoroutine(Transform source, float time, float distance)
+    {
+
+       
+        aiLerp.canMove = false;
+
+        Vector2 knockDirection = (transform.position - source.position).normalized;
+        Vector2 startPos = transform.position;
+        Vector2 endPos = startPos + knockDirection * distance;
+
+        float elapsed = 0f;
+
+        while (elapsed < time)
+        {
+            float t = elapsed / time;
+            // Smooth knockback
+            transform.position = Vector2.Lerp(startPos, endPos, t);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.position = endPos;
+
+        aiLerp.canMove = true;
+    }
 
 
     public void Heal(int amount)
@@ -536,9 +576,14 @@ public class EnemyBehaviour : MonoBehaviour, IDamageable
         Debug.Log($"{_enemyName} healed {amount}. HP now: {_enemyHealth}");
     }
 
-    public void DealDmg(IDamageable target)
+    public void DealDmg(IDamageable target, int dmg, bool isCrit = false)
     {
-        target.TakeDmg(_enemyAtk , false);
+
+        int finalDmg = isCrit 
+            ? Mathf.Clamp(Mathf.RoundToInt(dmg * critMultiplier), 1, int.MaxValue) 
+            : dmg;
+
+        target.TakeDmg(finalDmg , false);
     }
 
     void Die()

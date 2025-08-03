@@ -26,11 +26,11 @@ public class PlayerController : MonoBehaviour, IDamageable
     private Rigidbody2D _rb;
     private Vector2 _boxSize = new Vector2(0.5f, 0.5f);
 
-    bool isMoving = false;
+    public bool isMoving = false;
     public bool isAlive { get; private set; } = true;
 
-    [Header("Weapon")]
-    [SerializeField] public WeaponHolder weaponHolder; // Reference to new WeaponHolder component
+    //[Header("Weapon")]
+    //[SerializeField] public WeaponHolder weaponHolder; // Reference to new WeaponHolder component
 
     [Header("Audio")]
     [SerializeField] private AudioClip[] _hurtedSounds;
@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     [Header("Animation")]
     [SerializeField] private Animator _animator;
-    [SerializeField] private SpriteRenderer _spriteRenderer;
+    [SerializeField] public SpriteRenderer _spriteRenderer;
 
 
     [SerializeField] private GameObject explosionPrefab;
@@ -51,7 +51,24 @@ public class PlayerController : MonoBehaviour, IDamageable
     InventoryScript _inventoryScript;
 
 
+    public enum directionState{
+        front,
+        back
+    }
+
+    string _idleAnim;
+    string _moveAnim;
+    string _actionAnim;
+    string _currentAnim;
+
+    public directionState _currentDirectionState = directionState.front;
+
+
+
     bool isInvincible = false;
+
+
+    public WeaponHolder2 weaponHolder2;
 
 
 
@@ -64,17 +81,20 @@ public class PlayerController : MonoBehaviour, IDamageable
         
         healthBar.SetMaxHealth(_playerHealth);
         _animator = GetComponentInChildren<Animator>();
+        weaponHolder2 = GetComponentInChildren<WeaponHolder2>();
         //_spriteRenderer = GetComponentInChildren<SpriteRenderer>();
 
-        if (weaponHolder == null)
-            Debug.LogWarning("PlayerController: WeaponHolder is not assigned!");
+        //if (weaponHolder == null)
+        //    Debug.LogWarning("PlayerController: WeaponHolder is not assigned!");
+
+        SetAnimationName();
     }
 
     private void Update()
     {
         //HandleMovement();
         if(!isAlive) return;
-        if (weaponHolder != null)
+        if (weaponHolder2 != null)
         {
             HandleInput();
         }
@@ -86,6 +106,7 @@ public class PlayerController : MonoBehaviour, IDamageable
                 
             }
         }
+        //weaponHolder2.AnimateWeaponBob();
         //HandleItem();
        
     }
@@ -94,42 +115,69 @@ public class PlayerController : MonoBehaviour, IDamageable
     {
         if (!isAlive) return;
         HandleMovement();
-        //Debug.Log("isMoving =" + isMoving);
-        if (isMoving && !_animator.GetCurrentAnimatorStateInfo(0).IsName("IndianaJone_Move"))
-        {
-            _animator.Play("IndianaJone_Move");
-        }
-        else if (!isMoving && !_animator.GetCurrentAnimatorStateInfo(0).IsName("IndianaJone_Idle"))
-        {
-            _animator.Play("IndianaJone_Idle");
-        }
+        ////Debug.Log("isMoving =" + isMoving);
+        if (isMoving)
+            PlayAnimation(_moveAnim);
+        else
+            PlayAnimation(_idleAnim);
+
 
     }
 
     #region Movement
 
+    public void ChangeState(directionState _state)
+    {
+        _currentDirectionState = _state;
+    }
+
+
     private void HandleMovement()
     {
-        float moveX = Input.GetKey(KeyCode.A) ? -1f : Input.GetKey(KeyCode.D) ? 1f : 0f;
-        float moveY = Input.GetKey(KeyCode.W) ? 1f : Input.GetKey(KeyCode.S) ? -1f : 0f;
+        float moveX = 0f;
+        float moveY = 0f;
 
-        
-
-        // Simple flag: if any key is pressed, mark as moving
-        isMoving = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) ||
-                   Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D);
-
+        // Horizontal input and sprite flip
         if (Input.GetKey(KeyCode.A))
         {
+            moveX = -1f;
             _spriteRenderer.flipX = true;
         }
-        else if (Input.GetKey(KeyCode.D)) 
-        { 
+        else if (Input.GetKey(KeyCode.D))
+        {
+            moveX = 1f;
             _spriteRenderer.flipX = false;
         }
 
+        // Vertical input
+        if (Input.GetKey(KeyCode.W))
+        {
+            moveY = 1f;
+            if (_currentDirectionState != directionState.back)
+            {
+                ChangeState(directionState.back);
+                SetAnimationName();
+                weaponHolder2.DynamicWeaponRenderOrder();
+            }
+        }
+        else if (Input.GetKey(KeyCode.S))
+        {
+            moveY = -1f;
+            if (_currentDirectionState != directionState.front)
+            {
+                ChangeState(directionState.front);
+                SetAnimationName();
+                weaponHolder2.DynamicWeaponRenderOrder();
+            }
+        }
 
-            Vector2 moveDir = new Vector2(moveX, moveY).normalized;
+
+        // Movement flag
+        isMoving = moveX != 0f || moveY != 0f;
+
+
+
+        Vector2 moveDir = new Vector2(moveX, moveY).normalized;
 
         Vector2 targetPos = _rb.position + moveDir * _moveSpeed * Time.fixedDeltaTime;
 
@@ -149,21 +197,33 @@ public class PlayerController : MonoBehaviour, IDamageable
     }
 
 
+    public void SetAnimationName()
+    {
+        if (_currentDirectionState == directionState.back) 
+        {
+            _idleAnim = "Idle_behind";
+            _moveAnim = "Move_behind";
+            _actionAnim = "Action_behind";
+        }
+
+        else if (_currentDirectionState == directionState.front) 
+        {
+            _idleAnim = "Idle_front";
+            _moveAnim = "Move_front";
+            _actionAnim = "Action_front";
+        }
+    }
+
+    public void PlayAnimation(string newAnim)
+    {
+        if (_currentAnim == newAnim) return;
+        _animator.Play(newAnim);
+        _currentAnim = newAnim;
+    }
 
 
-    //private void HandleMovement()
-    //{
-    //    float moveX = Input.GetKey(KeyCode.A) ? -1f : Input.GetKey(KeyCode.D) ? 1f : 0f;
-    //    float moveY = Input.GetKey(KeyCode.W) ? 1f : Input.GetKey(KeyCode.S) ? -1f : 0f;
 
-    //    Vector2 moveDir = new Vector2(moveX, moveY).normalized;
-    //    Vector3 targetPos = transform.position + (Vector3)(moveDir * _moveSpeed * Time.deltaTime);
-
-    //    if (!Physics2D.OverlapBox(targetPos, _boxSize, 0f, _layerMask))
-    //    {
-    //        transform.position = targetPos;
-    //    }
-    //}
+   
 
     #endregion
 
@@ -171,11 +231,11 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     private void HandleInput()
     {
-        
-        weaponHolder.RotateToMouse();
-        weaponHolder.HandleShooting();
-        weaponHolder.HandleReload();
-        HandleExplosion();
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            weaponHolder2.TryAttack();
+        }
        
 
     }
@@ -204,7 +264,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     public void TakeDmg(int dmg, bool _isCrit)
     {
         if (isInvincible) return;
-
+        StartCoroutine(ChangeColor(Color.red, 0.1f));
 
         _playerHealth -= dmg;
         _playerHealth = Mathf.Clamp(_playerHealth, 0, PlayerMaxHealth);
@@ -219,9 +279,16 @@ public class PlayerController : MonoBehaviour, IDamageable
         }
     }
 
-    public void DealDmg(IDamageable target)
+    public void DealDmg(IDamageable target, int dmg, bool isCrit)
     {
-        // Future expansion
+        if (isCrit)
+        {
+            dmg = Mathf.Clamp(Mathf.RoundToInt(dmg * weaponHolder2.WeaponData.critMultiplier), 1, int.MaxValue);
+        }
+        
+        target.TakeDmg(dmg, isCrit);
+        Debug.Log("DealDmg called");
+
     }
 
     public void ShowDamage(string text, bool isCrit = false)
@@ -257,12 +324,18 @@ public class PlayerController : MonoBehaviour, IDamageable
         Destroy(prefab, 1f);
     }
 
+    public IEnumerator ChangeColor(Color color, float time)
+    {
+        _spriteRenderer.color = color;
+        yield return new WaitForSeconds(time);
+    }
+
     public void Heal(int amount)
     {
         _playerHealth += amount;
         _playerHealth = Mathf.Clamp(_playerHealth, 0, PlayerMaxHealth);
-        //healthBar.SetHealth(_playerHealth);
-        //SoundFXManager.Instance.PlaySoundFXClip(_healingSounds, transform, 1f);
+        healthBar.SetHealth(_playerHealth);
+       
         Debug.Log($"{_playerName} heal {amount}. Health: {_playerHealth}");
     }
 
@@ -314,8 +387,8 @@ public class PlayerController : MonoBehaviour, IDamageable
         isAlive = false;
         _animator.Play("IndianaJone_Die");
         _rb.linearVelocity = Vector2.zero;
-        weaponHolder.DropCurrentWeapon();
-        weaponHolder.DropCurrentWeapon();
+        //weaponHolder.DropCurrentWeapon();
+        //weaponHolder.DropCurrentWeapon();
         //lootBag.InstantiateLoot(transform.position);
 
 

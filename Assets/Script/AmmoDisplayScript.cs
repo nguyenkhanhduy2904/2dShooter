@@ -9,14 +9,14 @@ public class AmmoDisplayScript : MonoBehaviour
 
     private void Update()
     {
-        var weapon = _weaponHolder.GetCurrentWeapon();
-        if (weapon != null)
-        {
-            _ammoText.text = $"{weapon.CurrentMag} / {weapon.CurrentReserve}";
-        }
-        else
-        {
-            _ammoText.text = " -- / -- ";
-        }
+        //var weapon = _weaponHolder.GetCurrentWeapon();
+        //if (weapon != null)
+        //{
+        //    _ammoText.text = $"{weapon.CurrentMag} / {weapon.CurrentReserve}";
+        //}
+        //else
+        //{
+        //    _ammoText.text = " -- / -- ";
+        //}
     }
 }

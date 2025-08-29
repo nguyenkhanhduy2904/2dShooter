@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyName: Default_Orc
   _enemyMaxHealth: 200
-  _enemyAtk: 30
+  _enemyAtk: 1
   _enemySpeed: 5
-  _enemyAtkSpeed: 1.5
-  _enemyRange: 1.5
+  _enemyAtkSpeed: 1
+  _enemyRange: 0.75
   _enemyAggroRange: 4
   _enemyHurtedSounds:
   - {fileID: 8300000, guid: 9397afe9d224bbc4bbc301fc278dff08, type: 3}

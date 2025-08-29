@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyName: Skeleton_Archer
   _enemyMaxHealth: 100
-  _enemyAtk: 45
+  _enemyAtk: 1
   _enemySpeed: 6
-  _enemyAtkSpeed: 1.5
+  _enemyAtkSpeed: 1
   _enemyRange: 4
   _enemyAggroRange: 5
   _enemyHurtedSounds:

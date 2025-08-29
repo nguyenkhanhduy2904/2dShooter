@@ -13,10 +13,15 @@ MonoBehaviour:
   m_Name: GiantAxe
   m_EditorClassIdentifier: 
   weaponName: GiantAxe
-  weaponSprite: {fileID: 0}
+  weaponSprite: {fileID: 212143399115013302, guid: a2e519a17fd8ae5488d21a08236fbb8b, type: 3}
   weaponType: 0
-  weaponBaseDmg: 100
+  weaponBaseDmg: 50
   weaponSpeed: 1
-  critChance: 0
-  critMultiplier: 0
+  critChance: 40
+  critMultiplier: 1.5
+  spriteLocalPosition: {x: 0, y: 1, z: 0}
+  spriteLocalRotation: {x: 0, y: 0, z: 0}
+  spriteLocalScale: {x: 1, y: 1, z: 1}
+  sliceEffect: {fileID: 2925144124250855641, guid: 906bb92edbcc7e54b9cebda9c5c3fc5a, type: 3}
+  weaponPivotOffset: {x: 0, y: 0, z: 0}
   weaponBehaviour: {fileID: 11400000, guid: 145a2e93e7e1c754fb727412420c1764, type: 2}

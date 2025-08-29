@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponSounds: []
   weaponParticlePrefab: {fileID: 0}
+  sliceEffectPrefab: {fileID: 7833142788191802331, guid: dc58fd99107bf334987e88ddfb82a211, type: 3}
   swingArc_light: 60
   swingArc_heavy: 360
-  maxRange: 5
+  maxRange: 2
   affectedMask:
     serializedVersion: 2
     m_Bits: 256

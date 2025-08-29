@@ -328,6 +328,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     {
         _spriteRenderer.color = color;
         yield return new WaitForSeconds(time);
+        _spriteRenderer.color = Color.white;
     }
 
     public void Heal(int amount)

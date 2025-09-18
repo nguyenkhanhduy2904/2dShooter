@@ -46,7 +46,7 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     [SerializeField] private GameObject _floatingTextPreFab;
 
-    [SerializeField] LootBag lootBag;
+    //[SerializeField] LootBag lootBag;
 
     InventoryScript _inventoryScript;
 

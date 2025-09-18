@@ -9,19 +9,19 @@ public class FreezeScript : MonoBehaviour
 
     void Start()
     {
-        List<Collider2D> results = new List<Collider2D> ();
+        //List<Collider2D> results = new List<Collider2D> ();
        
-        int count = myCollider.Overlap(filter, results);
+        //int count = myCollider.Overlap(filter, results);
 
-        for (int i = 0; i < count; i++)
-        {
-            var _enemy = results[i].GetComponent<EnemyBehaviour>();
-            if (_enemy != null)
-            {
-                Debug.Log(_enemy.name + " froze");
-                _enemy.ForceStopAllAction(duration);
-            }
-        }
+        //for (int i = 0; i < count; i++)
+        //{
+        //    var _enemy = results[i].GetComponent<EnemyBehaviour>();
+        //    if (_enemy != null)
+        //    {
+        //        Debug.Log(_enemy.name + " froze");
+        //        _enemy.ForceStopAllAction(duration);
+        //    }
+        //}
     }
 
 }

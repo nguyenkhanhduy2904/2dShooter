@@ -87,13 +87,13 @@ public class Explosion : MonoBehaviour
     private IEnumerator Knockback(Transform target, Vector3 direction, float distance, float duration)
     {
         AILerp ai = target.GetComponent<AILerp>();
-        EnemyBehaviour enemy = target.GetComponent<EnemyBehaviour>();
+        //EnemyBehaviour enemy = target.GetComponent<EnemyBehaviour>();
 
         // Cancel any attack or recover
-        if (enemy != null)
-        {
-            enemy.InterruptAttack();
-        }
+        //if (enemy != null)
+        //{
+        //    enemy.InterruptAttack();
+        //}
 
         if (ai != null)
             ai.enabled = false;
@@ -115,11 +115,11 @@ public class Explosion : MonoBehaviour
             ai.SearchPath();
         }
 
-        // Always resume chase
-        if (enemy != null)
-        {
-            enemy.ChangeStateToChase();
-        }
+        //// Always resume chase
+        //if (enemy != null)
+        //{
+        //    enemy.ChangeStateToChase();
+        //}
     }
 
     IEnumerator FadeSprite()

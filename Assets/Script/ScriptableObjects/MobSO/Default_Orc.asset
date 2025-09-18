@@ -18,7 +18,7 @@ MonoBehaviour:
   _enemySpeed: 5
   _enemyAtkSpeed: 1
   _enemyRange: 0.75
-  _enemyAggroRange: 4
+  _enemyAggroRange: 5
   _enemyHurtedSounds:
   - {fileID: 8300000, guid: 9397afe9d224bbc4bbc301fc278dff08, type: 3}
   - {fileID: 8300000, guid: 847ea492ca32bc146967a4c697886c33, type: 3}

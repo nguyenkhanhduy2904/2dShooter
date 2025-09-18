@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using Assets.Script;
+using TMPro;
 public class AIStats : MonoBehaviour, IDamageable
 {
     [Header("Stats")]
@@ -15,6 +16,8 @@ public class AIStats : MonoBehaviour, IDamageable
     [SerializeField] private float _critChance;
     [SerializeField] private float _critMultiplier;
 
+    public AIState aiState;
+    public GameObject dmgTextPrefab;
 
     [Header("Utils")]
     [SerializeField] Mob_SO mob_SO;
@@ -51,6 +54,12 @@ public class AIStats : MonoBehaviour, IDamageable
     {
         CurrentHP -= amount;
         Debug.Log( Name +" took " +  amount + "damage, have " + CurrentHP +"left");
+        ShowDamage(amount.ToString(), isCrit );
+        if(CurrentHP <= 0)
+        {
+            CurrentHP = 0;
+            aiState.ChangeState(AIState.State.Die);
+        }
     }
 
     public void DealDmg(IDamageable target, int amount, bool isCrit)
@@ -61,7 +70,23 @@ public class AIStats : MonoBehaviour, IDamageable
 
     public void ShowDamage(string text, bool isCrit)
     {
-      
+
+        GameObject dmgText = Instantiate(dmgTextPrefab, this.transform.position, Quaternion.identity);
+        TextMeshPro textMesh = dmgText.GetComponentInChildren<TextMeshPro>();
+        textMesh.text = text;
+
+        if (isCrit)
+        {
+            textMesh.color = Color.red;
+            textMesh.fontSize = 10f;
+        }
+        else
+        {
+            textMesh.color = Color.white;
+        }
+        Destroy(dmgText, 1f);
+       
+
     }
 
     public IEnumerator ChangeColor(Color color, float time)

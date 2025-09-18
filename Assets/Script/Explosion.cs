@@ -63,13 +63,12 @@ public class Explosion : MonoBehaviour
             target.TakeDmg(damage, false);
             Transform targetTransform = ((MonoBehaviour)target).transform;
             Vector3 direction = (targetTransform.position - transform.position).normalized;
-            //targetTransform.position += direction * 1f;
-            // After applying damage:
-            EnemyBehaviour enemy = targetTransform.GetComponent<EnemyBehaviour>();
-            if (enemy != null)
-            {
-                enemy.InterruptAttack();
-            }
+            
+            //EnemyBehaviour enemy = targetTransform.GetComponent<EnemyBehaviour>();
+            //if (enemy != null)
+            //{
+            //    enemy.InterruptAttack();
+            //}
             StartCoroutine(Knockback(targetTransform, direction, 2f, 0.2f));
           
 

@@ -26,7 +26,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5804331710215009482
 Transform:
   m_ObjectHideFlags: 0
@@ -350,9 +350,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentState: 0
+  aiAnimation: {fileID: 1414219472992826527}
   aiBehaviour: {fileID: 7633721373657339217}
   aiStats: {fileID: -5879852006178661710}
   _target: {fileID: 0}
+  isInForceState: 0
 --- !u!114 &-5879852006178661710
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -375,6 +377,8 @@ MonoBehaviour:
   _aggroRange: 0
   _critChance: 0
   _critMultiplier: 0
+  aiState: {fileID: 6737847563170723954}
+  dmgTextPrefab: {fileID: 2996679915331620059, guid: 0e5590444d39a034886020c70a63223b, type: 3}
   mob_SO: {fileID: 11400000, guid: b5319d46c56548f4fb92912b9ee771c5, type: 2}
 --- !u!114 &7633721373657339217
 MonoBehaviour:
@@ -397,7 +401,11 @@ MonoBehaviour:
   obstacleMask:
     serializedVersion: 2
     m_Bits: 0
+  collider2D: {fileID: 0}
+  spriteRenderer: {fileID: 0}
   isAttacking: 0
+  isTargetInAttackRange: 0
+  isAttackingAllow: 1
   projectilePrefab: {fileID: 4435246658327050908, guid: 33343256bd2bff548bc874b3b98fa6fd, type: 3}
 --- !u!1 &2135260194842556948
 GameObject:
@@ -526,6 +534,8 @@ MonoBehaviour:
   aiState: {fileID: 6737847563170723954}
   AIStats: {fileID: -5879852006178661710}
   spriteRenderer: {fileID: 3492294070465318260}
+  overrideAnim: 
+  currentPlayingAnim: idle_anim
 --- !u!1 &8618635274894101236
 GameObject:
   m_ObjectHideFlags: 0

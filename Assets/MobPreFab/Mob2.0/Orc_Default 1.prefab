@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 2408913335176653917}
   - component: {fileID: 1069845445218098388}
   m_Layer: 8
-  m_Name: Ore_Default 1
+  m_Name: Orc_Default 1
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -332,11 +332,9 @@ MonoBehaviour:
   display: {fileID: 0}
   tempHolder:
   - itemData: {fileID: 11400000, guid: 2d3a714e74354484794c750385993f3a, type: 2}
-    quantity: 4
+    quantity: 1
   - itemData: {fileID: 11400000, guid: 92785cae74a8db84895c713cd1a34f3b, type: 2}
     quantity: 1
-  - itemData: {fileID: 11400000, guid: fdb99c60d0a60684eb5027bceb09f8b4, type: 2}
-    quantity: 3
 --- !u!114 &4502176624013460491
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -358,6 +356,8 @@ MonoBehaviour:
   obstacleMask:
     serializedVersion: 2
     m_Bits: 0
+  collider2D: {fileID: 0}
+  spriteRenderer: {fileID: 0}
   isAttacking: 0
   isTargetInAttackRange: 0
 --- !u!114 &2408913335176653917
@@ -373,9 +373,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentState: 0
+  aiAnimation: {fileID: 6969830156396377051}
   aiBehaviour: {fileID: 4502176624013460491}
   aiStats: {fileID: 1069845445218098388}
   _target: {fileID: 0}
+  isInForceState: 0
 --- !u!114 &1069845445218098388
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -398,6 +400,8 @@ MonoBehaviour:
   _aggroRange: 0
   _critChance: 0
   _critMultiplier: 0
+  aiState: {fileID: 2408913335176653917}
+  dmgTextPrefab: {fileID: 2996679915331620059, guid: 0e5590444d39a034886020c70a63223b, type: 3}
   mob_SO: {fileID: 11400000, guid: 4f5a52c0c0c98994fb3c381114ad3dfc, type: 2}
 --- !u!1 &4180797177012211064
 GameObject:
@@ -613,3 +617,5 @@ MonoBehaviour:
   aiState: {fileID: 2408913335176653917}
   AIStats: {fileID: 1069845445218098388}
   spriteRenderer: {fileID: 2698514372569411809}
+  overrideAnim: 
+  currentPlayingAnim: idle_anim

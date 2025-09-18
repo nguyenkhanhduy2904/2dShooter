@@ -71,7 +71,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     public WeaponHolder2 weaponHolder2;
 
 
-
+    
     private void Start()
     {
         
@@ -157,7 +157,7 @@ public class PlayerController : MonoBehaviour, IDamageable
             {
                 ChangeState(directionState.back);
                 SetAnimationName();
-                weaponHolder2.DynamicWeaponRenderOrder();
+                //weaponHolder2.DynamicWeaponRenderOrder();
             }
         }
         else if (Input.GetKey(KeyCode.S))
@@ -167,7 +167,7 @@ public class PlayerController : MonoBehaviour, IDamageable
             {
                 ChangeState(directionState.front);
                 SetAnimationName();
-                weaponHolder2.DynamicWeaponRenderOrder();
+                //weaponHolder2.DynamicWeaponRenderOrder();
             }
         }
 
@@ -234,7 +234,7 @@ public class PlayerController : MonoBehaviour, IDamageable
 
         if (Input.GetMouseButtonDown(0))
         {
-            weaponHolder2.TryAttack();
+            //weaponHolder2.TryAttack();
         }
        
 

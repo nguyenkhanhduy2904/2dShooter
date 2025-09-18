@@ -7,22 +7,31 @@ public class SKeletonArcher_Behaviour: AIBehaviour
     public GameObject projectilePrefab;
     public override IEnumerator AttackSequence()
     {
-       
         aiLerp.canMove = false;
-        float _waitTime = aiStats.GetAttackDelay() / 2;
-        yield return new WaitForSeconds(_waitTime);
-        try 
+        //float _waitTime = aiStats.GetAttackDelay()/2;
+        float cooldown = Mathf.Max(0.1f, 1f / aiStats.AttackSpeed);
+        //Debug.Log("wait time is: " +  _waitTime);
+        try
         {
+            yield return new WaitForSeconds(_animationTimer * 0.5f);
             FireProjectile();
+            isAttackingAllow = false;
+            yield return new WaitForSeconds(_animationTimer * 0.5f);
+            isAttacking = false;
+            aiLerp.canMove = true;
+            _attackCoroutine = null;
+            yield return new WaitForSeconds(cooldown);
+            isAttackingAllow = true;
         }
-        finally 
+        finally
         {
+            isAttackingAllow = true;
             isAttacking = false;
             aiLerp.canMove = true;
             _attackCoroutine = null;
         }
-       
-        yield return new WaitForSeconds(_waitTime);
+
+        //yield return new WaitForSeconds(_waitTime);
     }
 
     public void FireProjectile()

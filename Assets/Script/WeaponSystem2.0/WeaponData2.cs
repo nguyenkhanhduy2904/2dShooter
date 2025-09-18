@@ -19,10 +19,14 @@ public class WeaponData2 : ScriptableObject
     public float critMultiplier;
 
     [Header("Visual Transform Settings")]
-    public Vector3 spriteLocalPosition = Vector3.zero;
-    public Vector3 spriteLocalRotation = Vector3.zero; // Euler angles
+    //public Vector3 spriteLocalPositionRight = Vector3.zero;
+    //public Vector3 spriteLocalPositionLeft = Vector3.zero;
+
+    public Vector3 spriteLocalRotationRight = Vector3.zero; // Euler angles
+    public Vector3 spriteLocalRotationLeft = Vector3.zero; // Euler angles
     public Vector3 spriteLocalScale = Vector3.one;
-    public Sprite sliceEffect;
+    public Sprite sliceEffect_light;
+    public Sprite sliceEffect_heavy;
     [Header("Swing Settings")]
     public Vector3 weaponPivotOffset = Vector3.zero; // Where weapon rotates from
 

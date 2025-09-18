@@ -42,11 +42,14 @@ public class Inventory : MonoBehaviour
 
     public List<GameObject> InstantiateItem(Vector3 spawnPosition)
     {
+        Debug.Log("InstantiateItem called");
         List<GameObject> droppedGameObjects = new List<GameObject>();
         foreach (var slot in inventorySlots)
         {
+            Debug.Log("In foreach loop");
             for (int i = 0; i < slot.quantity; i++)
             {
+                Debug.Log("in for loop");
                 GameObject itemObject = Instantiate(droppedItemPrefab, spawnPosition, Quaternion.identity);
                 DroppedItem dropped = itemObject.GetComponent<DroppedItem>();
                 dropped.Initialize(slot.itemData);
@@ -77,8 +80,9 @@ public class Inventory : MonoBehaviour
     {
         if (this.CompareTag("Player"))
         {
+            Debug.Log("OntriggerEnter2D called");
             DroppedItem droppedItem = collision.GetComponent<DroppedItem>();
-            if (droppedItem != null) 
+            if (droppedItem != null)
             {
                 Add(droppedItem.itemData);
                 Destroy(collision.gameObject);

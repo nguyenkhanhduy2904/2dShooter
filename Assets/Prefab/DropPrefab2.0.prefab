@@ -399,3 +399,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemData: {fileID: 0}
+  collider2D: {fileID: 100676284638773439}

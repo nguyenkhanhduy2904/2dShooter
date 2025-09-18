@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Wizard_Default
   m_EditorClassIdentifier: 
   _enemyName: Wizard
-  _enemyMaxHealth: 120
+  _enemyMaxHealth: 100
   _enemyAtk: 60
   _enemySpeed: 30
-  _enemyAtkSpeed: 1
+  _enemyAtkSpeed: 0.25
   _enemyRange: 7
   _enemyAggroRange: 7
   _enemyHurtedSounds:

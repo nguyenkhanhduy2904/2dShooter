@@ -349,10 +349,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dd31c839bcd64c4fa91f7e0c11c9dcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentState: 0
+  currentState: 2
+  aiAnimation: {fileID: 4354688887572736230}
   aiBehaviour: {fileID: -789723898680893479}
   aiStats: {fileID: 2252256248215381788}
   _target: {fileID: 0}
+  isInForceState: 0
 --- !u!114 &2252256248215381788
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -375,6 +377,8 @@ MonoBehaviour:
   _aggroRange: 0
   _critChance: 0
   _critMultiplier: 0
+  aiState: {fileID: -638341797110337437}
+  dmgTextPrefab: {fileID: 2996679915331620059, guid: 0e5590444d39a034886020c70a63223b, type: 3}
   mob_SO: {fileID: 11400000, guid: c6c7138b222e6e74e95844be55a04c31, type: 2}
 --- !u!114 &-789723898680893479
 MonoBehaviour:
@@ -397,7 +401,14 @@ MonoBehaviour:
   obstacleMask:
     serializedVersion: 2
     m_Bits: 0
+  collider2D: {fileID: 0}
+  spriteRenderer: {fileID: 0}
   isAttacking: 0
+  isTargetInAttackRange: 0
+  teleportActiveRange: 2
+  teleportDistance: 4.5
+  teleportCoolDown: 5
+  teleportCoolDownRemain: 0
   projectilePrefab: {fileID: 4435246658327050908, guid: eff2a6b0f18a82540b4a528250afe888, type: 3}
 --- !u!1 &764705869158441013
 GameObject:
@@ -613,3 +624,5 @@ MonoBehaviour:
   aiState: {fileID: -638341797110337437}
   AIStats: {fileID: 2252256248215381788}
   spriteRenderer: {fileID: 6915940348431121169}
+  overrideAnim: 
+  currentPlayingAnim: idle_anim

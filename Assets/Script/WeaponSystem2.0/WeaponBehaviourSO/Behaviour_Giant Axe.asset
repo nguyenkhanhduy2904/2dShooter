@@ -12,10 +12,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b05a9813ac25ec747857e005d0021a94, type: 3}
   m_Name: Behaviour_Giant Axe
   m_EditorClassIdentifier: 
-  weaponSounds: []
+  weaponSounds_light_NoHit:
+  - {fileID: 8300000, guid: 9456399ab40d3c9428fa0fe329b77483, type: 3}
+  - {fileID: 8300000, guid: 8245d6521fe1e9946bebb663859269c2, type: 3}
+  weaponSounds_light_Hit:
+  - {fileID: 8300000, guid: 17f4f55305e86644f953ba3f8b6619de, type: 3}
+  - {fileID: 8300000, guid: 2ae428e162d57654b82c6ddb33fec94e, type: 3}
+  weaponSounds_heavy_NoHit:
+  - {fileID: 8300000, guid: c0ddc11b92d1d04438d545d0988629e6, type: 3}
+  - {fileID: 8300000, guid: 9c26140b6e6ab9349a7f11c2e3963672, type: 3}
+  weaponSounds_heavy_Hit:
+  - {fileID: 8300000, guid: fa08d6ead47ec9b4db64a338ef8df680, type: 3}
+  - {fileID: 8300000, guid: cbe4d37e71544a4419a6c31565528128, type: 3}
   weaponParticlePrefab: {fileID: 0}
+  lightAttackCoolDown: 0.25
+  heavyAttackCoolDown: 1.5
+  comboTimeWindow: 1.5
+  chargeDistance: 0.5
+  chargeTime: 0.15
   sliceEffectPrefab: {fileID: 7833142788191802331, guid: dc58fd99107bf334987e88ddfb82a211, type: 3}
-  swingArc_light: 60
+  swingArc_light: 180
   swingArc_heavy: 360
   maxRange: 2
   affectedMask:

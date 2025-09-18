@@ -10,7 +10,7 @@ public class AIBehaviour : MonoBehaviour
     public AIState aiState;
     public AIStats aiStats;
     public AIAnimation aiAnimation;
-    float _animationTimer;
+    protected float _animationTimer;
    
     public AILerp aiLerp;
     //public float _patrolRadious;
@@ -20,10 +20,13 @@ public class AIBehaviour : MonoBehaviour
     [Header("Utils")]
     [SerializeField]PlayerController playerStats;
     [SerializeField] LayerMask obstacleMask;
+    public Collider2D collider2D;
+    public SpriteRenderer spriteRenderer;
 
     //Flag
     public bool isAttacking = false;
     public bool isTargetInAttackRange = false;
+    public bool isAttackingAllow = true;
 
     //Coroutine
     public Coroutine _attackCoroutine;
@@ -34,9 +37,12 @@ public class AIBehaviour : MonoBehaviour
 
         target = GameObject.FindGameObjectWithTag("Player");
         playerStats = target.GetComponent<PlayerController>();
+        collider2D = GetComponent<Collider2D>();
+        spriteRenderer = transform.Find("Sprite").GetComponent<SpriteRenderer>();
+
     }
 
-    private void Update()
+    public virtual void Update()
     {
         //ProcessStateLogic(aiState);
         _animationTimer = aiAnimation.ProcessStateAnimation(aiState.currentState);
@@ -65,21 +71,25 @@ public class AIBehaviour : MonoBehaviour
 
 
 
+
+
     //------IDLE------//
     public void OnEnterIdle()
     {
         aiLerp.SetPath(null);
+        aiLerp.canMove = false;
+       
         //Debug.Log("Enter Idle State");
     }
 
     public void ProcessIdleLogic()
     {
-        //
+        aiLerp.Teleport(transform.position);
     }
 
     public void OnExitIdle()
     {
-        //
+        aiLerp.canMove = true;
     }
 
 
@@ -140,6 +150,32 @@ public class AIBehaviour : MonoBehaviour
         
     }
 
+    //--Stunned--//
+
+    public void OnEnterStunned()
+    {
+        aiLerp.SetPath(null);
+        aiLerp.canMove = false;
+    }
+    public void ProcessStunnedLogic()
+    {
+        aiLerp.Teleport(transform.position);
+    }
+    public void OnExitStunned()
+    {
+        aiLerp.canMove = true;
+    }
+
+
+    
+    
+
+
+
+
+
+
+
     public float CheckTargetDistance(Transform _target)
     {
         Vector3 _myPos = transform.position;
@@ -152,45 +188,94 @@ public class AIBehaviour : MonoBehaviour
         float distanceToTarget = Vector3.Distance(_myPos, _targetPos);
         return distanceToTarget;
     }
-
-    virtual public IEnumerator AttackSequence()
+    public virtual IEnumerator AttackSequence()
     {
-        
         aiLerp.canMove = false;
-        Debug.Log("In Charging...");
-        float _waitTime = aiStats.GetAttackDelay() / 2;
-
-        yield return new WaitForSeconds(_waitTime);
+        //float _waitTime = aiStats.GetAttackDelay()/2;
+        float cooldown = Mathf.Max(0.1f, 1f / aiStats.AttackSpeed);
+        //Debug.Log("wait time is: " +  _waitTime);
         try
         {
-           
-
-            Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, aiStats.AttackRange);
-            foreach (var hit in hits)
-            {
-                var target = hit.GetComponent<PlayerController>();
-                if (target != null)
-                {
-                    int finalDamage = aiStats.AttackDamage;
-                    bool isCrit = UnityEngine.Random.value <= aiStats.CritChance;
-                    if (isCrit)
-                        finalDamage = Mathf.RoundToInt(finalDamage * aiStats.CritMultiplier);
-
-                    aiStats.DealDmg(target, finalDamage, isCrit);
-                    Debug.Log("Hit player inside circle!");
-                }
-            }
+            yield return new WaitForSeconds(_animationTimer * 0.5f);
+            DealMeleeDmg();
+            isAttackingAllow = false;
+            yield return new WaitForSeconds(_animationTimer * 0.5f);
+            isAttacking = false;
+            aiLerp.canMove = true;
+            _attackCoroutine = null;
+            yield return new WaitForSeconds(cooldown);
+            isAttackingAllow = true;
         }
-         
         finally
         {
-          
+            isAttackingAllow = true;
             isAttacking = false;
             aiLerp.canMove = true;
             _attackCoroutine = null;
         }
-        yield return new WaitForSeconds(_waitTime);
+
+        //yield return new WaitForSeconds(_waitTime);
     }
+
+    public virtual void DealMeleeDmg()
+    {
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, aiStats.AttackRange);
+        foreach (var hit in hits)
+        {
+            var target = hit.GetComponent<PlayerStats>();
+            if (target != null)
+            {
+                int finalDamage = aiStats.AttackDamage;
+                bool isCrit = UnityEngine.Random.value <= aiStats.CritChance;
+                if (isCrit)
+                    finalDamage = Mathf.CeilToInt(finalDamage * aiStats.CritMultiplier);
+
+                aiStats.DealDmg(target, finalDamage, isCrit);
+                Debug.Log("Hit player inside circle!");
+            }
+        }
+
+    }
+
+
+    //virtual public IEnumerator AttackSequence()
+    //{
+
+    //    aiLerp.canMove = false;
+    //    Debug.Log("In Charging...");
+    //    float _waitTime = aiStats.GetAttackDelay() / 2;
+
+    //    yield return new WaitForSeconds(_waitTime);
+    //    try
+    //    {
+
+
+    //        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, aiStats.AttackRange);
+    //        foreach (var hit in hits)
+    //        {
+    //            var target = hit.GetComponent<PlayerStats>();
+    //            if (target != null)
+    //            {
+    //                int finalDamage = aiStats.AttackDamage;
+    //                bool isCrit = UnityEngine.Random.value <= aiStats.CritChance;
+    //                if (isCrit)
+    //                    finalDamage = Mathf.RoundToInt(finalDamage * aiStats.CritMultiplier);
+
+    //                aiStats.DealDmg(target, finalDamage, isCrit);
+    //                Debug.Log("Hit player inside circle!");
+    //            }
+    //        }
+    //    }
+
+    //    finally
+    //    {
+
+    //        isAttacking = false;
+    //        aiLerp.canMove = true;
+    //        _attackCoroutine = null;
+    //    }
+    //    yield return new WaitForSeconds(_waitTime);
+    //}
 
     public void OnExitAttack()
     {
@@ -215,36 +300,36 @@ public class AIBehaviour : MonoBehaviour
 
     public void OnEnterDie()
     {
-        //
-    }
-
-
-    public void ProcessDieLogic()
-    {
+        Debug.Log("OnEnterDie called");
+        aiLerp.SetPath(null);
+        aiLerp.canMove = false;
+        collider2D.enabled = false;
         if (_attackCoroutine != null)
         {
             StopCoroutine(_attackCoroutine);
             _attackCoroutine = null;
         }
-       
+
         StartCoroutine(DieSequence());
+    }
+
+
+    public void ProcessDieLogic()
+    {
+       
     }
 
     public IEnumerator DieSequence()
     {
-        // Stop movement, disable AI etc. if needed
-        aiLerp.canMove = false;
+        Debug.Log("DieSequence called");
+        yield return null;
+        
 
-        //_animator.Play("death_anim");
-        //Debug.Log("Play death anim");
         GetComponent<Inventory>().InstantiateItem(transform.position);
-        // Optionally: ensure the Animator updates before querying length
-        //yield return null;
 
-        //float animLength = _animator.GetCurrentAnimatorStateInfo(0).length;
+
 
         yield return new WaitForSeconds(_animationTimer + 0.5f);
-
 
 
         Debug.Log($"{aiStats.Name} has died.");
@@ -304,6 +389,32 @@ public class AIBehaviour : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, aiStats.AttackRange);
+    }
+    public void TakeKnockback(Transform user, float distance, float duration, float afterStun)
+    {
+       
+        StartCoroutine(Knockback(user, distance, duration, afterStun));
+       
+    }
+
+    public IEnumerator Knockback(Transform user, float distance, float duration, float afterStun)
+    {
+        aiState.ForceInState(AIState.State.Stunned, duration + afterStun);
+
+        float elapsed = 0f;
+        Vector2 startPos = this.transform.position;
+        Vector2 direction = (this.transform.position - user.position).normalized;
+        Vector2 endPos = startPos + direction * distance;
+
+
+        while (elapsed < duration)
+        {
+            float t = elapsed / duration;
+            this.transform.position = Vector3.Lerp(startPos, endPos, t);
+            elapsed += Time.deltaTime;
+            yield return null;
+
+        }
     }
 
 

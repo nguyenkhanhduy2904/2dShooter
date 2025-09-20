@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7aa8193314470a847a51c31c9a73f474, type: 3}
+  m_Name: Behaviour_Long Spear
+  m_EditorClassIdentifier: 
+  weaponSounds_light_NoHit:
+  - {fileID: 8300000, guid: 9456399ab40d3c9428fa0fe329b77483, type: 3}
+  - {fileID: 8300000, guid: 8245d6521fe1e9946bebb663859269c2, type: 3}
+  weaponSounds_light_Hit:
+  - {fileID: 8300000, guid: b9aeaf7a6927c9146a76d2146ab06364, type: 3}
+  - {fileID: 8300000, guid: 62a922ab98ec4794aba8793346fa0501, type: 3}
+  weaponSounds_heavy_NoHit: []
+  weaponSounds_heavy_Hit: []
+  weaponParticlePrefab: {fileID: 0}
+  lightAttackCoolDown: 0.5
+  heavyAttackCoolDown: 1.5
+  comboTimeWindow: 1.5
+  chargeDistance: 1
+  chargeTime: 0.15
+  maxRange: 2.5
+  hitBoxWidth: 3.5
+  knockbackRange: 0.5
+  knockbackDuration: 0.15
+  stunDuration: 1
+  lightEffectDefPos: {x: 1, y: 0, z: 0}
+  projectilePrefab: {fileID: 967043059895452196, guid: 00f87f642b2fb5243892a553ce7ac5ff, type: 3}
+  affectedMask:
+    serializedVersion: 2
+    m_Bits: 384
+  inAirSFX:
+  - {fileID: 8300000, guid: d6ca717b96b61ca4bb552f722a4e3480, type: 3}
+  - {fileID: 8300000, guid: 4bee05f493aaf764bb2c755797a25451, type: 3}
+  impactSFX:
+  - {fileID: 8300000, guid: c62b06ce96effb14ea83e63fe2de585a, type: 3}
+  - {fileID: 8300000, guid: 44c61d6824e54214eb949e48351bddca, type: 3}
+  - {fileID: 8300000, guid: d16221c6c736cf74b92fe03e3e409eca, type: 3}
+  - {fileID: 8300000, guid: f7082f654afb8de4eb5845671a691449, type: 3}

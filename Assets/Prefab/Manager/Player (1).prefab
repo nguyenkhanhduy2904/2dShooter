@@ -653,6 +653,7 @@ MonoBehaviour:
   weaponGameObjectHolder: {fileID: 427592597561874567}
   weaponSlash_light_FXGameObjectHolder: {fileID: 2506851935084731357}
   weaponSlash_heavy_FXGameObjectHolder: {fileID: 575255685812011072}
+  droppedGOPrefab: {fileID: 0}
   weaponSpriteRenderer: {fileID: 5583318189070465132}
   weaponSlash_light_FXSpriteRenderer: {fileID: 1552070164289092979}
   weaponSlash_heavy_FXSpriteRenderer: {fileID: 3688146146043176401}
@@ -712,12 +713,16 @@ MonoBehaviour:
   playerState: {fileID: 7636051893911523971}
   playerStats: {fileID: 1052775342694861281}
   playerAnimation: {fileID: 6679740178766481847}
+  weaponHolder: {fileID: 8281081317015914236}
   upKey: 119
   downKey: 115
   leftKey: 97
   rightKey: 100
   LightAttack: 323
   HeavyAttack: 324
+  DropWeapon: 103
+  movementInputAllow: 1
+  attackInputAllow: 1
 --- !u!114 &7636051893911523971
 MonoBehaviour:
   m_ObjectHideFlags: 0

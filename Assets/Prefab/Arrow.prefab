@@ -265,6 +265,12 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 1487509c690a4f34aa25f48d8ab6add3, type: 3}
   - {fileID: 8300000, guid: 0bec635a7198a114d8576fc53d374c44, type: 3}
   - {fileID: 8300000, guid: 509b510c18a750d4c8dc59800ede431e, type: 3}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  isDropAtImpact: 0
+  isFlyForever: 1
+  droppedGameObjPrefab: {fileID: 0}
 --- !u!96 &4882564302663189588
 TrailRenderer:
   serializedVersion: 3

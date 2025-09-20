@@ -106,8 +106,8 @@ public class AIState : MonoBehaviour
                 //Debug.Log("Has line of sight: " + aiBehaviour.HasLineOfSight());
                 //Debug.Log("Distance to Target <= aiStats.AggroRange : " + (distanceToTarget <= aiStats.AggroRange));
                 //Debug.Log("isAttackingAllow: " + aiBehaviour.isAttackingAllow);
-                Debug.Log("AggroRange: " + aiStats.AggroRange);
-                Debug.Log("distanceToTarget: " + distanceToTarget);
+                //Debug.Log("AggroRange: " + aiStats.AggroRange);
+                //Debug.Log("distanceToTarget: " + distanceToTarget);
                 if ((aiBehaviour.HasLineOfSight() && distanceToTarget <= aiStats.AggroRange )&& aiBehaviour.isAttackingAllow)
                 {
                     ChangeState(State.Aggro);

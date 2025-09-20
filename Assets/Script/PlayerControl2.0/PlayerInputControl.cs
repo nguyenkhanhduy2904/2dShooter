@@ -7,6 +7,7 @@ public class PlayerInputControl : MonoBehaviour
     public PlayerState playerState;
     public PlayerStats playerStats;
     public PlayerAnimation playerAnimation;
+    public WeaponHolder2 weaponHolder;
     [Header("KeyMap")]
     public KeyCode upKey = KeyCode.W;
     public KeyCode downKey = KeyCode.S;
@@ -14,6 +15,7 @@ public class PlayerInputControl : MonoBehaviour
     public KeyCode rightKey = KeyCode.D;
     public KeyCode LightAttack = KeyCode.Mouse0;
     public KeyCode HeavyAttack = KeyCode.Mouse1;
+    public KeyCode DropWeapon = KeyCode.G;
 
     public bool movementInputAllow = true;
     public bool attackInputAllow = true; 
@@ -36,6 +38,7 @@ public class PlayerInputControl : MonoBehaviour
         {
             UpdateAttack();
         }
+        UpdateExtraCommand();
         
         
     }
@@ -67,6 +70,14 @@ public class PlayerInputControl : MonoBehaviour
         {
             playerBehaviour.DoHeavyAttack();
             playerState.ChangeState(PlayerState.State.Attack);
+        }
+    }
+
+    public void UpdateExtraCommand()
+    {
+        if (Input.GetKeyDown(DropWeapon))
+        {
+            weaponHolder.DropWeapon(this.transform.position);
         }
     }
 

@@ -37,6 +37,8 @@ public class WeaponHolder2 : MonoBehaviour
     public GameObject weaponSlash_light_FXGameObjectHolder;
     public GameObject weaponSlash_heavy_FXGameObjectHolder;
 
+    public GameObject droppedGOPrefab;
+
     public SpriteRenderer weaponSpriteRenderer;
     public SpriteRenderer weaponSlash_light_FXSpriteRenderer;
     public SpriteRenderer weaponSlash_heavy_FXSpriteRenderer;
@@ -50,6 +52,11 @@ public class WeaponHolder2 : MonoBehaviour
     [SerializeField] private float bobSpeed = 60f;
     [SerializeField] private float bobAmount = 0.1f;
     private Vector3 initialSpriteLocalPos;
+
+
+    public WeaponBehaviour weaponBehaviour;//cache this so the discard wont break thing;
+
+
 
     private void Start()
     {
@@ -70,10 +77,36 @@ public class WeaponHolder2 : MonoBehaviour
 
        
     }
+    public void EquipWeapon(WeaponData2 weapon)
+    {
+        WeaponData = weapon;
+        SoundFXManager.Instance.PlaySoundFXClip(weapon.pickUpSFX, transform, 1f);
+        GetWeaponInfo();
+        resetWeaponStand();
+    }
+    public void DropWeapon(Vector2 dropPosition)
+    {
+        SoundFXManager.Instance.PlaySoundFXClip(WeaponData.droppedSFX, transform, 1f);
+        DiscardWeapon();
+        GameObject droppedWeaponObj = Instantiate(droppedGOPrefab, dropPosition, Quaternion.identity);
+
+        
+
+       
+    }
+
+    public void DiscardWeapon()
+    {
+        if (WeaponData == null) return;
+        WeaponData = null;
+        weaponSpriteRenderer.sprite = null;
+    }
+
 
     public void GetWeaponInfo()
     {
-       
+
+        weaponBehaviour = WeaponData.weaponBehaviour;
         weaponSpriteRenderer.sprite = WeaponData.weaponSprite;
         weaponSlash_light_FXSpriteRenderer.sprite = WeaponData.sliceEffect_light;
         weaponSlash_heavy_FXSpriteRenderer.sprite = WeaponData.sliceEffect_heavy;
@@ -84,9 +117,10 @@ public class WeaponHolder2 : MonoBehaviour
 
 
         weaponStandTransformRight = WeaponData.spriteLocalRotationRight;
-        Debug.Log("weaponStandTransformRight is: " + weaponStandTransformRight);
+        //Debug.Log("weaponStandTransformRight is: " + weaponStandTransformRight);
         weaponStandTransformLeft = WeaponData.spriteLocalRotationLeft;
-        Debug.Log("weaponStandTransformLeft is: " + weaponStandTransformLeft);    
+        //Debug.Log("weaponStandTransformLeft is: " + weaponStandTransformLeft);    
+        droppedGOPrefab = WeaponData.droppedWeaponPrefab;
        
       
         
@@ -137,6 +171,7 @@ public class WeaponHolder2 : MonoBehaviour
 
     public void TryAttack(AttackType attackType)
     {
+        if (WeaponData == null) return;
         if (isAttacking) return;
 
         if (attackType == AttackType.Light)
@@ -145,14 +180,14 @@ public class WeaponHolder2 : MonoBehaviour
             {
                 ExecuteLightAttack1();
                 comboStep = 1;
-                comboTimer = WeaponData.weaponBehaviour.comboTimeWindow;
-                attackCooldownTimer = WeaponData.weaponBehaviour.lightAttackCoolDown;
+                comboTimer = weaponBehaviour.comboTimeWindow;
+                attackCooldownTimer = weaponBehaviour.lightAttackCoolDown;
             }
             else if (comboStep == 1 && comboTimer > 0f)
             {
                 ExecuteLightAttack2();
                 comboStep = 0;
-                attackCooldownTimer = WeaponData.weaponBehaviour.lightAttackCoolDown;
+                attackCooldownTimer = weaponBehaviour.lightAttackCoolDown;
             }
 
            
@@ -163,7 +198,7 @@ public class WeaponHolder2 : MonoBehaviour
             // Heavy attack logic
             ExecuteHeavyAttack();
             comboStep = 0;
-            attackCooldownTimer = WeaponData.weaponBehaviour.heavyAttackCoolDown;
+            attackCooldownTimer = weaponBehaviour.heavyAttackCoolDown;
             isAttacking = true;
             StartCoroutine(StartCountDown(0.25f, () => resetWeaponStand()));
         }
@@ -175,10 +210,10 @@ public class WeaponHolder2 : MonoBehaviour
         Vector3 mouseWorld = GetMousePositionInWorld();
         Vector3 direction = (mouseWorld - player.transform.position).normalized;
         playerInputControl.SetFacingDirection(direction);
-        StartCoroutine(WeaponData.weaponBehaviour.ModifyMovement1(WeaponData.weaponBehaviour.chargeDistance, WeaponData.weaponBehaviour.chargeTime, direction, player.transform, playerInputControl));
-        WeaponData.weaponBehaviour.LightAttack(WeaponData.weaponBaseDmg, isCrit(WeaponData.critChance), WeaponData.critMultiplier, player.transform.position, GetMousePositionInWorld(), this, playerStats);
+        StartCoroutine(weaponBehaviour.ModifyMovement1(weaponBehaviour.chargeDistance, weaponBehaviour.chargeTime, direction, player.transform, playerInputControl));
+        weaponBehaviour.LightAttack(WeaponData.weaponBaseDmg, isCrit(WeaponData.critChance), WeaponData.critMultiplier, player.transform.position, GetMousePositionInWorld(), this, playerStats);
         
-        StartCoroutine(WeaponData.weaponBehaviour.PlayLightAttackAnimation1(player.transform.position, GetMousePositionInWorld(), weaponGameObjectHolder.transform, weaponSlash_light_FXGameObjectHolder.transform));
+        StartCoroutine(weaponBehaviour.PlayLightAttackAnimation1(player.transform.position, GetMousePositionInWorld(), weaponGameObjectHolder.transform, weaponSlash_light_FXGameObjectHolder.transform));
         ShowSlashEffect(weaponSlash_light_FXSpriteRenderer);
         FadeOutEffect(weaponSlash_light_FXSpriteRenderer, 0.25f);
        
@@ -189,9 +224,9 @@ public class WeaponHolder2 : MonoBehaviour
         Vector3 mouseWorld = GetMousePositionInWorld();
         Vector3 direction = (mouseWorld - player.transform.position).normalized;
         playerInputControl.SetFacingDirection(direction);
-        StartCoroutine(WeaponData.weaponBehaviour.ModifyMovement1(WeaponData.weaponBehaviour.chargeDistance, WeaponData.weaponBehaviour.chargeTime, direction, player.transform, playerInputControl));
-        WeaponData.weaponBehaviour.LightAttack(WeaponData.weaponBaseDmg, isCrit(WeaponData.critChance),WeaponData.critMultiplier, player.transform.position, GetMousePositionInWorld(), this, playerStats);
-        StartCoroutine(WeaponData.weaponBehaviour.PlayLightAttackAnimation2(player.transform.position, GetMousePositionInWorld(), weaponGameObjectHolder.transform, weaponSlash_light_FXGameObjectHolder.transform));
+        StartCoroutine(weaponBehaviour.ModifyMovement1(weaponBehaviour.chargeDistance, weaponBehaviour.chargeTime, direction, player.transform, playerInputControl));
+        weaponBehaviour.LightAttack(WeaponData.weaponBaseDmg, isCrit(WeaponData.critChance),WeaponData.critMultiplier, player.transform.position, GetMousePositionInWorld(), this, playerStats);
+        StartCoroutine(weaponBehaviour.PlayLightAttackAnimation2(player.transform.position, GetMousePositionInWorld(), weaponGameObjectHolder.transform, weaponSlash_light_FXGameObjectHolder.transform));
         ShowSlashEffect(weaponSlash_light_FXSpriteRenderer);
         FadeOutEffect(weaponSlash_light_FXSpriteRenderer, 0.25f);
     }
@@ -201,9 +236,9 @@ public class WeaponHolder2 : MonoBehaviour
         Vector3 mouseWorld = GetMousePositionInWorld();
         Vector3 direction = (mouseWorld - player.transform.position).normalized;
         playerInputControl.SetFacingDirection(direction);
-        StartCoroutine(WeaponData.weaponBehaviour.ModifyMovement2(WeaponData.weaponBehaviour.chargeDistance, WeaponData.weaponBehaviour.chargeTime, direction, player.transform, playerInputControl));
-        WeaponData.weaponBehaviour.HeavyAttack(WeaponData.weaponBaseDmg, isCrit(WeaponData.critChance), WeaponData.critMultiplier, player.transform.position, GetMousePositionInWorld(), this, playerStats);
-        StartCoroutine(WeaponData.weaponBehaviour.PlayHeavyAttackAnimation(player.transform.position, GetMousePositionInWorld(), weaponGameObjectHolder.transform, weaponSlash_heavy_FXGameObjectHolder.transform));
+        StartCoroutine(weaponBehaviour.ModifyMovement2(weaponBehaviour.chargeDistance, weaponBehaviour.chargeTime, direction, player.transform, playerInputControl));
+        weaponBehaviour.HeavyAttack(WeaponData.weaponBaseDmg, isCrit(WeaponData.critChance), WeaponData.critMultiplier, player.transform.position, GetMousePositionInWorld(), this, playerStats);
+        StartCoroutine(weaponBehaviour.PlayHeavyAttackAnimation(player.transform.position, GetMousePositionInWorld(), weaponGameObjectHolder.transform, weaponSlash_heavy_FXGameObjectHolder.transform));
         ShowSlashEffect(weaponSlash_heavy_FXSpriteRenderer);
         FadeOutEffect(weaponSlash_heavy_FXSpriteRenderer, 0.25f);
 
@@ -247,16 +282,17 @@ public class WeaponHolder2 : MonoBehaviour
 
     public void resetWeaponStand()
     {
+        if (WeaponData == null) return;
         if(playerAnimation.currentHorizontalDirection == PlayerAnimation.HorizontalDirection.Right)
         {
             weaponGameObjectHolder.transform.localRotation = Quaternion.Euler(weaponStandTransformRight);
-            Debug.Log("weaponStandTransformRight is: " + weaponStandTransformRight);
+            //Debug.Log("weaponStandTransformRight is: " + weaponStandTransformRight);
         }
 
         else
         {
             weaponGameObjectHolder.transform.localRotation = Quaternion.Euler(weaponStandTransformLeft);
-            Debug.Log("weaponStandTransformLeft is: " + weaponStandTransformLeft);
+            //Debug.Log("weaponStandTransformLeft is: " + weaponStandTransformLeft);
         }
            
 
@@ -314,6 +350,8 @@ public class WeaponHolder2 : MonoBehaviour
     //}
 
 
+
+
     public void SwingWeapon(float angle)
     {
         weaponPivot.localEulerAngles = new Vector3(0, 0, angle);
@@ -325,5 +363,7 @@ public class WeaponHolder2 : MonoBehaviour
         onFinished?.Invoke();
     }
 
+
+   
 
 }

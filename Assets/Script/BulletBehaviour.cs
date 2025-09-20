@@ -10,6 +10,10 @@ public class BulletBehaviour : MonoBehaviour
     public bool _isCrit;
     public AudioClip[] arrowInAirSounds;
     public AudioClip[] arrowHitSounds;
+    public LayerMask layerMask;
+    public bool isDropAtImpact = false;
+    public bool isFlyForever = false;
+    public GameObject droppedGameObjPrefab;
     public void SetDamage(int damage, bool isCrit = false)
     {
         _damage = damage;
@@ -21,22 +25,54 @@ public class BulletBehaviour : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
         _rb.linearVelocity = direction.normalized * _bulletSpeed;
         SoundFXManager.Instance.PlaySoundFXClip(arrowInAirSounds, transform, 1f);
-        Destroy(gameObject, 3f);
+        if (!isFlyForever)
+        {
+            //Invoke(nameof(DropOrDestroy), 0.85f);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player") || collision.CompareTag("ExplosionBarrel"))
+        if ((layerMask.value & (1 << collision.gameObject.layer)) != 0)
         {
             Debug.Log("Hit " + collision.gameObject.name);
 
             IDamageable target = collision.GetComponent<IDamageable>();
             if (target != null)
             {
-                target.TakeDmg(_damage, _isCrit); // use damage from enemy stat
+                target.TakeDmg(_damage, _isCrit);
             }
+
             SoundFXManager.Instance.PlaySoundFXClip(arrowHitSounds, transform, 1f);
+           
+            if (isDropAtImpact)
+            {
+                if (droppedGameObjPrefab != null)
+                {
+                    Drop();
+                }
+               
+              
+            }
             Destroy(gameObject);
+
         }
+
+
+    }
+
+
+    private void DropOrDestroy()
+    {
+        if (droppedGameObjPrefab != null)
+        {
+            Drop();
+        }
+        Destroy(gameObject);
+    }
+
+    private void Drop()
+    {
+        Instantiate(droppedGameObjPrefab, transform.position, Quaternion.identity);
     }
 }

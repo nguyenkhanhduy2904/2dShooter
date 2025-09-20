@@ -32,5 +32,7 @@ public class WeaponData2 : ScriptableObject
 
     [Header("Component")]
     public WeaponBehaviour weaponBehaviour;
-
+    public GameObject droppedWeaponPrefab;
+    public AudioClip[] pickUpSFX;
+    public AudioClip[] droppedSFX;
 }

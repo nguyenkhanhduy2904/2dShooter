@@ -26,3 +26,9 @@ MonoBehaviour:
   sliceEffect_heavy: {fileID: -3641437869259454432, guid: e82d25b100864a449abe3c93712463ff, type: 3}
   weaponPivotOffset: {x: 0, y: 0, z: 0}
   weaponBehaviour: {fileID: 11400000, guid: 145a2e93e7e1c754fb727412420c1764, type: 2}
+  droppedWeaponPrefab: {fileID: 2485846219481914284, guid: b67ee17e9a9114b42bd3d1f803965d6b, type: 3}
+  pickUpSFX:
+  - {fileID: 8300000, guid: 8768682d112a5ae4190f86b8d0ca91ac, type: 3}
+  - {fileID: 8300000, guid: 242899d0496e45741a3d0abfff707ae1, type: 3}
+  droppedSFX:
+  - {fileID: 8300000, guid: 99e836519dcc1944aa6dd96a26a51827, type: 3}

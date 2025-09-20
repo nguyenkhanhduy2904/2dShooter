@@ -72,7 +72,7 @@ public class AIAnimation : MonoBehaviour
                 time = PlayAnimation(currentPlayingAnim);
                 //animator.speed = 1 / AIStats.GetAttackDelay();
                 animator.speed = 1f;
-                Debug.Log("animation speed: " + animator.speed);
+                //Debug.Log("animation speed: " + animator.speed);
                 break;
             case AIState.State.Stunned:
                 SetAnimationName(state);

@@ -10,7 +10,7 @@ public class Wizard_Behaviour: AIBehaviour
     public float teleportCoolDown = 5f;
     public float teleportCoolDownRemain = 0f;
     public GameObject projectilePrefab;
-    
+    public LayerMask layerMask;
     public override IEnumerator AttackSequence()
     {
         aiLerp.canMove = false;
@@ -47,7 +47,7 @@ public class Wizard_Behaviour: AIBehaviour
         GameObject _projectileObj = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
 
         Fireball_Script _bulletBehaviour = _projectileObj.GetComponent<Fireball_Script>();
-
+        _bulletBehaviour.layerMask = layerMask;
         _bulletBehaviour.direction = _shootDirection;
         _bulletBehaviour._damage = aiStats.AttackDamage;
         _bulletBehaviour._isCrit = false;

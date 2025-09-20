@@ -37,3 +37,6 @@ MonoBehaviour:
   affectedMask:
     serializedVersion: 2
     m_Bits: 256
+  knockbackRange: 0.5
+  knockbackDuration: 0.15
+  stunDuration: 1

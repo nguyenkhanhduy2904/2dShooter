@@ -11,6 +11,8 @@ public class Fireball_Script : MonoBehaviour
     public bool _isCrit;
     [SerializeField] AudioClip[] _explosionSounds;
     [SerializeField] AudioClip[] _fireBallInAirSounds;
+
+    public LayerMask layerMask;
     public void SetDamage(int damage, bool isCrit = false)
     {
         _damage = damage;
@@ -27,7 +29,7 @@ public class Fireball_Script : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player") || collision.CompareTag("ExplosionBarrel") || collision.CompareTag("Wall"))
+        if ((layerMask.value & (1 << collision.gameObject.layer)) != 0)
         {
             Debug.Log("Hit " + collision.gameObject.name);
 
